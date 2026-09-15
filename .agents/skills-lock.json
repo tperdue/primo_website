@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "skills": {
+    "codeigniter-feature-delivery": {
+      "source": "local",
+      "sourceType": "workspace",
+      "skillPath": ".agents/skills/codeigniter-feature-delivery/SKILL.md",
+      "computedHash": "c0c6def1960c4ac8a91df99ac265ef9fd674117fd64ccd5040df790ce84c4bf2"
+    },
+    "codeigniter-security-review": {
+      "source": "local",
+      "sourceType": "workspace",
+      "skillPath": ".agents/skills/codeigniter-security-review/SKILL.md",
+      "computedHash": "2ae044afe7d54021aab6c07deec6972e9aad812d2098f05d5f05a478fac820b3"
+    },
+    "codeigniter-testing": {
+      "source": "local",
+      "sourceType": "workspace",
+      "skillPath": ".agents/skills/codeigniter-testing/SKILL.md",
+      "computedHash": "dff76e3bf8806ea62e8d159abf59274845fb85e198cb6e98753bb4bd2ecccc38"
+    },
+    "codeigniter-design-system-workflow": {
+      "source": "local",
+      "sourceType": "workspace",
+      "skillPath": ".agents/skills/codeigniter-design-system-workflow/SKILL.md",
+      "computedHash": "c05b952d97db8ee561f3a3ef20d759aa768b4839ce24dc2774aed14068c36f33"
+    },
+    "relume-codeigniter-ui-converter": {
+      "source": "local",
+      "sourceType": "workspace",
+      "skillPath": ".agents/skills/relume-codeigniter-ui-converter/SKILL.md",
+      "computedHash": "c73eed3d5e0131279b37b56340be7d1bbeb722442dfb385be9ccf3e1ed2a4e48"
+    },
+    "website-style-emulation-workflow": {
+      "source": "local",
+      "sourceType": "workspace",
+      "skillPath": ".agents/skills/website-style-emulation-workflow/SKILL.md",
+      "computedHash": "adff4973da42a6c00781d70fe261697413b503d49deeadbc873b68debe27bf64"
+    },
+    "improve-codebase-architecture": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/improve-codebase-architecture/SKILL.md",
+      "computedHash": "016f12709bff30a27419e8add978a9be70f5ca1fb6738b3be6793038e0aba631"
+    }
+  }
+}
