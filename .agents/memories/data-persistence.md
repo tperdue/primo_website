@@ -11,16 +11,16 @@ Use this memory to track database and persistence decisions. Update it when the 
 
 ## Current Status
 
-No database engine has been selected yet, but the handoff defines durable domain data that the future schema must support.
+SQLite is the initial database for the first single-business slice. Business settings are stored as one row with ID 1. Shield manages its own user tables; package migrations run alongside app migrations.
 
 ## Database Choice
 
 | Setting | Value |
 | --- | --- |
-| Engine | TBD |
-| Driver | TBD |
-| Local database name | TBD |
-| Test database strategy | TBD |
+| Engine | SQLite default; existing local `.env` overrides to MySQL |
+| Driver | `SQLite3` default, configurable through `.env` |
+| Local database name | Default `writable/primo.sqlite` (ignored by Git) |
+| Test database strategy | In-memory SQLite via CI4 `tests` group |
 
 ## Model Conventions
 

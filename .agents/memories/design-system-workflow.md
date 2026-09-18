@@ -21,7 +21,7 @@ Penji has been used as the public visual reference for starter design-system ext
 | Extraction date | 2026-09-18 |
 | Token source | Penji-inspired structure plus Primo palette |
 | Generated token files | `.extract-design-system/normalized.json`, `design-system/tokens.json`, `design-system/tokens.css` |
-| App stylesheet | TBD; no app stylesheet has imported the tokens yet |
+| App stylesheet | `public/assets/css/app.css` imports `public/assets/css/tokens.css`, a public copy of `design-system/tokens.css`; no build tool |
 | Frontend build tool | None |
 
 ## Extracted Signals
@@ -60,6 +60,7 @@ Future implementation sequence:
 - Treat extracted values as starter tokens until reviewed in actual project screens.
 - Do not copy Penji protected content, imagery, logos, mascot, customer proof, claims, class names, or source code.
 - Keep business-specific brand assets, copy, services, portfolio, testimonials, and FAQs configurable per deployment.
+- Keep the public token copy synchronized when the source token file changes.
 
 ## Open Questions
 

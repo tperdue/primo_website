@@ -23,5 +23,7 @@ Security defaults for generated CodeIgniter projects:
 - Enforce configurable allowed file extensions/types, maximum individual upload size, and maximum total upload size.
 - Card/payment details must never be stored directly if invoices/payments are added later.
 - Treat business settings, notification recipients, quote terms, and pricing visibility as administrative data.
+- Shield session login protects the admin settings routes with `session` and `group:admin`; login is rate-limited.
+- Browser forms use session-backed CSRF tokens; session cookies are Secure in production, HTTP-only, and SameSite Lax.
 
 When a security decision changes, update this memory and `ARCHITECTURE.md`.

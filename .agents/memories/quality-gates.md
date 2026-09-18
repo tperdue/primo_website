@@ -11,7 +11,7 @@ Use this memory to track required verification before handing off work. Update i
 
 ## Current Status
 
-The project has PHPUnit configured and a Composer `test` script. Current work is documentation/design-system setup only.
+The project has PHPUnit configured and a Composer `test` script. The first application slice has feature tests for public rendering, admin access, validation, and settings persistence.
 
 ## Required Checks
 

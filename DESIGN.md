@@ -10,6 +10,10 @@ Description: A reusable public website, quote-request flow, admin portal, and fu
 
 The public site should feel contemporary, creative, image-forward, and sales-capable. The admin portal should feel quieter and more operational: dense enough for repeated work, but still polished enough for a solo creative business owner.
 
+The first public homepage now adopts the reference's white editorial canvas, bold dark type, outlined actions, and prominent creative imagery. The visuals in `public/assets/images/` are original generated concept studies, labeled as illustrative rather than presented as client work. The shipped stylesheet is `public/assets/css/app.css`, which imports a public copy of the saved Primo token file at `public/assets/css/tokens.css`. Keep that copy synchronized with `design-system/tokens.css` when tokens change.
+
+The public header uses the black accent as a sticky navigation surface. At phone widths, desktop links collapse into a native `details` menu with a visible menu icon and touch-sized links; section anchors account for the sticky header height.
+
 ```yaml
 version: alpha
 name: Primo Graphic Designer Business Platform

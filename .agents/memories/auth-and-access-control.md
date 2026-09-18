@@ -11,14 +11,14 @@ Use this memory to track identity, session, role, permission, and route-protecti
 
 ## Current Status
 
-No authentication system is installed yet.
+CodeIgniter Shield session authentication is installed for the admin area. Public registration and magic-link login are disabled. Create the first owner through Shield's interactive CLI command; credentials are never committed.
 
 ## Authentication Provider
 
 | Setting | Value |
 | --- | --- |
-| Provider/package | TBD |
-| Session-based auth | TBD |
+| Provider/package | `codeigniter4/shield` `^1.4` |
+| Session-based auth | Yes |
 | Token/API auth | TBD |
 | Password policy | TBD |
 | MFA/2FA | TBD |
@@ -40,7 +40,7 @@ Document route groups or filters when introduced:
 | --- | --- | --- |
 | Public marketing site | None by default | Visitors may browse public pages and submit contact/quote forms. |
 | Public quote request | None by default | Must remain accountless for initial friction reduction. |
-| Admin portal | Auth/admin filter TBD | Designer owner only. |
+| Admin portal | `session` and `group:admin` filters | Designer owner only. |
 | Customer portal | Customer auth filter TBD | Later phase after public/admin workflows are stable. |
 
 ## Authorization Rules
@@ -59,6 +59,7 @@ Default until changed:
 - Use secure, HTTP-only, same-site cookie settings in production.
 - Regenerate session IDs after privilege changes such as login.
 - Keep session payloads minimal.
+- CSRF uses session protection; admin and login forms include CSRF tokens. Login routes use Shield's auth rate-limit filter.
 
 ## Open Questions
 

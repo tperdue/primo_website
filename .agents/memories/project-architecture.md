@@ -16,6 +16,8 @@ Current baseline:
 - `writable/` contains runtime output.
 - `tests/` contains PHPUnit and CodeIgniter tests.
 - `docs/developer_handoff.md` is the source product brief.
+- The first Phase 1 slice uses Shield session auth, a single-row business settings model, and a public home view backed by that row.
+- The framework database default is SQLite; the local ignored `.env` currently overrides it to MySQL.
 
 Architectural defaults:
 

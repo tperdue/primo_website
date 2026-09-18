@@ -87,11 +87,11 @@ Public pages may use a more expressive portfolio-forward design. Admin pages sho
 
 ## 4. Data Stores
 
-Primary Database: Not selected yet.
+Primary Database: SQLite for the initial single-business deployment, stored under `writable/primo.sqlite`. The framework database configuration can be changed for a future multi-user or hosted deployment.
 
-Expected Choices: MySQL/MariaDB or PostgreSQL via CodeIgniter database configuration.
+An existing `.env` may override the SQLite default; the current local environment is configured for MySQL. Production database selection remains deployment-specific.
 
-Schema Management: Use CodeIgniter migrations under `app/Database/Migrations/` once persistence is introduced.
+Schema Management: CodeIgniter migrations under `app/Database/Migrations/`; Shield and Settings package migrations are run with `php spark migrate --all`.
 
 Seeds: Use `app/Database/Seeds/` for deterministic development fixtures.
 
@@ -130,6 +130,7 @@ Monitoring And Logging: CodeIgniter logs write to `writable/logs/` by default. P
 - Use `.env` for secrets and never commit it.
 - Enable production environment settings before deployment.
 - Use CSRF protection for browser forms.
+- Admin settings routes require Shield session authentication and membership in the `admin` group. Public registration is disabled.
 - Use filters for authentication, authorization, CORS, and rate limiting concerns.
 - Escape view output with `esc()` using the correct output context.
 - Validate all request input before use.

@@ -19,6 +19,9 @@ Agents should:
 
 - Read `DESIGN.md` before UI work.
 - Use `design-system/tokens.json` and `design-system/tokens.css` as starter token sources once app styling begins.
+- The public homepage uses an original generated editorial design-work hero and concept-study image, with Penji-inspired hierarchy but no copied Penji assets or claims. The imagery is explicitly labeled illustrative, not client work.
+- `public/assets/css/app.css` imports `public/assets/css/tokens.css`, a shipped copy of `design-system/tokens.css`.
+- The public header is black and sticky. At 700px and below, navigation uses a native `details` menu with a 44px trigger; section anchors offset for the header.
 - Build actual usable application screens first.
 - Keep forms, tables, navigation, empty states, loading states, and validation states complete.
 - Use readable system typography and accessible contrast.
@@ -26,4 +29,4 @@ Agents should:
 - Avoid nested cards, decorative blobs, vague gradients, and text overflow.
 - Keep deployment-specific logos, imagery, business copy, services, portfolio, testimonials, FAQs, pricing visibility, and policies configurable.
 
-No app styles or views have been implemented yet. If the project later introduces a CSS framework, component library, asset pipeline, or implemented token import, update `DESIGN.md` and this memory.
+The app currently uses server-rendered CI4 views and plain CSS with no build tool. If the project later introduces a CSS framework, component library, or asset pipeline, update `DESIGN.md` and this memory.
