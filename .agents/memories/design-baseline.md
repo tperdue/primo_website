@@ -22,6 +22,8 @@ Agents should:
 - The public homepage uses an original generated editorial design-work hero and concept-study image, with Penji-inspired hierarchy but no copied Penji assets or claims. The imagery is explicitly labeled illustrative, not client work.
 - `public/assets/css/app.css` imports `public/assets/css/tokens.css`, a shipped copy of `design-system/tokens.css`.
 - The public header is black and sticky. At 700px and below, navigation uses a native `details` menu with a 44px trigger; section anchors offset for the header.
+- The service catalog is a compact editorial list, with a text-led detail page until real deployment-specific imagery is available.
+- Admin screens use a shared operations shell with persistent section navigation, a compact toolbar, restrained data summary, dense tables, and grouped forms. On phones, navigation is horizontal and service rows stack; avoid marketing-style cards and oversized headings.
 - Build actual usable application screens first.
 - Keep forms, tables, navigation, empty states, loading states, and validation states complete.
 - Use readable system typography and accessible contrast.

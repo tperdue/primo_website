@@ -1,6 +1,6 @@
 # Architecture Overview
 
-This is a living architecture file for a reusable CodeIgniter 4 application serving independent graphic designers. The project is still pre-implementation, but the product direction is now defined by `docs/developer_handoff.md`.
+This is a living architecture file for a reusable CodeIgniter 4 application serving independent graphic designers. The product direction is defined by `docs/developer_handoff.md`.
 
 ## 1. Project Structure
 
@@ -76,6 +76,8 @@ Responsibility: Encapsulate database table access through CodeIgniter models, en
 Rules: Use `$allowedFields`, validation rules, timestamps, and soft deletes intentionally. Never concatenate SQL with user input.
 
 Durable domain objects should include business settings, services, quote question groups, quote questions, portfolio projects, customers, quote requests, quote answers, uploaded files, quotes, quote line items, projects, media assets, pages/content, testimonials, FAQs, contact submissions, and optional blog posts.
+
+Services are stored in their own table with stable public slugs, draft/published/archived status, display order, and optional starting-price visibility. Only published services resolve on public routes. Admin service routes share the Shield session and admin-group filters.
 
 ### Views And Frontend
 

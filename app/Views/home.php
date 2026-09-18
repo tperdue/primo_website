@@ -7,29 +7,8 @@
     <title><?= esc($business['business_name'] ?? 'Design studio') ?></title>
     <link rel="stylesheet" href="<?= esc(base_url('assets/css/app.css'), 'attr') ?>">
 </head>
-<body>
-    <header class="site-header">
-        <div class="site-header-inner">
-            <a class="wordmark" href="/" aria-label="<?= esc(($business['business_name'] ?? 'Design studio') . ' home', 'attr') ?>"><?= esc($business['business_name'] ?? 'Design studio') ?></a>
-            <nav class="site-nav" aria-label="Main navigation">
-                <a href="#concepts">Concepts</a>
-                <a href="#studio">Studio</a>
-            </nav>
-            <?php if (! empty($business['contact_email'])): ?>
-                <a class="nav-action" href="mailto:<?= esc($business['contact_email'], 'attr') ?>">Get in touch <span aria-hidden="true">&nearr;</span></a>
-            <?php endif ?>
-            <details class="mobile-menu">
-                <summary title="Menu"><span class="visually-hidden">Menu</span><span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></summary>
-                <nav aria-label="Mobile navigation">
-                    <a href="#concepts">Concepts</a>
-                    <a href="#studio">Studio</a>
-                    <?php if (! empty($business['contact_email'])): ?>
-                        <a class="mobile-menu-action" href="mailto:<?= esc($business['contact_email'], 'attr') ?>">Get in touch <span aria-hidden="true">&nearr;</span></a>
-                    <?php endif ?>
-                </nav>
-            </details>
-        </div>
-    </header>
+<body id="top">
+    <?= view('partials/public_header', ['business' => $business]) ?>
     <main>
         <section class="public-hero" aria-labelledby="hero-title">
             <img class="public-hero-image" src="<?= esc(base_url('assets/images/hero-concepts.png'), 'attr') ?>" alt="Original graphic design concepts across print, packaging, and digital media">
@@ -45,6 +24,18 @@
                 </div>
             </div>
         </section>
+        <?php if ($services !== []): ?>
+        <section class="home-services" aria-labelledby="home-services-title">
+            <div class="home-services-inner">
+                <div class="home-services-heading"><div><p class="eyebrow">What we do</p><h2 id="home-services-title">Services shaped around your goals.</h2></div><a href="/services">All services &nearr;</a></div>
+                <div class="service-list">
+                    <?php foreach ($services as $service): ?>
+                        <a class="service-row" href="/services/<?= esc($service['slug'], 'attr') ?>"><span><?= esc($service['name']) ?></span><small><?= esc($service['summary']) ?></small><span aria-hidden="true">&nearr;</span></a>
+                    <?php endforeach ?>
+                </div>
+            </div>
+        </section>
+        <?php endif ?>
         <section class="concept-section" id="concepts" aria-labelledby="concept-title">
             <div class="section-heading">
                 <p class="eyebrow">Creative direction</p>
@@ -66,7 +57,6 @@
             </div>
         </section>
     </main>
-    <footer class="site-footer"><span><?= esc($business['business_name'] ?? 'Design studio') ?></span><a href="#hero-title">Back to top &uarr;</a></footer>
-    <script src="<?= esc(base_url('assets/js/nav.js'), 'attr') ?>" defer></script>
+    <?= view('partials/public_footer', ['business' => $business]) ?>
 </body>
 </html>

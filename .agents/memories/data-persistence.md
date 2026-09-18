@@ -11,7 +11,7 @@ Use this memory to track database and persistence decisions. Update it when the 
 
 ## Current Status
 
-SQLite is the initial database for the first single-business slice. Business settings are stored as one row with ID 1. Shield manages its own user tables; package migrations run alongside app migrations.
+SQLite is the default database. Business settings are stored as one row with ID 1. Services use auto-increment IDs internally and stable unique slugs publicly. Shield manages its own user tables; package migrations run alongside app migrations.
 
 ## Database Choice
 
@@ -42,13 +42,9 @@ Default until changed:
 
 ## ID Strategy
 
-TBD. Decide per generated project.
+Business settings use the singleton ID 1. Services use integer IDs for admin edits and immutable slugs for public URLs; renaming a service does not break existing links.
 
-Options to document when chosen:
-
-- Auto-increment integer IDs.
-- UUID/ULID public identifiers.
-- Separate internal and public identifiers.
+Other domain objects can choose their ID strategy when introduced.
 
 ## Seed Data
 

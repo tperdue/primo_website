@@ -10,8 +10,10 @@ class BusinessSettings extends BaseController
 {
     public function edit(): string
     {
+        $business = (new BusinessSettingsModel())->find(1);
         return view('admin/settings', [
-            'business' => (new BusinessSettingsModel())->find(1),
+            'business' => $business,
+            'businessName' => $business['business_name'] ?? 'Design studio',
         ]);
     }
 

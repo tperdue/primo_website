@@ -14,6 +14,10 @@ The first public homepage now adopts the reference's white editorial canvas, bol
 
 The public header uses the black accent as a sticky navigation surface. At phone widths, desktop links collapse into a native `details` menu with a visible menu icon and touch-sized links; section anchors account for the sticky header height.
 
+The service catalog uses a compact editorial list and a text-led detail layout until deployment-specific service imagery is available. Do not imply that the illustrative homepage concept studies are real service or client work.
+
+The admin area is an operational workspace, distinct from the public marketing layout: persistent section navigation, a compact toolbar, a data-led overview, scannable service table, and grouped settings forms. On narrow screens, navigation becomes a horizontal section bar and data rows stack with visible labels.
+
 ```yaml
 version: alpha
 name: Primo Graphic Designer Business Platform

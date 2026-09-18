@@ -11,11 +11,11 @@ Use this memory to track the current state of work. Update it at the end of mean
 
 ## Current Phase
 
-Phase 1: application foundation and first public/admin slice.
+Phase 1: application foundation and public service catalog.
 
 ## Active Work
 
-The first implementation slice is in place: admin sign-in, editable business settings, and a public home page driven by stored settings.
+The service-catalog slice is in place: admin-managed service records and published public list/detail pages.
 
 ## Completed
 
@@ -37,6 +37,8 @@ The first implementation slice is in place: admin sign-in, editable business set
 - Relume component lookup was attempted but its connector sign-in had expired, so no Relume component was used in the implementation.
 - The user created the first admin account.
 - The public header now has a black sticky surface and an expandable phone navigation menu, with accessible native disclosure behavior and anchored-section offsets.
+- Services now have admin create/edit/list screens, draft/published/archived states, ordering, optional public starting prices, and stable public detail URLs. The home page features up to three published services.
+- The admin UI now shares a sidebar/toolbar shell across overview, services, and business settings. `/admin/` shows real service counts and recent records; service management uses a responsive data table and settings use grouped fields.
 
 ## In Progress
 
@@ -48,16 +50,16 @@ None known.
 
 ## Next Actions
 
-- Expand Phase 1 into services/portfolio and remaining public pages before Phase 2 quote requests.
+- Expand Phase 1 into portfolio and remaining public pages before Phase 2 quote requests.
+- Add reusable media/library support before service-specific images are introduced.
 - Decide whether `Zalando Sans` is licensed/available or use the system fallback in production.
 - Add feature-specific tests with the first real behavior.
 - Update this file after each meaningful development session.
 
 ## Last Verification
 
-- `php spark migrate --all` completed against the existing local `.env` MySQL connection; the framework default is SQLite.
-- `vendor/bin/phpunit --no-coverage` passed 11 tests / 25 assertions after the responsive navigation change.
-- Home and login returned HTTP 200; guest admin route redirected to login. The homepage was checked in the in-app browser at phone and desktop widths: header sticky at scroll, mobile menu opens/closes, section link closes it, and desktop navigation returns above 700px.
+- `php spark migrate --all` applied the services migration against the local `.env` MySQL connection; the framework default is SQLite.
+- `vendor/bin/phpunit --no-coverage` passed 20 tests / 63 assertions after the admin shell and overview were added. The admin overview, service list, and settings were rendered with temporary mock-data previews and inspected at desktop and 390px phone width; the page has no horizontal overflow.
 
 ## Handoff Notes
 
