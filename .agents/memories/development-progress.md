@@ -1,5 +1,5 @@
 ---
-id: ci4_starter_development_progress
+id: primo_graphic_designer_development_progress
 importance: high
 tags: progress, workflow, handoff
 title: Development Progress
@@ -11,11 +11,11 @@ Use this memory to track the current state of work. Update it at the end of mean
 
 ## Current Phase
 
-Day-zero scaffold.
+Product setup and design-system documentation.
 
 ## Active Work
 
-No active application feature yet.
+No implementation is active. The current request is documentation, memory, and design-system extraction/setup only.
 
 ## Completed
 
@@ -25,6 +25,10 @@ No active application feature yet.
 - Relume React/TSX UI elements can be converted into CodeIgniter 4 PHP views using the `relume-codeigniter-ui-converter` skill.
 - Design-system extraction and adoption can be orchestrated with the `codeigniter-design-system-workflow` skill.
 - Existing website style emulation can be orchestrated with the `website-style-emulation-workflow` skill.
+- `docs/developer_handoff.md` defines the product as a reusable CodeIgniter application for independent graphic designers.
+- Agent instructions, architecture documentation, design documentation, and memory files have been updated to preserve the product brief, domain model, phase order, security considerations, and design direction.
+- Penji (`https://penji.co/`) was used as the visual reference for design-system extraction.
+- `design-system/tokens.json`, `design-system/tokens.css`, and `.extract-design-system/normalized.json` exist with the Primo palette applied.
 
 ## In Progress
 
@@ -36,18 +40,19 @@ None known.
 
 ## Next Actions
 
-- Choose the generated app's product/domain.
+- Begin Phase 1 implementation only after explicit user approval.
 - Choose persistence strategy when the first stored feature is needed.
 - Choose authentication strategy when protected routes are needed.
+- Decide whether `Zalando Sans` is licensed/available or use the system fallback in production.
 - Add feature-specific tests with the first real behavior.
 - Update this file after each meaningful development session.
 
 ## Last Verification
 
-- `composer test` ran 5 tests and 6 assertions successfully.
-- PHPUnit exited non-zero because no code coverage driver is installed.
+- Pending for this session: parse changed JSON/token files and inspect docs. App tests are not expected because no runtime implementation changed.
 
 ## Handoff Notes
 
-- Keep scaffold memories generic until this starter is copied into a specific project.
-- Record durable decisions in the topic-specific memory file, then summarize session status here.
+- Do not implement app behavior until the user asks for implementation.
+- Keep business-specific values configurable for each deployment.
+- Preserve the phase order from `docs/developer_handoff.md`.

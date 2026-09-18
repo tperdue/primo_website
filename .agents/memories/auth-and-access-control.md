@@ -1,5 +1,5 @@
 ---
-id: ci4_starter_auth_access_control
+id: primo_graphic_designer_auth_access_control
 importance: high
 tags: auth, authorization, access-control, security
 title: Authentication And Access Control
@@ -11,7 +11,7 @@ Use this memory to track identity, session, role, permission, and route-protecti
 
 ## Current Status
 
-No authentication system is installed at scaffold time.
+No authentication system is installed yet.
 
 ## Authentication Provider
 
@@ -25,11 +25,12 @@ No authentication system is installed at scaffold time.
 
 ## Roles And Permissions
 
-No roles or permissions are defined yet.
+No roles or permissions are implemented yet. Product planning expects at least an admin/designer owner for the admin portal, and later customer identities for the customer portal.
 
 | Role | Permissions | Notes |
 | --- | --- | --- |
-| TBD | TBD | TBD |
+| Admin/Designer Owner | Manage business settings, services, quote questions, quote requests, quotes, customers, portfolio, content, media, contact submissions, and later projects/invoices. | Required for admin portal. |
+| Customer | View profile, requests, quotes, accepted work, files, messages, invoices, and payments. | Later customer portal phase only. |
 
 ## Protected Routes
 
@@ -37,7 +38,10 @@ Document route groups or filters when introduced:
 
 | Route/Group | Filter | Access Rule |
 | --- | --- | --- |
-| TBD | TBD | TBD |
+| Public marketing site | None by default | Visitors may browse public pages and submit contact/quote forms. |
+| Public quote request | None by default | Must remain accountless for initial friction reduction. |
+| Admin portal | Auth/admin filter TBD | Designer owner only. |
+| Customer portal | Customer auth filter TBD | Later phase after public/admin workflows are stable. |
 
 ## Authorization Rules
 
@@ -47,6 +51,8 @@ Default until changed:
 - Authorization must still check whether that identity can perform the action.
 - Do not rely on hidden UI alone for access control.
 - Enforce ownership checks for user-owned records.
+- Public quote-request submission does not prove customer identity.
+- Later customer portal access must not expose quote/project records across customers.
 
 ## Session And Cookie Notes
 
@@ -59,3 +65,4 @@ Default until changed:
 - Will the generated project use CodeIgniter Shield, a custom auth layer, or an external provider?
 - Which routes are public, authenticated, or admin-only?
 - Does the project need API tokens or only browser sessions?
+- Will deployments have only one designer owner or support multiple admin users?

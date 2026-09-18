@@ -1,122 +1,172 @@
 # Design
 
-This day-zero design file follows the `DESIGN.md` convention so agents have a stable source of truth for UI work. Replace these defaults once the generated project has a real brand or product direction.
+This project uses a Penji-inspired visual direction adapted for Primo's purple-led palette. Treat this as a starter design system for a reusable CodeIgniter application serving independent graphic designers, not a pixel-perfect clone of Penji or a source of protected Penji content/assets.
 
 ## Overview
 
-Name: CodeIgniter Starter
+Name: Primo Graphic Designer Business Platform
 
-Description: A quiet, practical full-stack application baseline for internal tools, dashboards, portals, and server-rendered web products.
+Description: A reusable public website, quote-request flow, admin portal, and future customer portal for solo graphic designers and very small design businesses.
 
-The default visual direction is restrained and work-focused: readable forms, compact tables, clear navigation, accessible contrast, and predictable interaction states.
+The public site should feel contemporary, creative, image-forward, and sales-capable. The admin portal should feel quieter and more operational: dense enough for repeated work, but still polished enough for a solo creative business owner.
 
 ```yaml
 version: alpha
-name: CodeIgniter Starter
-description: Day-zero design tokens for generated CodeIgniter applications
+name: Primo Graphic Designer Business Platform
+description: Penji-inspired design primitives with Primo palette
+source:
+  referenceSite: "https://penji.co/"
+  extractionDate: "2026-09-18"
+  extractedFont: "Zalando Sans"
 colors:
-  background: "#F7F8FA"
-  surface: "#FFFFFF"
-  surface-muted: "#EEF2F6"
-  text: "#17202A"
-  text-muted: "#5D6B7A"
-  primary: "#1F6FEB"
-  primary-hover: "#195EC8"
+  primary: "#562C82"
+  secondary: "#68418F"
+  accent: "#000000"
+  surface: "#D2C7DC"
+  light-neutral: "#FBF9FB"
+  text: "#000000"
+  text-muted: "#3B3044"
+  border: "#BDAFCB"
+  focus: "#562C82"
   success: "#188038"
   warning: "#B06000"
   danger: "#C5221F"
-  border: "#D7DEE8"
 typography:
   body:
-    fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontFamily: "Zalando Sans, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
     fontSize: 16px
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: 0
   heading:
-    fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-    fontSize: 28px
-    fontWeight: 650
-    lineHeight: 1.2
+    fontFamily: "Zalando Sans, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+    fontSize: 32px
+    fontWeight: 700
+    lineHeight: 1.12
     letterSpacing: 0
 rounded:
-  xs: 2px
-  sm: 4px
-  md: 8px
-spacing:
   xs: 4px
   sm: 8px
-  md: 16px
-  lg: 24px
-  xl: 32px
+  md: 12px
+  lg: 20px
+  pill: 999px
+spacing:
+  1: 2px
+  2: 4px
+  3: 5px
+  4: 6px
+  5: 8px
+  6: 10px
+  7: 12px
+  8: 14px
+  9: 16px
+  10: 20px
+  11: 24px
+  12: 28px
+  13: 32px
+  14: 40px
+  15: 48px
+  16: 64px
+  17: 80px
+  18: 96px
+  19: 112px
+  20: 128px
 components:
   button-primary:
     backgroundColor: "{colors.primary}"
-    textColor: "#FFFFFF"
-    rounded: "{rounded.sm}"
-    padding: 10px 14px
+    textColor: "{colors.light-neutral}"
+    rounded: "{rounded.pill}"
+    padding: 12px 20px
+  button-secondary:
+    backgroundColor: "{colors.light-neutral}"
+    textColor: "{colors.accent}"
+    borderColor: "{colors.border}"
+    rounded: "{rounded.pill}"
+    padding: 12px 20px
   input:
-    backgroundColor: "{colors.surface}"
+    backgroundColor: "{colors.light-neutral}"
     textColor: "{colors.text}"
+    borderColor: "{colors.border}"
     rounded: "{rounded.sm}"
-    padding: 10px 12px
+    padding: 12px 14px
   card:
-    backgroundColor: "{colors.surface}"
+    backgroundColor: "{colors.light-neutral}"
     textColor: "{colors.text}"
     rounded: "{rounded.md}"
-    padding: 16px
+    padding: 24px
 ```
 
-## Colors
+## Reference Patterns
 
-Use neutral surfaces with one clear action color. Avoid one-note palettes dominated by a single hue. Reserve success, warning, and danger colors for semantic state.
+The Penji homepage reference establishes these reusable patterns:
+
+- Bold editorial hero with short navigation, direct CTAs, social proof, and image-forward creative previews.
+- Large alternating bands for capabilities, portfolio proof, testimonials, FAQ, and final CTA.
+- Rounded buttons and input groups with simple, high-contrast CTAs.
+- Portfolio/case-study modules that pair imagery, outcomes, metrics, and a concise story.
+- Service category navigation that makes a broad creative offering feel browsable.
+- Friendly but confident copy density, with large headings and compact supporting paragraphs.
+
+Do not copy Penji logos, proprietary imagery, mascot/illustrations, customer names, testimonials, claims, pricing, or copy. Use the layout archetypes and interaction patterns only.
+
+## Color Use
+
+Use the Primo palette as the adopted source of truth:
+
+- Primary: Deep Primo Purple `#562C82`
+- Secondary: Soft Purple `#68418F`
+- Accent: Black `#000000`
+- Surface: Pale Lavender `#D2C7DC`
+- Light Neutral: White `#FBF9FB`
+
+Primary purple should anchor CTAs, focus states, active navigation, quote indicators, and important admin actions. Soft purple can support secondary bands, hover states, charts, and subtle emphasis. Black is the main text/accent color and should be used sparingly for strong contrast. Pale Lavender is a section surface and should not be the only background color on a page. White keeps portfolio imagery, forms, cards, and admin screens crisp.
 
 ## Typography
 
-Use system fonts by default. Keep body copy at readable sizes and avoid viewport-scaled type. Use compact headings inside dashboards, forms, sidebars, and cards.
+The extraction detected `Zalando Sans` for both headings and body. Use it only if it is licensed and available for the deployment; otherwise fall back to the system sans stack in the token files.
+
+Headlines should be confident and spacious on public marketing pages, but compact in admin screens. Avoid viewport-scaled type and negative letter spacing.
 
 ## Layout
 
-Prioritize scannable layouts:
+Public pages should be mobile-first and portfolio-forward:
 
-- Full-width page bands or simple constrained content regions.
-- Forms with clear labels, help text, validation errors, and submit states.
-- Tables that support repeated use: obvious columns, empty states, and responsive behavior.
-- Stable dimensions for buttons, toolbars, pagination, counters, and tiles.
+- Home, services, service detail, portfolio, about, contact, quote request, legal pages.
+- Hero sections may be expressive, but they should lead into usable service and quote paths quickly.
+- Portfolio and service pages should support strong imagery, concise content, related items, and quote CTAs.
+- Quote-request flows should feel lighter than e-commerce checkout but borrow cart-style clarity.
 
-## Elevation & Depth
+Admin screens should favor scanning and repeat use:
 
-Use borders first, shadows sparingly. Do not nest cards inside cards.
-
-## Shapes
-
-Use 4px radius for buttons and inputs, 8px max for cards and panels unless a generated project defines a stronger design system.
+- Dashboard items requiring attention.
+- Tables/lists for quote requests, customers, services, portfolio, media, and settings.
+- Forms with clear labels, help text, validation errors, upload limits, and submit states.
+- No decorative marketing composition inside operational admin screens.
 
 ## Components
 
-Expected day-zero components:
+Expected early primitives:
 
-- App shell with header/nav and main content region
-- Button, icon button, link button
-- Form inputs, selects, checkboxes, radios, toggles
-- Validation summary and field-level errors
-- Table/list view with empty and loading states
-- Alert/flash messages
-- Pagination
-- Modal or confirmation dialog only when needed
+- Public app shell with header, service navigation, quote indicator, and footer.
+- Admin app shell with sidebar/topbar, dashboard cards, tables, status chips, and actions.
+- Buttons, icon buttons, link buttons, segmented controls, toggles, checkboxes, radios, selects, inputs, textareas, and file upload controls.
+- Service cards, portfolio cards, testimonial/quote cards, metric cards, FAQ accordions, pricing/starting-price display, and quote item rows.
+- Alerts, validation summaries, empty states, loading states, pagination, modals, and confirmation dialogs.
 
-## Do's and Don'ts
+## Do's And Don'ts
 
 Do:
 
-- Build the actual usable screen first.
-- Keep workflows efficient for repeat use.
-- Use accessible labels and visible focus states.
-- Match UI density to the job the app performs.
+- Build real product workflows before decorative pages.
+- Keep business-specific brand details configurable.
+- Use original placeholder copy and user-provided assets.
+- Escape dynamic output in views with the correct `esc()` context.
+- Keep layouts responsive for portfolio browsing, quote requests, file uploads, quote viewing, and admin quote management.
 
 Don't:
 
-- Add marketing hero sections to internal/product tools.
-- Use decorative blobs, vague gradients, or stock-like visuals by default.
-- Put instructional copy in the UI to explain obvious controls.
-- Let text overflow buttons, cards, tables, or navigation items.
+- Build a one-off designer site that hard-codes the first deployment.
+- Add a customer portal before the public site, quote system, and admin portal are stable.
+- Introduce a page builder, complex CRM, accounting platform, or advanced project-management system in the initial phases.
+- Copy Penji content, assets, class names, claims, or source code.
+- Use decorative blobs, vague gradients, nested cards, or overflowing text.

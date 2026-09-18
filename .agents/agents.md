@@ -4,14 +4,17 @@ kind: agents
 
 # CodeIgniter Starter Agent Guidelines
 
-This workspace contains a portable `.agents/` setup for a day-zero CodeIgniter 4 full-stack PHP scaffold. Use it as the project-specific layer above global agent defaults.
+This workspace contains a portable `.agents/` setup for a CodeIgniter 4 full-stack PHP application. Use it as the project-specific layer above global agent defaults.
+
+The product direction is now defined: a reusable East Point Software application for independent graphic designers, combining a public marketing/portfolio site, quote-request flow, admin portal, and later customer portal.
 
 ## Read First
 
 1. `AGENTS.md` for broad coding-agent compatibility.
 2. `ARCHITECTURE.md` for the current system map.
 3. `DESIGN.md` before user-facing UI work.
-4. The relevant `.agents/memories/*.md` files for persistent project decisions, current progress, and handoff notes.
+4. `docs/developer_handoff.md` before product planning, domain modeling, feature phasing, admin work, quote workflows, or customer portal decisions.
+5. The relevant `.agents/memories/*.md` files for persistent project decisions, current progress, and handoff notes.
 
 ## Memory Files
 
@@ -82,10 +85,11 @@ Install or add these when a generated project needs them:
 ## Default Working Agreement
 
 - Identify whether a request affects framework behavior, security, persistence, UI, tests, or agent configuration.
-- Keep scaffold changes generic and reusable unless the user says this is for a specific app.
+- Keep changes reusable across multiple graphic-designer deployments unless the user explicitly says a choice is deployment-specific.
 - Prefer CI4-native mechanisms over custom framework wrappers.
 - Update memory files when a decision becomes true for future agents.
 - Do not introduce build tools, JavaScript frameworks, authentication, queues, or database dependencies until the generated project asks for them.
+- Do not implement app behavior when the user asks only for documentation, memory setup, planning, or design-system extraction.
 
 ## Verification Defaults
 

@@ -1,5 +1,5 @@
 ---
-id: ci4_starter_deployment_runtime
+id: primo_graphic_designer_deployment_runtime
 importance: medium
 tags: deployment, runtime, operations, environment
 title: Deployment Runtime
@@ -11,7 +11,7 @@ Use this memory to track hosting, runtime, environment, jobs, logging, backup, a
 
 ## Current Status
 
-No deployment target is selected at scaffold time.
+No deployment target is selected yet. Each deployment should support configurable business identity, public website content, admin access, email notifications, file uploads, and eventually customer portal/invoice/payment workflows.
 
 ## Runtime Requirements
 
@@ -42,10 +42,12 @@ Document project-specific variables here. Do not record secret values.
 | --- | --- | --- |
 | `CI_ENVIRONMENT` | CodeIgniter environment name | Yes |
 | `app.baseURL` | Application base URL | Yes |
+| TBD mail settings | Transactional email for quote/contact notifications and later quote delivery | Yes before quote submission launch |
+| TBD file/upload settings | Upload limits and storage location for private quote files and public media | Yes before upload launch |
 
 ## Jobs And Schedules
 
-No queue workers, cron jobs, or scheduled tasks are defined yet.
+No queue workers, cron jobs, or scheduled tasks are defined yet. Future notification delivery, quote expiration reminders, or payment reconciliation may require background work, but should not be introduced until needed.
 
 ## Logging And Monitoring
 
@@ -63,3 +65,6 @@ No backup strategy is defined yet.
 - Where will the generated project be hosted?
 - Will the app need background jobs, queues, or scheduled commands?
 - What data needs backup and restore testing?
+- Where will private customer uploads be stored?
+- Which transactional email provider will be used?
+- Which payment provider will be used in the later invoices/payments phase?

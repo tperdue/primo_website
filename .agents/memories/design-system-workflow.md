@@ -1,5 +1,5 @@
 ---
-id: ci4_starter_design_system_workflow
+id: primo_graphic_designer_design_system_workflow
 importance: high
 tags: design-system, tokens, css, workflow
 title: Design System Workflow
@@ -11,31 +11,45 @@ Use this memory to track design-system source, token files, adoption status, and
 
 ## Current Status
 
-No external design system has been extracted or adopted yet.
+Penji has been used as the public visual reference for starter design-system extraction. The automated extractor detected typography and spacing but no palette colors, so the palette was intentionally replaced with the user-provided Primo colors.
 
 ## Source Of Truth
 
 | Item | Current Value |
 | --- | --- |
-| Reference site | TBD |
-| Extraction date | TBD |
-| Token source | `DESIGN.md` day-zero defaults |
-| Generated token files | TBD |
-| App stylesheet | TBD |
+| Reference site | `https://penji.co/` |
+| Extraction date | 2026-09-18 |
+| Token source | Penji-inspired structure plus Primo palette |
+| Generated token files | `.extract-design-system/normalized.json`, `design-system/tokens.json`, `design-system/tokens.css` |
+| App stylesheet | TBD; no app stylesheet has imported the tokens yet |
 | Frontend build tool | None |
+
+## Extracted Signals
+
+- Font family detected: `Zalando Sans` for heading and body.
+- Spacing scale detected: `2px`, `4px`, `5px`, `6px`, `8px`, `10px`, `12px`, `14px`, `16px`, `20px`, `24px`, `28px`, `32px`, `40px`, `48px`, `64px`, `80px`, `96px`, `112px`, `128px`.
+- Automated color extraction returned no palette entries.
+- User-provided color roles now define the starter palette: primary `#562C82`, secondary `#68418F`, accent `#000000`, surface `#D2C7DC`, light neutral `#FBF9FB`.
+- Radius and shadow scales were added as starter tokens for rounded CTAs/cards and restrained elevation.
+
+## Reference Patterns
+
+- Bold image-forward public hero with direct CTAs.
+- Service category browsing.
+- Portfolio/case-study cards with metrics and outcomes.
+- Rounded CTA buttons and compact forms.
+- Large content bands for services, proof, process, FAQ, and final CTA.
+- Dense but readable admin screens when product workflows are implemented.
 
 ## Workflow
 
-Default sequence:
+Future implementation sequence:
 
-1. Extract starter tokens from a public reference site with `extract-design-system`.
-2. Review `.extract-design-system/normalized.json`.
-3. Summarize confidence, gaps, and accessibility risks.
-4. Generate or refresh `design-system/tokens.json` and `design-system/tokens.css`.
-5. Update `DESIGN.md`.
-6. Update this memory and `design-baseline.md`.
-7. Apply tokens to app CSS/views only after confirmation.
-8. Verify rendered UI when app code changes.
+1. Re-read `DESIGN.md`, this memory, and `docs/developer_handoff.md`.
+2. Import or copy from `design-system/tokens.css` into the app stylesheet only when implementation is requested.
+3. Keep CI4 views server-rendered.
+4. Build public and admin UI primitives from these tokens.
+5. Verify rendered UI on mobile and desktop once app code changes.
 
 ## Adoption Rules
 
@@ -44,9 +58,11 @@ Default sequence:
 - Do not add React or a frontend build pipeline for design-system adoption.
 - Use Relume React components only as visual source material, converted through `relume-codeigniter-ui-converter`.
 - Treat extracted values as starter tokens until reviewed in actual project screens.
+- Do not copy Penji protected content, imagery, logos, mascot, customer proof, claims, class names, or source code.
+- Keep business-specific brand assets, copy, services, portfolio, testimonials, and FAQs configurable per deployment.
 
 ## Open Questions
 
-- What public site or brand should seed the generated project's design system?
-- Should generated projects keep plain CSS, use utility classes, or adopt a CSS methodology?
+- Is `Zalando Sans` licensed/available for deployments, or should the system fallback become the production default?
+- Should the app keep plain CSS, use utility classes, or adopt a CSS methodology?
 - Which UI primitives should become reusable CI4 partials?

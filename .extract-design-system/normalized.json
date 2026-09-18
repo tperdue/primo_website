@@ -1,0 +1,67 @@
+{
+  "source": {
+    "url": "https://penji.co/",
+    "extractedAt": "2026-09-18T20:05:04.554Z",
+    "extractor": "dembrandt",
+    "notes": "Automated extraction detected typography and spacing but no palette colors. Color roles were replaced with the user-provided Primo palette."
+  },
+  "colors": {
+    "palette": [
+      "#562C82",
+      "#68418F",
+      "#000000",
+      "#D2C7DC",
+      "#FBF9FB"
+    ],
+    "cssVariables": {
+      "--color-primary": "#562C82",
+      "--color-secondary": "#68418F",
+      "--color-accent": "#000000",
+      "--color-surface": "#D2C7DC",
+      "--color-light-neutral": "#FBF9FB"
+    }
+  },
+  "typography": {
+    "headingFont": "Zalando Sans",
+    "bodyFont": "Zalando Sans"
+  },
+  "spacing": {
+    "scale": [
+      "2px",
+      "4px",
+      "5px",
+      "6px",
+      "8px",
+      "10px",
+      "12px",
+      "14px",
+      "16px",
+      "20px",
+      "24px",
+      "28px",
+      "32px",
+      "40px",
+      "48px",
+      "64px",
+      "80px",
+      "96px",
+      "112px",
+      "128px"
+    ]
+  },
+  "radius": {
+    "scale": [
+      "4px",
+      "8px",
+      "12px",
+      "20px",
+      "999px"
+    ]
+  },
+  "shadows": {
+    "scale": [
+      "0 1px 2px rgb(0 0 0 / 0.08)",
+      "0 12px 32px rgb(0 0 0 / 0.10)"
+    ]
+  }
+}

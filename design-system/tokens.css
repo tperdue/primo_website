@@ -1,0 +1,58 @@
+:root {
+  --color-primary: #562C82;
+  --color-secondary: #68418F;
+  --color-accent: #000000;
+  --color-surface: #D2C7DC;
+  --color-light-neutral: #FBF9FB;
+
+  --color-background: var(--color-light-neutral);
+  --color-surface-raised: var(--color-light-neutral);
+  --color-text: var(--color-accent);
+  --color-text-muted: #3B3044;
+  --color-border: #BDAFCB;
+  --color-focus: var(--color-primary);
+  --color-primary-hover: var(--color-secondary);
+  --color-success: #188038;
+  --color-warning: #B06000;
+  --color-danger: #C5221F;
+
+  --font-heading: "Zalando Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: "Zalando Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --font-size-body: 16px;
+  --font-line-body: 1.5;
+  --font-weight-body: 400;
+  --font-size-heading: 32px;
+  --font-line-heading: 1.12;
+  --font-weight-heading: 700;
+
+  --space-1: 2px;
+  --space-2: 4px;
+  --space-3: 5px;
+  --space-4: 6px;
+  --space-5: 8px;
+  --space-6: 10px;
+  --space-7: 12px;
+  --space-8: 14px;
+  --space-9: 16px;
+  --space-10: 20px;
+  --space-11: 24px;
+  --space-12: 28px;
+  --space-13: 32px;
+  --space-14: 40px;
+  --space-15: 48px;
+  --space-16: 64px;
+  --space-17: 80px;
+  --space-18: 96px;
+  --space-19: 112px;
+  --space-20: 128px;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.08);
+  --shadow-md: 0 12px 32px rgb(0 0 0 / 0.10);
+}

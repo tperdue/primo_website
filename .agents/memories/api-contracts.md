@@ -1,5 +1,5 @@
 ---
-id: ci4_starter_api_contracts
+id: primo_graphic_designer_api_contracts
 importance: medium
 tags: api, contracts, json, errors
 title: API Contracts
@@ -11,7 +11,7 @@ Use this memory when the generated project exposes JSON APIs, webhooks, or machi
 
 ## Current Status
 
-No JSON API contract is defined at scaffold time.
+No JSON API contract is defined yet. The initial product can be server-rendered CodeIgniter, with JSON endpoints added only when they support concrete UI workflows such as quote-builder interactions, media selection, uploads, or future portal behavior.
 
 ## API Style
 
@@ -77,3 +77,5 @@ Default candidates:
 - Is this project server-rendered only, API-first, or hybrid?
 - Will APIs be public, internal, or consumed only by first-party UI?
 - Does the API need OpenAPI documentation?
+- Which quote-builder interactions need JSON endpoints versus standard form posts?
+- Will future customer portal features require a documented API?

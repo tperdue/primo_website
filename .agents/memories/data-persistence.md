@@ -1,5 +1,5 @@
 ---
-id: ci4_starter_data_persistence
+id: primo_graphic_designer_data_persistence
 importance: high
 tags: data, database, migrations, models
 title: Data Persistence
@@ -11,7 +11,7 @@ Use this memory to track database and persistence decisions. Update it when the 
 
 ## Current Status
 
-No application database has been selected at scaffold time.
+No database engine has been selected yet, but the handoff defines durable domain data that the future schema must support.
 
 ## Database Choice
 
@@ -54,12 +54,28 @@ Options to document when chosen:
 
 No seed data is defined yet.
 
+Expected future persisted concepts:
+
+- Business settings for deployment-specific identity, website, brand, quote defaults, files, and notifications.
+- Services with public visibility, starting price, pricing visibility, images, quote questions, related services, and related portfolio work.
+- Question groups and quote questions with field type, requirement, ordering, help text, placeholder, active/inactive state, and reusable service attachment.
+- Portfolio projects with draft/published/featured status, gallery, related services, SEO metadata, and reusable placements.
+- Quote requests with reference number, selected services, general fields, answers, uploaded files, status, and internal notes.
+- Customers/clients with lightweight contact and relationship history.
+- Quotes with numbers, expiration, flexible line items, totals, terms, deposits, statuses, and optional revision history.
+- Projects, project files/messages, invoices, and payments in later phases.
+- Pages/content, media assets, contact submissions, testimonials, FAQs, and optional blog posts.
+
 ## Retention And Deletion
 
 No retention or deletion policy is defined yet.
+
+Future policies must address customer quote uploads, media library files, contact submissions, quote history, customer records, project files, invoices, and logs. Customer uploads should not automatically be publicly accessible.
 
 ## Open Questions
 
 - Which database engine will the generated project use?
 - Should public routes expose sequential IDs, slugs, UUIDs, or opaque identifiers?
 - Which records need soft deletes, audit trails, or immutable history?
+- Which file storage strategy will separate private uploads from public media?
+- Which quote/project records require revision history?

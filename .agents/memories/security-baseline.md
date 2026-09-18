@@ -1,5 +1,5 @@
 ---
-id: ci4_starter_security_baseline
+id: primo_graphic_designer_security_baseline
 importance: high
 tags: security, owasp, codeigniter
 title: Security Baseline
@@ -17,5 +17,11 @@ Security defaults for generated CodeIgniter projects:
 - Define `$allowedFields` on every model that accepts inserts or updates.
 - Use filters for authentication, authorization, CORS, and other request gates.
 - Validate uploads by size, MIME type, extension, storage location, and generated filename.
+- Protect all admin portal routes behind authentication and authorization.
+- Keep public quote requests unauthenticated, but validate them aggressively and add spam/rate-limit protections when implemented.
+- Customer uploads for quote requests must not be stored in publicly browsable locations by default.
+- Enforce configurable allowed file extensions/types, maximum individual upload size, and maximum total upload size.
+- Card/payment details must never be stored directly if invoices/payments are added later.
+- Treat business settings, notification recipients, quote terms, and pricing visibility as administrative data.
 
 When a security decision changes, update this memory and `ARCHITECTURE.md`.

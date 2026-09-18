@@ -1,5 +1,5 @@
 ---
-id: ci4_starter_quality_gates
+id: primo_graphic_designer_quality_gates
 importance: high
 tags: quality, testing, verification, handoff
 title: Quality Gates
@@ -11,7 +11,7 @@ Use this memory to track required verification before handing off work. Update i
 
 ## Current Status
 
-The starter has PHPUnit configured and a Composer `test` script.
+The project has PHPUnit configured and a Composer `test` script. Current work is documentation/design-system setup only.
 
 ## Required Checks
 
@@ -21,6 +21,9 @@ Default for scaffold work:
 - Run `composer test` or `vendor/bin/phpunit` for PHP behavior changes when feasible.
 - For docs-only changes, inspect changed files and skip app tests if there is no runtime impact.
 - For security-sensitive changes, review input validation, authorization, CSRF, output escaping, SQL construction, session/cookie behavior, and secret handling.
+- For design-system changes, parse token JSON and inspect generated CSS/docs.
+- For future UI implementation, verify mobile and desktop rendering, contrast risk, focus states, text overflow, and that no protected reference-site content/assets were copied.
+- For future quote/upload work, verify validation, upload storage location, MIME/extension/size restrictions, CSRF, spam protection, and notification behavior.
 
 ## Known Verification Caveat
 
