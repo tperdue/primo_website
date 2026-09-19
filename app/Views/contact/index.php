@@ -4,7 +4,7 @@
     <?= view('partials/public_meta', ['business' => $business, 'pageTitle' => $page['meta_title'], 'description' => $page['meta_description'], 'canonicalPath' => 'contact']) ?>
 </head>
 <body id="top">
-    <?= view('partials/public_header', ['business' => $business, 'publicPages' => $publicPages]) ?>
+    <?= view('partials/public_header', ['business' => $business, 'publicPages' => $publicPages, 'quoteCount' => $quoteCount]) ?>
     <main class="contact-page">
         <div class="contact-intro"><p class="eyebrow"><?= esc($page['eyebrow'] ?: 'Contact') ?></p><h1><?= esc($page['title']) ?></h1><p class="contact-summary"><?= esc($page['summary']) ?></p><div class="contact-copy"><?= nl2br(esc($page['body'])) ?></div><?php if (! empty($business['contact_email'])): ?><a class="contact-email" href="mailto:<?= esc($business['contact_email'], 'attr') ?>"><?= esc($business['contact_email']) ?></a><?php endif ?></div>
         <div class="contact-form-wrap">

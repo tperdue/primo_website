@@ -4,7 +4,7 @@
     <?= view('partials/public_meta', ['business' => $business, 'pageTitle' => $project['title'], 'description' => $project['summary'], 'canonicalPath' => 'work/' . $project['slug'], 'openGraphType' => 'article', 'openGraphImage' => $project['image_path']]) ?>
 </head>
 <body id="top">
-    <?= view('partials/public_header', ['business' => $business, 'publicPages' => $publicPages]) ?>
+    <?= view('partials/public_header', ['business' => $business, 'publicPages' => $publicPages, 'quoteCount' => $quoteCount]) ?>
     <main class="work-detail">
         <a class="back-link" href="/work">&larr; All work</a>
         <div class="work-detail-heading"><p class="eyebrow">Portfolio project</p><h1><?= esc($project['title']) ?></h1><p><?= esc($project['summary']) ?></p></div>

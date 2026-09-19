@@ -23,6 +23,7 @@ class SiteFiles extends BaseController
         }
         $urls[] = ['location' => base_url('services'), 'updated_at' => null];
         $urls[] = ['location' => base_url('work'), 'updated_at' => null];
+        $urls[] = ['location' => base_url('quote'), 'updated_at' => null];
 
         return $this->response->setContentType('application/xml')->setBody(view('site/sitemap', ['urls' => $urls]));
     }

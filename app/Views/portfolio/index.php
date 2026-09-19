@@ -4,7 +4,7 @@
     <?= view('partials/public_meta', ['business' => $business, 'pageTitle' => 'Work', 'description' => 'Selected design projects from ' . ($business['business_name'] ?? 'our studio') . '.', 'canonicalPath' => 'work']) ?>
 </head>
 <body id="top">
-    <?= view('partials/public_header', ['business' => $business, 'publicPages' => $publicPages]) ?>
+    <?= view('partials/public_header', ['business' => $business, 'publicPages' => $publicPages, 'quoteCount' => $quoteCount]) ?>
     <main class="work-page">
         <div class="work-page-heading"><p class="eyebrow">Portfolio</p><h1>Selected work</h1><p>Projects shaped by clear ideas and purposeful design.</p></div>
         <?php if ($projects === []): ?>

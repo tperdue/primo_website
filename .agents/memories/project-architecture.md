@@ -31,6 +31,7 @@ Architectural defaults:
 - Do not build the customer portal before the public site, quote system, and admin portal are stable.
 - Keep deployment-specific business settings, website content, services, portfolio, quote questions, quote terms, policies, and notifications configurable.
 - Resolve quote intake through active reusable groups: unassigned groups are general, while service assignments make groups conditional on the selected quote services.
+- Keep the pre-submission cart transient in the visitor session; durable quote-request records begin only when the visitor explicitly submits.
 
 Core product workflow:
 

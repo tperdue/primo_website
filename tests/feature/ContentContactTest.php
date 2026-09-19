@@ -164,6 +164,7 @@ final class ContentContactTest extends CIUnitTestCase
         $sitemap->assertOK();
         $sitemap->assertSee('http://localhost:8080/about');
         $sitemap->assertSee('http://localhost:8080/contact');
+        $sitemap->assertSee('http://localhost:8080/quote');
         $sitemap->assertDontSee('http://localhost:8080/privacy');
 
         $robots = $this->get('/robots.txt');

@@ -28,5 +28,6 @@ Security defaults for generated CodeIgniter projects:
 - Admin media uploads accept only JPEG, PNG, and WebP up to 5 MB, verify real MIME and image dimensions, require alt text, and store generated filenames under intentionally public `public/uploads/media/`. Deletion checks every known reference and verifies the resolved file remains under `public/uploads/`. Quote/customer uploads remain private and must not reuse this path.
 - Public contact forms use CSRF, CodeIgniter's injected honeypot, strict length/email validation, and a five-request-per-IP limit over 15 minutes. Inquiries are escaped in admin views, raw IP addresses are not stored, and notification failures do not discard submissions.
 - Quote-question configuration is admin-only. Group assignments, supported field types, lengths, ordering, and choice counts are validated server-side; choice labels are normalized into related records and all admin output is escaped.
+- Public quote-cart changes are POST-only and CSRF-protected. Session state is capped at 25 services and 200 answers; services are rechecked for published status, answer keys and option IDs are catalog-whitelisted, text is length-bounded, and draft values are escaped on output. File questions do not accept uploads until private storage is implemented.
 
 When a security decision changes, update this memory and `ARCHITECTURE.md`.

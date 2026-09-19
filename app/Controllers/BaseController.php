@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Libraries\QuoteCart;
 use App\Models\BusinessSettingsModel;
 use App\Models\ContentPageModel;
 use CodeIgniter\Controller;
@@ -45,14 +46,18 @@ abstract class BaseController extends Controller
         // $this->session = service('session');
     }
 
-    /** @return array{business: array|null, publicPages: array<string, array>} */
+    /** @return array{business: array|null, publicPages: array<string, array>, quoteCount: int, quoteServiceIds: list<int>} */
     protected function publicSiteData(): array
     {
         $pages = (new ContentPageModel())->published()->findAll();
+        $cart = new QuoteCart();
+        $serviceIds = $cart->serviceIds();
 
         return [
             'business' => (new BusinessSettingsModel())->find(1),
             'publicPages' => array_column($pages, null, 'slug'),
+            'quoteCount' => count($serviceIds),
+            'quoteServiceIds' => $serviceIds,
         ];
     }
 }

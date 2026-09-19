@@ -5,6 +5,7 @@
             <a href="/services">Services</a>
             <a href="/work">Work</a>
             <?php if (isset($publicPages['about'])): ?><a href="/about">About</a><?php endif ?>
+            <a class="quote-nav-link" href="/quote">Quote <span class="quote-count" aria-label="<?= (int) $quoteCount ?> selected <?= (int) $quoteCount === 1 ? 'service' : 'services' ?>"><?= (int) $quoteCount ?></span></a>
         </nav>
         <?php if (isset($publicPages['contact'])): ?><a class="nav-action" href="/contact">Get in touch <span aria-hidden="true">&nearr;</span></a><?php endif ?>
         <details class="mobile-menu">
@@ -13,6 +14,7 @@
                 <a href="/services">Services</a>
                 <a href="/work">Work</a>
                 <?php if (isset($publicPages['about'])): ?><a href="/about">About</a><?php endif ?>
+                <a href="/quote">Quote <span class="quote-count" aria-label="<?= (int) $quoteCount ?> selected <?= (int) $quoteCount === 1 ? 'service' : 'services' ?>"><?= (int) $quoteCount ?></span></a>
                 <?php if (isset($publicPages['contact'])): ?><a class="mobile-menu-action" href="/contact">Get in touch <span aria-hidden="true">&nearr;</span></a><?php endif ?>
             </nav>
         </details>

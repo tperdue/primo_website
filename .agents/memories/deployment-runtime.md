@@ -24,6 +24,7 @@ Baseline:
 - Web server document root set to `public/`
 - `writable/` writable by the PHP/web server user
 - `public/uploads/media/` writable by the PHP/web server user and included in backups; legacy `public/uploads/portfolio/` files must also be retained when present
+- Session storage available for the pre-submission quote cart; multi-instance deployments must use a shared session handler or compatible sticky-session strategy
 
 ## Hosting
 

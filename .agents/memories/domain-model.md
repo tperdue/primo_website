@@ -84,6 +84,7 @@ Document state machines or status fields here:
 - The customer portal must wait until public site, quote system, and admin portal foundations are stable.
 - A question group with no service assignments is general and appears once per request; an assigned group appears when any assigned service is selected.
 - Choice-field options are normalized records. Inactive groups and questions are retained so future submitted answers can preserve historical context.
+- Quote-cart selections and draft answers are transient session state, not quote requests. A durable QuoteRequest is created only at explicit submission.
 
 ## Open Questions
 

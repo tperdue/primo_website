@@ -45,6 +45,7 @@ None.
 - Public pages now share canonical and Open Graph metadata; dynamic `sitemap.xml` and `robots.txt` endpoints are available.
 - Media-library administration now supports validated image upload, reusable alt text, file metadata, usage counts, and guarded deletion. Services can select featured images; portfolio projects can select ordered gallery images and related services. Public service and project pages render those relationships responsively.
 - Quote-question administration now supports reusable general or service-assigned groups, ordered active/inactive questions, all planned field types, and normalized options for dropdown, radio, and checkbox fields. An active catalog reader resolves the groups needed by selected services for the future quote builder.
+- Visitors can now add published services to a session-backed quote cart, see a live count in desktop and mobile navigation, remove or add services, and save bounded draft answers through a responsive public builder. The builder resolves general and service-specific active questions without JavaScript and does not create a request before explicit submission.
 
 ## In Progress
 
@@ -56,7 +57,7 @@ None known.
 
 ## Next Actions
 
-- Build the quote cart and public builder from the stable question catalog, then add private uploads, submission notifications, and the quote-request admin inbox.
+- Build durable quote submission with customer details, immutable service/question snapshots, reference numbers, private uploads, notifications, and the quote-request admin inbox.
 - Define a contact-submission retention policy before production launch.
 - Decide whether `Zalando Sans` is licensed/available or use the system fallback in production.
 - Add feature-specific tests with the first real behavior.
@@ -78,6 +79,8 @@ None known.
 - `php spark migrate --all` applied the quote-question migration against the local MySQL connection.
 - `vendor/bin/phpunit --no-coverage` passed: 47 tests, 200 assertions.
 - The quote-question group index was visually checked at 1440px, 390px, and 320px. The desktop table and mobile labeled rows had no document overflow; the mobile admin navigation remains intentionally horizontally scrollable.
+- `vendor/bin/phpunit --no-coverage` passed after the quote-builder slice: 53 tests, 240 assertions.
+- The quote builder was visually checked with representative local data at 1440px, 390px, and 320px. Its sticky summary returns to normal flow on smaller screens, question fields become one column, the mobile menu exposes the live count, and no viewport had horizontal overflow; the temporary preview was removed afterward.
 
 ## Handoff Notes
 

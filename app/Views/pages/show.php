@@ -4,7 +4,7 @@
     <?= view('partials/public_meta', ['business' => $business, 'pageTitle' => $page['meta_title'], 'description' => $page['meta_description'], 'canonicalPath' => $page['slug']]) ?>
 </head>
 <body id="top">
-    <?= view('partials/public_header', ['business' => $business, 'publicPages' => $publicPages]) ?>
+    <?= view('partials/public_header', ['business' => $business, 'publicPages' => $publicPages, 'quoteCount' => $quoteCount]) ?>
     <main class="content-page">
         <header class="content-page-heading"><p class="eyebrow"><?= esc($page['eyebrow'] ?: 'Studio') ?></p><h1><?= esc($page['title']) ?></h1><p><?= esc($page['summary']) ?></p></header>
         <article class="content-page-body"><?= nl2br(esc($page['body'])) ?></article>

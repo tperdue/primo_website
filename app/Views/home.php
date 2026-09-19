@@ -4,7 +4,7 @@
     <?= view('partials/public_meta', ['business' => $business, 'pageTitle' => null, 'description' => $business['description'] ?? '', 'canonicalPath' => '']) ?>
 </head>
 <body id="top">
-    <?= view('partials/public_header', ['business' => $business, 'publicPages' => $publicPages]) ?>
+    <?= view('partials/public_header', ['business' => $business, 'publicPages' => $publicPages, 'quoteCount' => $quoteCount]) ?>
     <main>
         <section class="public-hero" aria-labelledby="hero-title">
             <img class="public-hero-image" src="<?= esc(base_url('assets/images/hero-concepts.png'), 'attr') ?>" alt="Original graphic design concepts across print, packaging, and digital media">

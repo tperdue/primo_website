@@ -26,6 +26,8 @@ Managed About and legal pages use a restrained editorial reading layout. Contact
 
 Quote-question administration follows the same operations pattern: a compact group table communicates status, question count, scope, and order; group forms separate applicability from content; and question forms keep answer type, choices, and behavior in distinct sections. On mobile, rows become labeled records while the admin section navigation remains horizontally scrollable.
 
+The public quote builder uses a visible navigation count, compact selected-service summary, and numbered question bands rather than a checkout-style card stack. The service summary is sticky on desktop and returns to normal flow on smaller screens; question fields collapse from two columns to one, and all cart mutations remain usable without JavaScript.
+
 ```yaml
 version: alpha
 name: Primo Graphic Designer Business Platform
