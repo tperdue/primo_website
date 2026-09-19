@@ -15,6 +15,7 @@
             <span class="admin-nav-heading">WORKSPACE</span>
             <a href="/admin/" <?= $activeSection === 'overview' ? 'aria-current="page"' : '' ?>>Overview</a>
             <a href="/admin/quotes" <?= $activeSection === 'quotes' ? 'aria-current="page"' : '' ?>>Quotes</a>
+            <a href="/admin/customers" <?= $activeSection === 'customers' ? 'aria-current="page"' : '' ?>>Customers</a>
             <span class="admin-nav-heading">WEBSITE</span>
             <a href="/admin/services" <?= $activeSection === 'services' ? 'aria-current="page"' : '' ?>>Services</a>
             <a href="/admin/portfolio" <?= $activeSection === 'portfolio' ? 'aria-current="page"' : '' ?>>Portfolio</a>

@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\BusinessSettingsModel;
+use App\Models\CustomerModel;
 use App\Models\QuoteRequestAnswerModel;
 use App\Models\QuoteRequestFileModel;
 use App\Models\QuoteRequestModel;
@@ -35,14 +36,17 @@ class QuoteRequests extends BaseController
 
     public function show(int $id): string
     {
+        $request = $this->findRequest($id);
+
         return view('admin/quote_requests/show', [
             'businessName' => $this->businessName(),
-            'request' => $this->findRequest($id),
+            'request' => $request,
             'services' => (new QuoteRequestServiceModel())->where('quote_request_id', $id)->orderBy('sort_order', 'ASC')->findAll(),
             'answers' => (new QuoteRequestAnswerModel())->where('quote_request_id', $id)->orderBy('sort_order', 'ASC')->findAll(),
             'files' => (new QuoteRequestFileModel())->where('quote_request_id', $id)->findAll(),
             'statuses' => QuoteRequestModel::STATUSES,
             'quote' => (new QuoteModel())->where('quote_request_id', $id)->first(),
+            'customer' => $request['customer_id'] ? (new CustomerModel())->find($request['customer_id']) : null,
         ]);
     }
 

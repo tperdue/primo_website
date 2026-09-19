@@ -11,7 +11,7 @@ Use this memory to track the current state of work. Update it at the end of mean
 
 ## Current Phase
 
-Phase 3: quote construction and delivery foundation complete.
+Phase 3: quote construction, delivery, and customer relationship administration complete.
 
 ## Active Work
 
@@ -51,6 +51,7 @@ None.
 - Admins now have a protected quote-request inbox with status filtering, full request details, attachment downloads, workflow statuses, and private internal notes.
 - Qualified requests can now become a single customer-linked commercial quote. Admins can edit flexible line items, dates, status, discount, tax, deposit, terms, and customer notes while the server recalculates totals and records immutable revisions plus status history.
 - Quotes have configurable expiration, terms, and deposit defaults; a protected admin quote list/editor; email delivery state; and a tokenized, non-indexable, non-cacheable customer proposal that supports browser print-to-PDF.
+- Admins now have a searchable customer directory plus create/edit profiles for contact, address, and private notes. Normalized email links matching requests to one relationship, quote conversion reuses that customer, and profiles show a chronological request, quote, and quote-status history without rewriting commercial snapshots.
 
 ## In Progress
 
@@ -62,8 +63,8 @@ None known.
 
 ## Next Actions
 
-- Build lightweight customer administration and relationship history across requests and quotes.
-- Decide whether the next quote increment needs token rotation, downloadable server-generated PDFs, or admin-driven revision restoration before adding customer acceptance in Phase 4.
+- Choose the next increment between an operations-focused dashboard/attention queue and Phase 4 customer quote acceptance. Before public acceptance, decide token rotation and audit requirements.
+- Decide whether downloadable server-generated PDFs or admin-driven revision restoration are required before project conversion.
 - Define a contact-submission retention policy before production launch.
 - Decide whether `Zalando Sans` is licensed/available or use the system fallback in production.
 - Add feature-specific tests with the first real behavior.
@@ -90,6 +91,7 @@ None known.
 - The final 1855x848 tabletop hero was visually checked at 1440px, 390px, and 320px. It fills the desktop hero without artificial zoom, preserves a clean left copy field, keeps the products and wall-mounted sign recognizable on mobile, and has no horizontal overflow. The homepage feature tests and full suite passed after integration.
 - `php spark migrate --all` applied the quote-request migration against the local MySQL connection. `vendor/bin/phpunit --no-coverage` passed: 58 tests, 265 assertions. The populated public quote builder was visually checked at 1440px and 390px with responsive navigation and no visible horizontal overflow. Admin rendering is covered by authenticated feature tests because the browser test tab was not signed in.
 - `php spark migrate --all` applied the customer/quote migration against the local MySQL connection. `vendor/bin/phpunit --no-coverage` passed: 64 tests, 306 assertions. Admin and proposal rendering are covered by authenticated/public feature tests because the browser test tab has no admin session or persisted sample quote.
+- `php spark migrate` applied the customer-relationship migration against the local MySQL connection. Customer, submission, and quote workflow tests passed together: 17 tests, 97 assertions. `vendor/bin/phpunit --no-coverage` passed the full suite: 70 tests, 337 assertions. The browser confirmed protected customer routes redirect to sign-in; authenticated admin rendering is covered by feature tests because the browser tab has no admin session.
 
 ## Handoff Notes
 

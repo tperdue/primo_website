@@ -68,4 +68,10 @@ $routes->group('admin', ['filter' => ['session', 'group:admin']], static functio
     $routes->get('quotes/(:num)/edit', 'Admin\Quotes::edit/$1');
     $routes->post('quotes/(:num)', 'Admin\Quotes::update/$1');
     $routes->post('quotes/(:num)/send', 'Admin\Quotes::send/$1');
+    $routes->get('customers', 'Admin\Customers::index');
+    $routes->get('customers/new', 'Admin\Customers::create');
+    $routes->post('customers', 'Admin\Customers::store');
+    $routes->get('customers/(:num)', 'Admin\Customers::show/$1');
+    $routes->get('customers/(:num)/edit', 'Admin\Customers::edit/$1');
+    $routes->post('customers/(:num)', 'Admin\Customers::update/$1');
 });

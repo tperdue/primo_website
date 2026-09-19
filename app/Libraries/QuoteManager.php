@@ -2,7 +2,6 @@
 
 namespace App\Libraries;
 
-use App\Models\CustomerModel;
 use App\Models\QuoteLineItemModel;
 use App\Models\QuoteModel;
 use App\Models\QuoteRequestModel;
@@ -38,13 +37,8 @@ class QuoteManager
         $db->transBegin();
 
         try {
-            $customerId = (int) (new CustomerModel())->insert([
-                'name' => $request['name'],
-                'business_name' => $request['company'],
-                'email' => $request['email'],
-                'phone' => $request['phone'],
-                'notes' => 'Created from quote request ' . $request['reference_number'] . '.',
-            ]);
+            $customer = (new CustomerRelationships())->findOrCreateForRequest($request);
+            $customerId = (int) $customer['id'];
             $quoteDate = date('Y-m-d');
             $expirationDays = max(1, min(365, (int) ($business['default_quote_expiration_days'] ?? 30)));
             $quoteId = (int) $quoteModel->insert([

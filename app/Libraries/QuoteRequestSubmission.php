@@ -118,6 +118,7 @@ class QuoteRequestSubmission
             if ($requestId < 1) {
                 throw new RuntimeException('The quote request could not be created.');
             }
+            (new CustomerRelationships())->linkToExistingCustomer($requestModel->find($requestId));
 
             $serviceModel = new QuoteRequestServiceModel();
             foreach ($services as $index => $service) {

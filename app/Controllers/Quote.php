@@ -109,6 +109,8 @@ class Quote extends BaseController
         }
 
         unset($input['consent']);
+        $input['email'] = strtolower($input['email']);
+        $input['normalized_email'] = $input['email'];
         foreach (['company', 'phone', 'desired_completion_date', 'budget_range', 'additional_notes'] as $nullable) {
             $input[$nullable] = $input[$nullable] === '' ? null : $input[$nullable];
         }

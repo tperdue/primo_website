@@ -34,5 +34,6 @@ Security defaults for generated CodeIgniter projects:
 - Quote totals are server-authoritative. Admin input for dates, statuses, line items, quantities, prices, discounts, tax, deposits, terms, and notes is bounded and validated before a transaction replaces lines and records a revision.
 - Customer proposal links use 256-bit random bearer tokens and expose only ready/sent/accepted/declined/expired quotes. Responses set no-store, no-cache, no-referrer, and noindex directives. Anyone holding a link can view that quote, so tokens must not be logged, indexed, or exposed in unrelated navigation.
 - Email delivery failure or missing configuration never marks a quote sent. Quote/customer contact snapshots preserve the exact recipient and commercial record at creation time.
+- Customer directory, profile, and editing routes require both Shield session authentication and admin-group authorization. Search uses query builder conditions, profile fields are length/email validated, normalized-email duplicate checks prevent routine accidental duplicates, and all customer notes/contact/address/history output is escaped.
 
 When a security decision changes, update this memory and `ARCHITECTURE.md`.

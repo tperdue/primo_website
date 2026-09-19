@@ -23,7 +23,7 @@ class QuoteRequestModel extends Model
     protected $returnType = 'array';
     protected $useTimestamps = true;
     protected $allowedFields = [
-        'reference_number', 'name', 'company', 'email', 'phone', 'preferred_contact',
+        'reference_number', 'customer_id', 'name', 'company', 'email', 'normalized_email', 'phone', 'preferred_contact',
         'project_summary', 'desired_completion_date', 'budget_range', 'additional_notes',
         'status', 'internal_notes', 'owner_notification_status', 'customer_notification_status',
         'submitted_at',

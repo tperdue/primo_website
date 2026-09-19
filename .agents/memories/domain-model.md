@@ -88,6 +88,7 @@ Document state machines or status fields here:
 - Submitted requests use an opaque human-readable reference and immutable service/question/answer snapshots. Live catalog foreign keys are nullable so catalog retirement cannot destroy request history.
 - Quote-request receipt confirms delivery only; it is never a final price or project acceptance. Owner and customer notification outcomes are tracked independently.
 - A qualified request converts into at most one actual quote and an associated lightweight customer. The quote snapshots customer contact details so later customer edits cannot rewrite the commercial record.
+- Customer identity is matched by normalized email. Matching requests share one customer relationship record, while quote snapshots remain historically immutable; customer records are not deletable until an explicit archive/retention policy exists.
 - Quote line items are independent of originally requested services. Subtotal, fixed discount, percentage tax, total, and percentage deposit are calculated from current line items by the server.
 - Each quote save creates an immutable numbered revision. Status changes also append history; public quote visibility begins at Ready and email delivery promotes Ready to Sent only after successful sending.
 

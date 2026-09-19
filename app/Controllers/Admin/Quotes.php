@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Libraries\QuoteDeliveryNotifier;
 use App\Libraries\QuoteManager;
 use App\Models\BusinessSettingsModel;
+use App\Models\CustomerModel;
 use App\Models\QuoteLineItemModel;
 use App\Models\QuoteModel;
 use App\Models\QuoteRequestModel;
@@ -53,6 +54,7 @@ class Quotes extends BaseController
             'versions' => (new QuoteVersionModel())->where('quote_id', $id)->orderBy('version_number', 'DESC')->findAll(),
             'statuses' => QuoteModel::STATUSES,
             'request' => $quote['quote_request_id'] ? (new QuoteRequestModel())->find($quote['quote_request_id']) : null,
+            'customer' => (new CustomerModel())->find($quote['customer_id']),
         ]);
     }
 

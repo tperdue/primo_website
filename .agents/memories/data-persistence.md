@@ -13,7 +13,7 @@ Use this memory to track database and persistence decisions. Update it when the 
 
 SQLite is the default database. Business settings are stored as one row with ID 1. Services and portfolio projects use auto-increment IDs internally and stable unique slugs publicly. Reusable media records relate to service featured images, portfolio featured images, ordered project galleries, and project-service associations; deleting an in-use asset is restricted by both the application and database. Quote question groups own ordered questions and normalized choice options; explicit group-service rows make a group conditional, while a group with no service rows is general. The quote cart and draft answers remain transient session state. Explicit submission creates a durable quote request, immutable service and answer snapshots, and private file metadata under one transaction. Fixed-slug content pages store About, Contact, Privacy, and Terms copy plus SEO metadata. Contact submissions store inquiry and notification state but no raw IP address. Shield manages its own user tables; package migrations run alongside app migrations.
 
-Qualified requests convert into one quote and one lightweight customer record. Quotes retain customer contact snapshots, a unique human-readable quote number, a 256-bit public access token, line items, calculated totals, terms, delivery state, and version number. Every save replaces current line items transactionally and appends an immutable JSON revision; status changes also append history. Business settings provide default expiration days, terms, and deposit percentage.
+Qualified requests convert into one quote and one lightweight customer record. Customer identity matching uses trimmed, lowercased email stored on both customers and quote requests; conversion reuses an existing match and links previously unassigned requests with the same normalized email. Customer profiles hold current contact, optional address, and private notes, while quotes retain immutable customer contact snapshots, a unique human-readable quote number, a 256-bit public access token, line items, calculated totals, terms, delivery state, and version number. Every save replaces current line items transactionally and appends an immutable JSON revision; status changes also append history. Business settings provide default expiration days, terms, and deposit percentage.
 
 ## Database Choice
 
@@ -65,7 +65,7 @@ Expected future persisted concepts:
 
 ## Retention And Deletion
 
-No retention or deletion policy is defined yet.
+No retention or deletion policy is defined yet. Customer deletion is not exposed because requests and quotes form durable relationship and commercial history; define archival and retention behavior before adding destructive customer actions.
 
 New media files are stored under ignored `public/uploads/media/` and are intentionally public; legacy `public/uploads/portfolio/` paths remain valid. Replacing a selected image does not delete its reusable media record or file. An asset can be deleted only after all service, featured-project, and gallery references are removed. Backups must include the database and both public upload directories when present.
 
