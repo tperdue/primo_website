@@ -44,6 +44,7 @@ None.
 - The public contact form stores validated inquiries, uses CSRF, a honeypot, and an IP-based submission limit, and attempts configurable owner email notification without losing messages when mail is unavailable. Admins can review and close submissions in a protected inbox.
 - Public pages now share canonical and Open Graph metadata; dynamic `sitemap.xml` and `robots.txt` endpoints are available.
 - Media-library administration now supports validated image upload, reusable alt text, file metadata, usage counts, and guarded deletion. Services can select featured images; portfolio projects can select ordered gallery images and related services. Public service and project pages render those relationships responsively.
+- Quote-question administration now supports reusable general or service-assigned groups, ordered active/inactive questions, all planned field types, and normalized options for dropdown, radio, and checkbox fields. An active catalog reader resolves the groups needed by selected services for the future quote builder.
 
 ## In Progress
 
@@ -55,8 +56,7 @@ None known.
 
 ## Next Actions
 
-- Build reusable question groups and configurable quote questions, including service assignment and supported field types.
-- Build the quote cart/builder, private uploads, submission notifications, and quote-request admin inbox after the reusable question model is stable.
+- Build the quote cart and public builder from the stable question catalog, then add private uploads, submission notifications, and the quote-request admin inbox.
 - Define a contact-submission retention policy before production launch.
 - Decide whether `Zalando Sans` is licensed/available or use the system fallback in production.
 - Add feature-specific tests with the first real behavior.
@@ -75,6 +75,9 @@ None known.
 - `vendor/bin/phpunit --no-coverage` passed: 42 tests, 172 assertions.
 - Service featured imagery, related-work composition, and project galleries were visually checked with temporary representative previews at desktop and 390px. Both mobile pages had zero horizontal overflow; preview files were removed afterward.
 - The admin media browser/upload layout was visually checked at desktop and 390px. Its grid reduced from four to two columns with stacked upload controls and zero horizontal overflow; the preview file was removed afterward.
+- `php spark migrate --all` applied the quote-question migration against the local MySQL connection.
+- `vendor/bin/phpunit --no-coverage` passed: 47 tests, 200 assertions.
+- The quote-question group index was visually checked at 1440px, 390px, and 320px. The desktop table and mobile labeled rows had no document overflow; the mobile admin navigation remains intentionally horizontally scrollable.
 
 ## Handoff Notes
 

@@ -11,7 +11,7 @@ Use this memory to track database and persistence decisions. Update it when the 
 
 ## Current Status
 
-SQLite is the default database. Business settings are stored as one row with ID 1. Services and portfolio projects use auto-increment IDs internally and stable unique slugs publicly. Reusable media records relate to service featured images, portfolio featured images, ordered project galleries, and project-service associations; deleting an in-use asset is restricted by both the application and database. Fixed-slug content pages store About, Contact, Privacy, and Terms copy plus SEO metadata. Contact submissions store inquiry and notification state but no raw IP address. Shield manages its own user tables; package migrations run alongside app migrations.
+SQLite is the default database. Business settings are stored as one row with ID 1. Services and portfolio projects use auto-increment IDs internally and stable unique slugs publicly. Reusable media records relate to service featured images, portfolio featured images, ordered project galleries, and project-service associations; deleting an in-use asset is restricted by both the application and database. Quote question groups own ordered questions and normalized choice options; explicit group-service rows make a group conditional, while a group with no service rows is general. Fixed-slug content pages store About, Contact, Privacy, and Terms copy plus SEO metadata. Contact submissions store inquiry and notification state but no raw IP address. Shield manages its own user tables; package migrations run alongside app migrations.
 
 ## Database Choice
 
@@ -54,7 +54,6 @@ Expected future persisted concepts:
 
 - Business settings for deployment-specific identity, website, brand, quote defaults, files, and notifications.
 - Services with public visibility, starting price, pricing visibility, images, quote questions, related services, and related portfolio work.
-- Question groups and quote questions with field type, requirement, ordering, help text, placeholder, active/inactive state, and reusable service attachment.
 - Portfolio projects with draft/published/featured status, gallery, related services, SEO metadata, and reusable placements.
 - Quote requests with reference number, selected services, general fields, answers, uploaded files, status, and internal notes.
 - Customers/clients with lightweight contact and relationship history.

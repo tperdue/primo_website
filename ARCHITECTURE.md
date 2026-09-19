@@ -83,6 +83,8 @@ Portfolio projects are separate records with stable slugs, draft/published/archi
 
 The public media library stores validated images once and relates them through explicit tables: one featured image per service, ordered gallery images per portfolio project, and service-to-project associations. Media deletion is blocked while any featured or gallery relationship exists. New library uploads use generated names under `public/uploads/media/`; existing `public/uploads/portfolio/` records remain valid.
 
+Quote intake configuration uses reusable question groups, ordered questions, normalized choice options, and explicit group-to-service relationships. A group with no service relationships is general and applies once to every quote request; an assigned group applies when at least one of its services is selected. Inactive groups and questions remain stored for future quote-history integrity. The `QuoteQuestionCatalog` exposes only active, relevant configuration to the future public builder.
+
 About, contact, privacy, and terms content use fixed-slug page records with draft/published visibility and editable SEO fields. Fixed slugs keep navigation and sitemap URLs stable without introducing a general page builder. Contact inquiries are persisted before synchronous notification is attempted; delivery state is recorded on the submission, and failed or unconfigured email never discards the inquiry. Contact and page administration share the Shield session and admin-group filters.
 
 ### Views And Frontend

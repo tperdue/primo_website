@@ -37,6 +37,15 @@ $routes->group('admin', ['filter' => ['session', 'group:admin']], static functio
     $routes->get('media/(:num)/edit', 'Admin\Media::edit/$1');
     $routes->post('media/(:num)', 'Admin\Media::update/$1');
     $routes->post('media/(:num)/delete', 'Admin\Media::delete/$1');
+    $routes->get('question-groups', 'Admin\QuestionGroups::index');
+    $routes->get('question-groups/new', 'Admin\QuestionGroups::create');
+    $routes->post('question-groups', 'Admin\QuestionGroups::store');
+    $routes->get('question-groups/(:num)/edit', 'Admin\QuestionGroups::edit/$1');
+    $routes->post('question-groups/(:num)', 'Admin\QuestionGroups::update/$1');
+    $routes->get('question-groups/(:num)/questions/new', 'Admin\QuoteQuestions::create/$1');
+    $routes->post('question-groups/(:num)/questions', 'Admin\QuoteQuestions::store/$1');
+    $routes->get('question-groups/(:num)/questions/(:num)/edit', 'Admin\QuoteQuestions::edit/$1/$2');
+    $routes->post('question-groups/(:num)/questions/(:num)', 'Admin\QuoteQuestions::update/$1/$2');
     $routes->get('pages', 'Admin\ContentPages::index');
     $routes->get('pages/(:num)/edit', 'Admin\ContentPages::edit/$1');
     $routes->post('pages/(:num)', 'Admin\ContentPages::update/$1');

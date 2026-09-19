@@ -19,6 +19,8 @@
             <a href="/admin/portfolio" <?= $activeSection === 'portfolio' ? 'aria-current="page"' : '' ?>>Portfolio</a>
             <a href="/admin/media" <?= $activeSection === 'media' ? 'aria-current="page"' : '' ?>>Media</a>
             <a href="/admin/pages" <?= $activeSection === 'pages' ? 'aria-current="page"' : '' ?>>Pages</a>
+            <span class="admin-nav-heading">QUOTE SETUP</span>
+            <a href="/admin/question-groups" <?= $activeSection === 'questions' ? 'aria-current="page"' : '' ?>>Quote questions</a>
             <span class="admin-nav-heading">INBOX</span>
             <a href="/admin/contacts" <?= $activeSection === 'contacts' ? 'aria-current="page"' : '' ?>>Contact submissions</a>
             <span class="admin-nav-heading">CONFIGURATION</span>

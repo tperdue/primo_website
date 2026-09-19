@@ -24,6 +24,8 @@ The media library uses a dense thumbnail browser with visible descriptions, type
 
 Managed About and legal pages use a restrained editorial reading layout. Contact uses a two-column introduction and form on desktop and a single-column flow on smaller screens. Contact submissions and page editing live in the operational admin shell as tables and grouped forms, not promotional cards.
 
+Quote-question administration follows the same operations pattern: a compact group table communicates status, question count, scope, and order; group forms separate applicability from content; and question forms keep answer type, choices, and behavior in distinct sections. On mobile, rows become labeled records while the admin section navigation remains horizontally scrollable.
+
 ```yaml
 version: alpha
 name: Primo Graphic Designer Business Platform
