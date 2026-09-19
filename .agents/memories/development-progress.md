@@ -46,6 +46,7 @@ None.
 - Media-library administration now supports validated image upload, reusable alt text, file metadata, usage counts, and guarded deletion. Services can select featured images; portfolio projects can select ordered gallery images and related services. Public service and project pages render those relationships responsively.
 - Quote-question administration now supports reusable general or service-assigned groups, ordered active/inactive questions, all planned field types, and normalized options for dropdown, radio, and checkbox fields. An active catalog reader resolves the groups needed by selected services for the future quote builder.
 - Visitors can now add published services to a session-backed quote cart, see a live count in desktop and mobile navigation, remove or add services, and save bounded draft answers through a responsive public builder. The builder resolves general and service-specific active questions without JavaScript and does not create a request before explicit submission.
+- The homepage hero now uses a generated portfolio composition derived from five user-provided physical mockups: book-cover, business-card, signage, menu, and merchandise work. A loose standalone logo specimen was removed so every piece demonstrates design in application. The light studio field reserves desktop copy space, while mobile focuses the complete object cluster beneath the established copy and calls to action.
 
 ## In Progress
 
@@ -81,6 +82,7 @@ None known.
 - The quote-question group index was visually checked at 1440px, 390px, and 320px. The desktop table and mobile labeled rows had no document overflow; the mobile admin navigation remains intentionally horizontally scrollable.
 - `vendor/bin/phpunit --no-coverage` passed after the quote-builder slice: 53 tests, 240 assertions.
 - The quote builder was visually checked with representative local data at 1440px, 390px, and 320px. Its sticky summary returns to normal flow on smaller screens, question fields become one column, the mobile menu exposes the live count, and no viewport had horizontal overflow; the temporary preview was removed afterward.
+- The final 1855x848 tabletop hero was visually checked at 1440px, 390px, and 320px. It fills the desktop hero without artificial zoom, preserves a clean left copy field, keeps the products and wall-mounted sign recognizable on mobile, and has no horizontal overflow. The homepage feature tests and full suite passed after integration.
 
 ## Handoff Notes
 

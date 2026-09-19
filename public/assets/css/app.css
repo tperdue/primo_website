@@ -37,8 +37,8 @@ h1, h2, p { overflow-wrap: anywhere; }
 .mobile-menu { display: none; }
 #concepts, #studio { scroll-margin-top: 78px; }
 
-.public-hero { position: relative; min-height: min(650px, calc(100svh - 78px)); background: var(--light); overflow: hidden; display: flex; align-items: center; }
-.public-hero-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.public-hero { position: relative; min-height: min(650px, calc(100svh - 78px)); background: #fbf9fc; overflow: hidden; display: flex; align-items: center; isolation: isolate; }
+.public-hero-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; mix-blend-mode: normal; }
 .public-hero-inner { position: relative; z-index: 1; width: min(100%, 1600px); margin: 0 auto; padding: 58px clamp(20px, 4vw, 64px) 72px; }
 .hero-kicker, .eyebrow { margin: 0 0 24px; font-size: 12px; line-height: 1.3; font-weight: 800; text-transform: uppercase; letter-spacing: 0; }
 .hero-kicker { color: var(--primary); }
@@ -394,7 +394,7 @@ h1, h2, p { overflow-wrap: anywhere; }
   .mobile-menu nav .mobile-menu-action { justify-content: space-between; margin-top: 12px; padding: 0 16px; border: 1px solid var(--light); border-radius: 4px; }
   #concepts, #studio { scroll-margin-top: 70px; }
   .public-hero h1 { font-size: 58px; }
-  .public-hero-image { object-position: 58% center; }
+  .public-hero-image { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 56% 52%; }
   .contact-page { grid-template-columns: 1fr; gap: 42px; }
   .quote-layout { grid-template-columns: 1fr; }
   .quote-summary { position: static; }
@@ -404,7 +404,7 @@ h1, h2, p { overflow-wrap: anywhere; }
 @media (max-width: 700px) {
   .public-hero { display: flex; flex-direction: column-reverse; align-items: stretch; min-height: 0; }
   .public-hero-inner { padding: 54px 22px 34px; }
-  .public-hero-image { position: relative; width: 100%; height: 285px; object-fit: cover; object-position: 72% center; }
+  .public-hero-image { position: relative; inset: auto; width: 100%; height: min(76vw, 300px); object-fit: cover; object-position: 78% center; mix-blend-mode: normal; }
   .public-hero h1 { font-size: 46px; max-width: 12ch; }
   .hero-tagline { font-size: 19px; margin: 18px 0 26px; }
   .hero-actions { gap: 10px; }

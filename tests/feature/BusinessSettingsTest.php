@@ -31,7 +31,7 @@ final class BusinessSettingsTest extends CIUnitTestCase
         $result->assertSee('North Studio');
         $result->assertSee('Original work for growing brands.');
         $result->assertSee('href="/contact"');
-        $result->assertSee('assets/images/hero-concepts.png');
+        $result->assertSee('assets/images/portfolio-hero-composition.png');
         $result->assertSee('assets/images/concept-study.png');
         $result->assertSee('class="mobile-menu"');
         $result->assertSee('assets/js/nav.js');

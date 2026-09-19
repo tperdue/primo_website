@@ -7,7 +7,7 @@
     <?= view('partials/public_header', ['business' => $business, 'publicPages' => $publicPages, 'quoteCount' => $quoteCount]) ?>
     <main>
         <section class="public-hero" aria-labelledby="hero-title">
-            <img class="public-hero-image" src="<?= esc(base_url('assets/images/hero-concepts.png'), 'attr') ?>" alt="Original graphic design concepts across print, packaging, and digital media">
+            <img class="public-hero-image" src="<?= esc(base_url('assets/images/portfolio-hero-composition.png'), 'attr') ?>" alt="Primo design work arranged on a studio counter with signage mounted in the background" width="1855" height="848" fetchpriority="high">
             <div class="public-hero-inner">
                 <p class="hero-kicker">Independent graphic design studio</p>
                 <h1 id="hero-title"><?= esc($business['business_name'] ?? 'Design studio') ?></h1>
