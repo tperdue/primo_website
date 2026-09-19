@@ -36,6 +36,17 @@
             </div>
         </section>
         <?php endif ?>
+        <?php if ($featuredProjects !== []): ?>
+        <section class="featured-work" aria-labelledby="featured-work-title">
+            <div class="featured-work-inner"><div class="featured-work-heading"><div><p class="eyebrow">Selected work</p><h2 id="featured-work-title">Work worth a closer look.</h2></div><a href="/work">See all work &nearr;</a></div>
+                <div class="work-grid">
+                    <?php foreach ($featuredProjects as $project): ?>
+                    <a class="work-item" href="/work/<?= esc($project['slug'], 'attr') ?>"><img src="<?= esc(base_url($project['image_path']), 'attr') ?>" alt="<?= esc($project['image_alt'], 'attr') ?>" loading="lazy"><span class="work-item-meta"><strong><?= esc($project['title']) ?></strong><span><?= esc($project['summary']) ?></span></span></a>
+                    <?php endforeach ?>
+                </div>
+            </div>
+        </section>
+        <?php endif ?>
         <section class="concept-section" id="concepts" aria-labelledby="concept-title">
             <div class="section-heading">
                 <p class="eyebrow">Creative direction</p>

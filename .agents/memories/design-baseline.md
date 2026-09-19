@@ -24,6 +24,7 @@ Agents should:
 - The public header is black and sticky. At 700px and below, navigation uses a native `details` menu with a 44px trigger; section anchors offset for the header.
 - The service catalog is a compact editorial list, with a text-led detail page until real deployment-specific imagery is available.
 - Admin screens use a shared operations shell with persistent section navigation, a compact toolbar, restrained data summary, dense tables, and grouped forms. On phones, navigation is horizontal and service rows stack; avoid marketing-style cards and oversized headings.
+- Public Work pages use real uploaded project images with large previews and a full-image detail view; the homepage only features published projects explicitly marked featured.
 - Build actual usable application screens first.
 - Keep forms, tables, navigation, empty states, loading states, and validation states complete.
 - Use readable system typography and accessible contrast.

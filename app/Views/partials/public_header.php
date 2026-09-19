@@ -3,6 +3,7 @@
         <a class="wordmark" href="/" aria-label="<?= esc(($business['business_name'] ?? 'Design studio') . ' home', 'attr') ?>"><?= esc($business['business_name'] ?? 'Design studio') ?></a>
         <nav class="site-nav" aria-label="Main navigation">
             <a href="/services">Services</a>
+            <a href="/work">Work</a>
             <a href="/#concepts">Concepts</a>
             <a href="/#studio">Studio</a>
         </nav>
@@ -13,6 +14,7 @@
             <summary title="Menu"><span class="visually-hidden">Menu</span><span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></summary>
             <nav aria-label="Mobile navigation">
                 <a href="/services">Services</a>
+                <a href="/work">Work</a>
                 <a href="/#concepts">Concepts</a>
                 <a href="/#studio">Studio</a>
                 <?php if (! empty($business['contact_email'])): ?>

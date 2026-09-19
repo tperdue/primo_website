@@ -23,6 +23,7 @@ Baseline:
 - `mbstring` PHP extension
 - Web server document root set to `public/`
 - `writable/` writable by the PHP/web server user
+- `public/uploads/portfolio/` writable by the PHP/web server user and included in backups; these are intentionally public media files
 
 ## Hosting
 

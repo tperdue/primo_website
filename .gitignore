@@ -64,6 +64,8 @@ Vagrantfile
 !/writable/debugbar/index.html
 /writable/*.sqlite
 /writable/*.sqlite-*
+/public/uploads/*
+!/public/uploads/.htaccess
 
 php_errors.log
 

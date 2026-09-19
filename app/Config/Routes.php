@@ -6,6 +6,8 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->get('services', 'Services::index');
 $routes->get('services/(:segment)', 'Services::show/$1');
+$routes->get('work', 'Portfolio::index');
+$routes->get('work/(:segment)', 'Portfolio::show/$1');
 $routes->setAutoRoute(false);
 service('auth')->routes($routes, ['only' => ['login']]);
 $routes->post('logout', '\CodeIgniter\Shield\Controllers\LoginController::logoutAction', ['as' => 'logout']);
@@ -18,4 +20,9 @@ $routes->group('admin', ['filter' => ['session', 'group:admin']], static functio
     $routes->post('services', 'Admin\Services::store');
     $routes->get('services/(:num)/edit', 'Admin\Services::edit/$1');
     $routes->post('services/(:num)', 'Admin\Services::update/$1');
+    $routes->get('portfolio', 'Admin\Portfolio::index');
+    $routes->get('portfolio/new', 'Admin\Portfolio::create');
+    $routes->post('portfolio', 'Admin\Portfolio::store');
+    $routes->get('portfolio/(:num)/edit', 'Admin\Portfolio::edit/$1');
+    $routes->post('portfolio/(:num)', 'Admin\Portfolio::update/$1');
 });

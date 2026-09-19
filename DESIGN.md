@@ -18,6 +18,8 @@ The service catalog uses a compact editorial list and a text-led detail layout u
 
 The admin area is an operational workspace, distinct from the public marketing layout: persistent section navigation, a compact toolbar, a data-led overview, scannable service table, and grouped settings forms. On narrow screens, navigation becomes a horizontal section bar and data rows stack with visible labels.
 
+Portfolio pages are image-forward only when real deployment-specific project images are uploaded. The public Work index uses large image previews and the detail page shows the full featured image without cropping, followed by challenge and solution. Featured published projects may appear on the homepage. Admin portfolio management follows the same dense workspace patterns as Services.
+
 ```yaml
 version: alpha
 name: Primo Graphic Designer Business Platform

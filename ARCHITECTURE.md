@@ -79,6 +79,8 @@ Durable domain objects should include business settings, services, quote questio
 
 Services are stored in their own table with stable public slugs, draft/published/archived status, display order, and optional starting-price visibility. Only published services resolve on public routes. Admin service routes share the Shield session and admin-group filters.
 
+Portfolio projects are separate records with stable slugs, draft/published/archived status, optional homepage featuring, and a featured media reference. Reusable public media records hold an image path and alt text. Only published portfolio records resolve on public routes; the admin portfolio routes share the Shield session and admin-group filters.
+
 ### Views And Frontend
 
 Responsibility: Render UI using CodeIgniter views, helpers, CSS, and progressive enhancement where useful.
@@ -138,6 +140,7 @@ Monitoring And Logging: CodeIgniter logs write to `writable/logs/` by default. P
 - Validate all request input before use.
 - Use CodeIgniter models/query builder or bound parameters for database access.
 - Store uploads outside the public web root unless the file is intentionally public.
+- Portfolio images are intentionally public media under `public/uploads/portfolio/`; they are admin-only uploads with size, type, extension, and image-content checks plus generated filenames. Private customer quote uploads must use a separate non-public store.
 
 ## 8. Development And Testing Environment
 
