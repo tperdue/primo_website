@@ -11,7 +11,7 @@ Use this memory to track the current state of work. Update it at the end of mean
 
 ## Current Phase
 
-Phase 2: content relationships and quote-request foundations.
+Phase 3: quote construction and delivery foundation complete.
 
 ## Active Work
 
@@ -47,6 +47,10 @@ None.
 - Quote-question administration now supports reusable general or service-assigned groups, ordered active/inactive questions, all planned field types, and normalized options for dropdown, radio, and checkbox fields. An active catalog reader resolves the groups needed by selected services for the future quote builder.
 - Visitors can now add published services to a session-backed quote cart, see a live count in desktop and mobile navigation, remove or add services, and save bounded draft answers through a responsive public builder. The builder resolves general and service-specific active questions without JavaScript and does not create a request before explicit submission.
 - The homepage hero now uses a generated portfolio composition derived from five user-provided physical mockups: book-cover, business-card, signage, menu, and merchandise work. A loose standalone logo specimen was removed so every piece demonstrates design in application. The light studio field reserves desktop copy space, while mobile focuses the complete object cluster beneath the established copy and calls to action.
+- Visitors can now submit the quote builder with validated customer/project details, consent, configured-question answers, and optional private attachments. Submission creates opaque references plus immutable service and answer snapshots transactionally, clears the cart only after success, and records independent owner/customer email outcomes.
+- Admins now have a protected quote-request inbox with status filtering, full request details, attachment downloads, workflow statuses, and private internal notes.
+- Qualified requests can now become a single customer-linked commercial quote. Admins can edit flexible line items, dates, status, discount, tax, deposit, terms, and customer notes while the server recalculates totals and records immutable revisions plus status history.
+- Quotes have configurable expiration, terms, and deposit defaults; a protected admin quote list/editor; email delivery state; and a tokenized, non-indexable, non-cacheable customer proposal that supports browser print-to-PDF.
 
 ## In Progress
 
@@ -58,7 +62,8 @@ None known.
 
 ## Next Actions
 
-- Build durable quote submission with customer details, immutable service/question snapshots, reference numbers, private uploads, notifications, and the quote-request admin inbox.
+- Build lightweight customer administration and relationship history across requests and quotes.
+- Decide whether the next quote increment needs token rotation, downloadable server-generated PDFs, or admin-driven revision restoration before adding customer acceptance in Phase 4.
 - Define a contact-submission retention policy before production launch.
 - Decide whether `Zalando Sans` is licensed/available or use the system fallback in production.
 - Add feature-specific tests with the first real behavior.
@@ -83,6 +88,8 @@ None known.
 - `vendor/bin/phpunit --no-coverage` passed after the quote-builder slice: 53 tests, 240 assertions.
 - The quote builder was visually checked with representative local data at 1440px, 390px, and 320px. Its sticky summary returns to normal flow on smaller screens, question fields become one column, the mobile menu exposes the live count, and no viewport had horizontal overflow; the temporary preview was removed afterward.
 - The final 1855x848 tabletop hero was visually checked at 1440px, 390px, and 320px. It fills the desktop hero without artificial zoom, preserves a clean left copy field, keeps the products and wall-mounted sign recognizable on mobile, and has no horizontal overflow. The homepage feature tests and full suite passed after integration.
+- `php spark migrate --all` applied the quote-request migration against the local MySQL connection. `vendor/bin/phpunit --no-coverage` passed: 58 tests, 265 assertions. The populated public quote builder was visually checked at 1440px and 390px with responsive navigation and no visible horizontal overflow. Admin rendering is covered by authenticated feature tests because the browser test tab was not signed in.
+- `php spark migrate --all` applied the customer/quote migration against the local MySQL connection. `vendor/bin/phpunit --no-coverage` passed: 64 tests, 306 assertions. Admin and proposal rendering are covered by authenticated/public feature tests because the browser test tab has no admin session or persisted sample quote.
 
 ## Handoff Notes
 

@@ -14,6 +14,7 @@
         <nav class="admin-side-nav" aria-label="Admin sections">
             <span class="admin-nav-heading">WORKSPACE</span>
             <a href="/admin/" <?= $activeSection === 'overview' ? 'aria-current="page"' : '' ?>>Overview</a>
+            <a href="/admin/quotes" <?= $activeSection === 'quotes' ? 'aria-current="page"' : '' ?>>Quotes</a>
             <span class="admin-nav-heading">WEBSITE</span>
             <a href="/admin/services" <?= $activeSection === 'services' ? 'aria-current="page"' : '' ?>>Services</a>
             <a href="/admin/portfolio" <?= $activeSection === 'portfolio' ? 'aria-current="page"' : '' ?>>Portfolio</a>
@@ -22,6 +23,7 @@
             <span class="admin-nav-heading">QUOTE SETUP</span>
             <a href="/admin/question-groups" <?= $activeSection === 'questions' ? 'aria-current="page"' : '' ?>>Quote questions</a>
             <span class="admin-nav-heading">INBOX</span>
+            <a href="/admin/quote-requests" <?= $activeSection === 'quote-requests' ? 'aria-current="page"' : '' ?>>Quote requests</a>
             <a href="/admin/contacts" <?= $activeSection === 'contacts' ? 'aria-current="page"' : '' ?>>Contact submissions</a>
             <span class="admin-nav-heading">CONFIGURATION</span>
             <a href="/admin/settings" <?= $activeSection === 'settings' ? 'aria-current="page"' : '' ?>>Business settings</a>

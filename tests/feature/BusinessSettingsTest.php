@@ -16,6 +16,13 @@ final class BusinessSettingsTest extends CIUnitTestCase
 
     protected $namespace = null;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        auth('session')->logout();
+        service('superglobals')->setGlobalArray('post', []);
+    }
+
     public function testHomeDisplaysStoredBusinessDetails(): void
     {
         (new BusinessSettingsModel())->update(1, [
@@ -77,6 +84,9 @@ final class BusinessSettingsTest extends CIUnitTestCase
             'description' => 'Brand and digital design.',
             'contact_email' => 'hello@orbit.example',
             'notification_email' => 'inbox@orbit.example',
+            'default_quote_expiration_days' => '21',
+            'default_quote_terms' => 'A 50% deposit begins the engagement.',
+            'default_deposit_percentage' => '50.00',
         ]);
 
         $result->assertRedirectTo('/admin/settings');
@@ -94,6 +104,10 @@ final class BusinessSettingsTest extends CIUnitTestCase
             'tagline' => 'Short',
             'description' => 'Description',
             'contact_email' => 'not-an-email',
+            'notification_email' => '',
+            'default_quote_expiration_days' => '30',
+            'default_quote_terms' => '',
+            'default_deposit_percentage' => '50.00',
         ]);
 
         $result->assertRedirect();

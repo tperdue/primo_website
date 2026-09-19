@@ -25,6 +25,9 @@ class BusinessSettings extends BaseController
             'description' => 'required|max_length[2000]',
             'contact_email' => 'permit_empty|valid_email|max_length[254]',
             'notification_email' => 'permit_empty|valid_email|max_length[254]',
+            'default_quote_expiration_days' => 'required|integer|greater_than_equal_to[1]|less_than_equal_to[365]',
+            'default_quote_terms' => 'permit_empty|max_length[10000]',
+            'default_deposit_percentage' => 'required|decimal|greater_than_equal_to[0]|less_than_equal_to[100]',
         ];
 
         $data = [];

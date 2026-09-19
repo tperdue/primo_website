@@ -85,7 +85,9 @@ The public media library stores validated images once and relates them through e
 
 Quote intake configuration uses reusable question groups, ordered questions, normalized choice options, and explicit group-to-service relationships. A group with no service relationships is general and applies once to every quote request; an assigned group applies when at least one of its services is selected. Inactive groups and questions remain stored for future quote-history integrity. The `QuoteQuestionCatalog` exposes only active, relevant configuration to the public builder.
 
-The pre-submission quote cart is intentionally session-backed. It stores only published service IDs and bounded draft answers, revalidates service availability on every read, and does not create a durable quote request. Permanent customer details, immutable answer snapshots, private files, and request reference numbers begin at the submission boundary in the next slice.
+The pre-submission quote cart is intentionally session-backed. It stores only published service IDs and bounded draft answers, revalidates service availability on every read, and does not create a durable quote request. Explicit submission creates an opaque-reference `quote_requests` record plus immutable service and answer snapshots in one database transaction. Attachments are stored under non-public `writable/uploads/quote_requests/` and are available only through an admin-authorized download route. The cart clears only after persistence succeeds; owner and customer email attempts happen afterward and record independent delivery states.
+
+Qualified requests can be converted once into an actual commercial quote. Conversion creates a lightweight customer record, a customer/contact snapshot on the quote, editable line items, calculated subtotal/discount/tax/total/deposit values, a status-history entry, and an immutable JSON revision snapshot. Quote math is recalculated server-side on every save. Customer-facing proposals use a random 256-bit bearer token, are available only in public quote states, and return private no-store/noindex responses. Delivery uses the configured email service and records its outcome without falsely marking an undelivered quote as sent.
 
 About, contact, privacy, and terms content use fixed-slug page records with draft/published visibility and editable SEO fields. Fixed slugs keep navigation and sitemap URLs stable without introducing a general page builder. Contact inquiries are persisted before synchronous notification is attempted; delivery state is recorded on the submission, and failed or unconfigured email never discards the inquiry. Contact and page administration share the Shield session and admin-group filters.
 
@@ -151,6 +153,8 @@ Monitoring And Logging: CodeIgniter logs write to `writable/logs/` by default. P
 - Media-library images are intentionally public under `public/uploads/media/` (with legacy portfolio uploads still supported); they are admin-only uploads with size, type, extension, and image-content checks plus generated filenames. Private customer quote uploads must use a separate non-public store.
 - Public contact submissions use CSRF, CodeIgniter's honeypot filter, server-side validation, output escaping, and a five-submission-per-IP rolling limit over 15 minutes. Raw visitor IP addresses are not persisted.
 - Quote-cart mutations use POST with CSRF. Session data is bounded and treated as untrusted: selected services are revalidated as published, answer keys and choice IDs are restricted to the active catalog, and all rendered draft values are escaped.
+- Public quote submission adds honeypot and per-IP throttling, validates customer and configured-question input, limits private attachments to five approved files with 8 MB individual and 20 MB aggregate caps, and does not persist raw IP addresses. Admin quote-request list, detail, status, notes, and attachment routes require Shield session authentication and `admin` membership.
+- Quote construction and delivery routes are admin-only and CSRF-protected. Submitted totals are never trusted: line quantities, unit prices, discounts, tax, and deposits are range-validated and recalculated before persistence. Secure proposal responses suppress caching, referrers, and search indexing; their tokens must be treated as secrets.
 
 ## 8. Development And Testing Environment
 
@@ -183,7 +187,7 @@ Repository URL: To be filled in by the generated project.
 
 Primary Contact/Team: East Point Software
 
-Date of Last Update: 2026-09-18
+Date of Last Update: 2026-09-19
 
 ## 11. Glossary
 

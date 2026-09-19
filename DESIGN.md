@@ -153,6 +153,7 @@ Public pages should be mobile-first and portfolio-forward:
 - Hero sections may be expressive, but they should lead into usable service and quote paths quickly.
 - Portfolio and service pages should support strong imagery, concise content, related items, and quote CTAs.
 - Quote-request flows should feel lighter than e-commerce checkout but borrow cart-style clarity.
+- The quote builder keeps its selected-service summary visible beside a numbered intake form on desktop, then returns the summary to normal flow and stacks all fields on mobile. Submission is visually distinct from saving draft progress, and the receipt presents only the opaque request reference.
 
 Admin screens should favor scanning and repeat use:
 
@@ -160,6 +161,8 @@ Admin screens should favor scanning and repeat use:
 - Tables/lists for quote requests, customers, services, portfolio, media, and settings.
 - Forms with clear labels, help text, validation errors, upload limits, and submit states.
 - No decorative marketing composition inside operational admin screens.
+- Quote-request administration uses a scan-friendly inbox with status filtering and a detail workspace that separates customer/project context, immutable intake snapshots, private attachments, and internal workflow controls.
+- Quote construction uses a dense operational editor: editable line rows, a sticky live pricing summary, visible revision and status history, and a separate delivery action. The secure customer proposal reads like a restrained document, supports browser print-to-PDF, and collapses pricing rows into labeled mobile blocks.
 
 ## Components
 

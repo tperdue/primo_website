@@ -85,6 +85,11 @@ Document state machines or status fields here:
 - A question group with no service assignments is general and appears once per request; an assigned group appears when any assigned service is selected.
 - Choice-field options are normalized records. Inactive groups and questions are retained so future submitted answers can preserve historical context.
 - Quote-cart selections and draft answers are transient session state, not quote requests. A durable QuoteRequest is created only at explicit submission.
+- Submitted requests use an opaque human-readable reference and immutable service/question/answer snapshots. Live catalog foreign keys are nullable so catalog retirement cannot destroy request history.
+- Quote-request receipt confirms delivery only; it is never a final price or project acceptance. Owner and customer notification outcomes are tracked independently.
+- A qualified request converts into at most one actual quote and an associated lightweight customer. The quote snapshots customer contact details so later customer edits cannot rewrite the commercial record.
+- Quote line items are independent of originally requested services. Subtotal, fixed discount, percentage tax, total, and percentage deposit are calculated from current line items by the server.
+- Each quote save creates an immutable numbered revision. Status changes also append history; public quote visibility begins at Ready and email delivery promotes Ready to Sent only after successful sending.
 
 ## Open Questions
 

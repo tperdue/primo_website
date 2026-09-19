@@ -4,6 +4,8 @@ $inputId = 'question-' . $questionId;
 $answer = $answers[$questionId] ?? ($question['field_type'] === 'checkboxes' ? [] : '');
 $answerValues = is_array($answer) ? array_map('strval', $answer) : [];
 $requiredText = $question['is_required'] ? ' (required)' : '';
+$errors = session('errors') ?? [];
+$error = $errors['answers.' . $questionId] ?? $errors['files.' . $questionId] ?? null;
 ?>
 <div class="quote-question">
     <?php if (in_array($question['field_type'], ['radio', 'checkboxes', 'yes_no'], true)): ?>
@@ -26,13 +28,15 @@ $requiredText = $question['is_required'] ? ' (required)' : '';
         <?php if ($question['help_text']): ?><p class="quote-question-help"><?= esc($question['help_text']) ?></p><?php endif ?>
         <select id="<?= $inputId ?>" name="answers[<?= $questionId ?>]"><option value=""><?= esc($question['placeholder'] ?: 'Choose an option') ?></option><?php foreach ($question['options'] as $option): ?><option value="<?= (int) $option['id'] ?>" <?= (string) $answer === (string) $option['id'] ? 'selected' : '' ?>><?= esc($option['label']) ?></option><?php endforeach ?></select>
     <?php elseif ($question['field_type'] === 'file'): ?>
-        <span class="quote-question-label"><?= esc($question['label']) ?><span><?= esc($requiredText) ?></span></span>
+        <label for="<?= $inputId ?>"><?= esc($question['label']) ?><span><?= esc($requiredText) ?></span></label>
         <?php if ($question['help_text']): ?><p class="quote-question-help"><?= esc($question['help_text']) ?></p><?php endif ?>
-        <p class="quote-file-note">Supporting files can be attached before the request is sent.</p>
+        <input id="<?= $inputId ?>" type="file" name="files[<?= $questionId ?>]" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        <p class="quote-file-note">PDF, JPG, PNG, DOC, or DOCX. Maximum 8 MB.</p>
     <?php else: ?>
         <?php $htmlType = ['email' => 'email', 'phone' => 'tel', 'number' => 'number', 'date' => 'date'][$question['field_type']] ?? 'text'; ?>
         <label for="<?= $inputId ?>"><?= esc($question['label']) ?><span><?= esc($requiredText) ?></span></label>
         <?php if ($question['help_text']): ?><p class="quote-question-help"><?= esc($question['help_text']) ?></p><?php endif ?>
         <input id="<?= $inputId ?>" type="<?= $htmlType ?>" name="answers[<?= $questionId ?>]" maxlength="500" value="<?= esc(is_string($answer) ? $answer : '', 'attr') ?>" placeholder="<?= esc($question['placeholder'] ?? '', 'attr') ?>">
     <?php endif ?>
+    <?php if ($error): ?><p class="field-error" role="alert"><?= esc($error) ?></p><?php endif ?>
 </div>

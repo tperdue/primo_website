@@ -11,7 +11,9 @@ Use this memory to track database and persistence decisions. Update it when the 
 
 ## Current Status
 
-SQLite is the default database. Business settings are stored as one row with ID 1. Services and portfolio projects use auto-increment IDs internally and stable unique slugs publicly. Reusable media records relate to service featured images, portfolio featured images, ordered project galleries, and project-service associations; deleting an in-use asset is restricted by both the application and database. Quote question groups own ordered questions and normalized choice options; explicit group-service rows make a group conditional, while a group with no service rows is general. The current quote cart and draft answers are transient session state and create no database record until the submission slice is implemented. Fixed-slug content pages store About, Contact, Privacy, and Terms copy plus SEO metadata. Contact submissions store inquiry and notification state but no raw IP address. Shield manages its own user tables; package migrations run alongside app migrations.
+SQLite is the default database. Business settings are stored as one row with ID 1. Services and portfolio projects use auto-increment IDs internally and stable unique slugs publicly. Reusable media records relate to service featured images, portfolio featured images, ordered project galleries, and project-service associations; deleting an in-use asset is restricted by both the application and database. Quote question groups own ordered questions and normalized choice options; explicit group-service rows make a group conditional, while a group with no service rows is general. The quote cart and draft answers remain transient session state. Explicit submission creates a durable quote request, immutable service and answer snapshots, and private file metadata under one transaction. Fixed-slug content pages store About, Contact, Privacy, and Terms copy plus SEO metadata. Contact submissions store inquiry and notification state but no raw IP address. Shield manages its own user tables; package migrations run alongside app migrations.
+
+Qualified requests convert into one quote and one lightweight customer record. Quotes retain customer contact snapshots, a unique human-readable quote number, a 256-bit public access token, line items, calculated totals, terms, delivery state, and version number. Every save replaces current line items transactionally and appends an immutable JSON revision; status changes also append history. Business settings provide default expiration days, terms, and deposit percentage.
 
 ## Database Choice
 
@@ -69,7 +71,7 @@ New media files are stored under ignored `public/uploads/media/` and are intenti
 
 Future policies must address contact-submission retention, customer quote uploads, media library files, quote history, customer records, project files, invoices, and logs. Customer uploads should not automatically be publicly accessible.
 
-Unsubmitted quote-cart state follows the configured session lifetime and is not part of database backups.
+Unsubmitted quote-cart state follows the configured session lifetime and is not part of database backups. Submitted customer files live under `writable/uploads/quote_requests/{reference}/`; backups and retention procedures must cover this private directory together with the database.
 
 ## Open Questions
 
@@ -78,3 +80,4 @@ Unsubmitted quote-cart state follows the configured session lifetime and is not 
 - Which records need soft deletes, audit trails, or immutable history?
 - Which file storage strategy will separate private uploads from public media?
 - Which quote/project records require revision history?
+- Define quote/customer retention and bearer-token rotation policies before production launch.
