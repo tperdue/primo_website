@@ -30,11 +30,12 @@ final class BusinessSettingsTest extends CIUnitTestCase
         $result->assertOK();
         $result->assertSee('North Studio');
         $result->assertSee('Original work for growing brands.');
-        $result->assertSee('mailto:hello@example.com');
+        $result->assertSee('href="/contact"');
         $result->assertSee('assets/images/hero-concepts.png');
         $result->assertSee('assets/images/concept-study.png');
         $result->assertSee('class="mobile-menu"');
         $result->assertSee('assets/js/nav.js');
+        $this->get('/contact')->assertSee('mailto:hello@example.com');
     }
 
     public function testGuestCannotOpenSettings(): void
@@ -75,10 +76,12 @@ final class BusinessSettingsTest extends CIUnitTestCase
             'tagline' => 'Design with direction.',
             'description' => 'Brand and digital design.',
             'contact_email' => 'hello@orbit.example',
+            'notification_email' => 'inbox@orbit.example',
         ]);
 
         $result->assertRedirectTo('/admin/settings');
         $this->assertSame('Orbit Studio', (new BusinessSettingsModel())->find(1)['business_name']);
+        $this->assertSame('inbox@orbit.example', (new BusinessSettingsModel())->find(1)['notification_email']);
     }
 
     public function testInvalidSettingsAreNotSaved(): void

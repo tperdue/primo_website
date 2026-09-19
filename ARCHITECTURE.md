@@ -81,6 +81,8 @@ Services are stored in their own table with stable public slugs, draft/published
 
 Portfolio projects are separate records with stable slugs, draft/published/archived status, optional homepage featuring, and a featured media reference. Reusable public media records hold an image path and alt text. Only published portfolio records resolve on public routes; the admin portfolio routes share the Shield session and admin-group filters.
 
+About, contact, privacy, and terms content use fixed-slug page records with draft/published visibility and editable SEO fields. Fixed slugs keep navigation and sitemap URLs stable without introducing a general page builder. Contact inquiries are persisted before synchronous notification is attempted; delivery state is recorded on the submission, and failed or unconfigured email never discards the inquiry. Contact and page administration share the Shield session and admin-group filters.
+
 ### Views And Frontend
 
 Responsibility: Render UI using CodeIgniter views, helpers, CSS, and progressive enhancement where useful.
@@ -141,6 +143,7 @@ Monitoring And Logging: CodeIgniter logs write to `writable/logs/` by default. P
 - Use CodeIgniter models/query builder or bound parameters for database access.
 - Store uploads outside the public web root unless the file is intentionally public.
 - Portfolio images are intentionally public media under `public/uploads/portfolio/`; they are admin-only uploads with size, type, extension, and image-content checks plus generated filenames. Private customer quote uploads must use a separate non-public store.
+- Public contact submissions use CSRF, CodeIgniter's honeypot filter, server-side validation, output escaping, and a five-submission-per-IP rolling limit over 15 minutes. Raw visitor IP addresses are not persisted.
 
 ## 8. Development And Testing Environment
 

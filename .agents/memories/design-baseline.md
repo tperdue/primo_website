@@ -25,6 +25,7 @@ Agents should:
 - The service catalog is a compact editorial list, with a text-led detail page until real deployment-specific imagery is available.
 - Admin screens use a shared operations shell with persistent section navigation, a compact toolbar, restrained data summary, dense tables, and grouped forms. On phones, navigation is horizontal and service rows stack; avoid marketing-style cards and oversized headings.
 - Public Work pages use real uploaded project images with large previews and a full-image detail view; the homepage only features published projects explicitly marked featured.
+- Managed About/legal pages use an editorial reading layout; Contact pairs concise studio context with a practical form and collapses to one column on mobile. Admin Pages and Contact submissions stay table/form oriented.
 - Build actual usable application screens first.
 - Keep forms, tables, navigation, empty states, loading states, and validation states complete.
 - Use readable system typography and accessible contrast.

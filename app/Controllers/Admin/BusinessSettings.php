@@ -24,6 +24,7 @@ class BusinessSettings extends BaseController
             'tagline' => 'required|max_length[180]',
             'description' => 'required|max_length[2000]',
             'contact_email' => 'permit_empty|valid_email|max_length[254]',
+            'notification_email' => 'permit_empty|valid_email|max_length[254]',
         ];
 
         $data = [];

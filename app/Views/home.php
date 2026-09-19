@@ -1,14 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="<?= esc($business['description'] ?? '', 'attr') ?>">
-    <title><?= esc($business['business_name'] ?? 'Design studio') ?></title>
-    <link rel="stylesheet" href="<?= esc(base_url('assets/css/app.css'), 'attr') ?>">
+    <?= view('partials/public_meta', ['business' => $business, 'pageTitle' => null, 'description' => $business['description'] ?? '', 'canonicalPath' => '']) ?>
 </head>
 <body id="top">
-    <?= view('partials/public_header', ['business' => $business]) ?>
+    <?= view('partials/public_header', ['business' => $business, 'publicPages' => $publicPages]) ?>
     <main>
         <section class="public-hero" aria-labelledby="hero-title">
             <img class="public-hero-image" src="<?= esc(base_url('assets/images/hero-concepts.png'), 'attr') ?>" alt="Original graphic design concepts across print, packaging, and digital media">
@@ -17,9 +13,7 @@
                 <h1 id="hero-title"><?= esc($business['business_name'] ?? 'Design studio') ?></h1>
                 <p class="hero-tagline"><?= esc($business['tagline'] ?? '') ?></p>
                 <div class="hero-actions">
-                    <?php if (! empty($business['contact_email'])): ?>
-                        <a class="button button-primary" href="mailto:<?= esc($business['contact_email'], 'attr') ?>">Start a conversation <span aria-hidden="true">&nearr;</span></a>
-                    <?php endif ?>
+                    <?php if (isset($publicPages['contact'])): ?><a class="button button-primary" href="/contact">Start a conversation <span aria-hidden="true">&nearr;</span></a><?php endif ?>
                     <a class="button button-outline" href="#concepts">Explore concepts <span aria-hidden="true">&searr;</span></a>
                 </div>
             </div>
@@ -62,12 +56,10 @@
             <div class="studio-section-inner">
                 <p class="eyebrow">The studio</p>
                 <h2 id="studio-title">Good work starts with a conversation.</h2>
-                <?php if (! empty($business['contact_email'])): ?>
-                    <a class="button button-dark" href="mailto:<?= esc($business['contact_email'], 'attr') ?>">Tell us what you are building <span aria-hidden="true">&nearr;</span></a>
-                <?php endif ?>
+                <?php if (isset($publicPages['contact'])): ?><a class="button button-dark" href="/contact">Tell us what you are building <span aria-hidden="true">&nearr;</span></a><?php endif ?>
             </div>
         </section>
     </main>
-    <?= view('partials/public_footer', ['business' => $business]) ?>
+    <?= view('partials/public_footer', ['business' => $business, 'publicPages' => $publicPages]) ?>
 </body>
 </html>

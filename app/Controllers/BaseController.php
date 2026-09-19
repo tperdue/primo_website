@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\BusinessSettingsModel;
+use App\Models\ContentPageModel;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -41,5 +43,16 @@ abstract class BaseController extends Controller
 
         // Preload any models, libraries, etc, here.
         // $this->session = service('session');
+    }
+
+    /** @return array{business: array|null, publicPages: array<string, array>} */
+    protected function publicSiteData(): array
+    {
+        $pages = (new ContentPageModel())->published()->findAll();
+
+        return [
+            'business' => (new BusinessSettingsModel())->find(1),
+            'publicPages' => array_column($pages, null, 'slug'),
+        ];
     }
 }

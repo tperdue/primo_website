@@ -11,11 +11,11 @@ Use this memory to track the current state of work. Update it at the end of mean
 
 ## Current Phase
 
-Phase 1: application foundation, services, and portfolio publishing.
+Phase 1 marketing foundation is complete; the next work begins Phase 2 quote-request foundations.
 
 ## Active Work
 
-The portfolio slice is in place: admin-managed projects, reusable public image records, and published Work pages.
+None.
 
 ## Completed
 
@@ -40,6 +40,9 @@ The portfolio slice is in place: admin-managed projects, reusable public image r
 - Services now have admin create/edit/list screens, draft/published/archived states, ordering, optional public starting prices, and stable public detail URLs. The home page features up to three published services.
 - The admin UI now shares a sidebar/toolbar shell across overview, services, and business settings. `/admin/` shows real service counts and recent records; service management uses a responsive data table and settings use grouped fields.
 - Portfolio projects now have admin create/edit/list screens, draft/published/archived state, homepage featuring, featured-image upload or reuse, and public Work list/detail pages. Images are admin-uploaded public media with alt text and generated filenames.
+- About, Contact, Privacy, and Terms are fixed-slug managed pages with draft/published state and SEO fields. Legal pages start as drafts so placeholder language is not published.
+- The public contact form stores validated inquiries, uses CSRF, a honeypot, and an IP-based submission limit, and attempts configurable owner email notification without losing messages when mail is unavailable. Admins can review and close submissions in a protected inbox.
+- Public pages now share canonical and Open Graph metadata; dynamic `sitemap.xml` and `robots.txt` endpoints are available.
 
 ## In Progress
 
@@ -51,8 +54,9 @@ None known.
 
 ## Next Actions
 
-- Complete remaining Phase 1 public pages, especially about, contact, and legal pages, before Phase 2 quote requests.
-- Extend the basic media record and picker into a fuller media library when service images and galleries are introduced.
+- Begin Phase 2 with media-library administration plus service/portfolio image relationships, then build question groups and quote questions.
+- Build the quote cart/builder, private uploads, submission notifications, and quote-request admin inbox after the reusable question model is stable.
+- Define a contact-submission retention policy before production launch.
 - Decide whether `Zalando Sans` is licensed/available or use the system fallback in production.
 - Add feature-specific tests with the first real behavior.
 - Update this file after each meaningful development session.
@@ -63,6 +67,9 @@ None known.
 - `php spark migrate --all` applied the portfolio/media migration against the local MySQL connection; tests use in-memory SQLite.
 - Portfolio list/detail and admin list/form were rendered with temporary mock-data previews at desktop and 390px phone width. Images loaded and no page overflow was observed.
 - `vendor/bin/phpunit --no-coverage` passed: 29 tests, 99 assertions. `composer test` ran the same suite but exited nonzero solely because this machine has no coverage driver. At 768px, the public header displays its mobile menu without horizontal overflow.
+- `php spark migrate --all` applied the content/contact migration against the local MySQL connection.
+- `vendor/bin/phpunit --no-coverage` passed: 38 tests, 146 assertions.
+- About and Contact were visually checked at desktop width; Contact was measured at 390px with no horizontal overflow and the mobile menu active. Admin routes were verified through authenticated feature tests because the browser test tab was not signed in.
 
 ## Handoff Notes
 

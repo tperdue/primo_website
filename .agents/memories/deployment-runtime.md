@@ -43,7 +43,7 @@ Document project-specific variables here. Do not record secret values.
 | --- | --- | --- |
 | `CI_ENVIRONMENT` | CodeIgniter environment name | Yes |
 | `app.baseURL` | Application base URL | Yes |
-| TBD mail settings | Transactional email for quote/contact notifications and later quote delivery | Yes before quote submission launch |
+| `email.fromEmail`, `email.fromName`, and provider-specific mail settings | Contact notifications and later quote delivery | Required for email delivery; contact records still persist without them |
 | TBD file/upload settings | Upload limits and storage location for private quote files and public media | Yes before upload launch |
 
 ## Jobs And Schedules

@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\BusinessSettingsModel;
 use App\Models\PortfolioProjectModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 
@@ -10,8 +9,7 @@ class Portfolio extends BaseController
 {
     public function index(): string
     {
-        return view('portfolio/index', [
-            'business' => (new BusinessSettingsModel())->find(1),
+        return view('portfolio/index', $this->publicSiteData() + [
             'projects' => (new PortfolioProjectModel())->published()->withImage()->findAll(),
         ]);
     }
@@ -23,8 +21,7 @@ class Portfolio extends BaseController
             throw PageNotFoundException::forPageNotFound();
         }
 
-        return view('portfolio/show', [
-            'business' => (new BusinessSettingsModel())->find(1),
+        return view('portfolio/show', $this->publicSiteData() + [
             'project' => $project,
         ]);
     }

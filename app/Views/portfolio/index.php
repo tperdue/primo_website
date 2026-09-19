@@ -1,18 +1,14 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Selected design projects from <?= esc($business['business_name'] ?? 'our studio', 'attr') ?>.">
-    <title>Work | <?= esc($business['business_name'] ?? 'Design studio') ?></title>
-    <link rel="stylesheet" href="<?= esc(base_url('assets/css/app.css'), 'attr') ?>">
+    <?= view('partials/public_meta', ['business' => $business, 'pageTitle' => 'Work', 'description' => 'Selected design projects from ' . ($business['business_name'] ?? 'our studio') . '.', 'canonicalPath' => 'work']) ?>
 </head>
 <body id="top">
-    <?= view('partials/public_header', ['business' => $business]) ?>
+    <?= view('partials/public_header', ['business' => $business, 'publicPages' => $publicPages]) ?>
     <main class="work-page">
         <div class="work-page-heading"><p class="eyebrow">Portfolio</p><h1>Selected work</h1><p>Projects shaped by clear ideas and purposeful design.</p></div>
         <?php if ($projects === []): ?>
-            <div class="service-empty"><p>Our work is being prepared for the site.</p><?php if (! empty($business['contact_email'])): ?><a href="mailto:<?= esc($business['contact_email'], 'attr') ?>">Get in touch &nearr;</a><?php endif ?></div>
+            <div class="service-empty"><p>Our work is being prepared for the site.</p><?php if (isset($publicPages['contact'])): ?><a href="/contact">Get in touch &nearr;</a><?php endif ?></div>
         <?php else: ?>
             <div class="work-grid">
                 <?php foreach ($projects as $project): ?>
@@ -21,6 +17,6 @@
             </div>
         <?php endif ?>
     </main>
-    <?= view('partials/public_footer', ['business' => $business]) ?>
+    <?= view('partials/public_footer', ['business' => $business, 'publicPages' => $publicPages]) ?>
 </body>
 </html>

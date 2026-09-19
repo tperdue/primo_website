@@ -13,5 +13,5 @@ class BusinessSettingsModel extends Model
     protected $useTimestamps = true;
     protected $createdField = '';
     protected $updatedField = 'updated_at';
-    protected $allowedFields = ['business_name', 'tagline', 'description', 'contact_email'];
+    protected $allowedFields = ['business_name', 'tagline', 'description', 'contact_email', 'notification_email'];
 }

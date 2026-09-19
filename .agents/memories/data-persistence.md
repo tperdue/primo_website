@@ -11,7 +11,7 @@ Use this memory to track database and persistence decisions. Update it when the 
 
 ## Current Status
 
-SQLite is the default database. Business settings are stored as one row with ID 1. Services and portfolio projects use auto-increment IDs internally and stable unique slugs publicly. Portfolio projects reference reusable media asset records; deleting a referenced asset is restricted by the database. Shield manages its own user tables; package migrations run alongside app migrations.
+SQLite is the default database. Business settings are stored as one row with ID 1. Services and portfolio projects use auto-increment IDs internally and stable unique slugs publicly. Portfolio projects reference reusable media asset records; deleting a referenced asset is restricted by the database. Fixed-slug content pages store About, Contact, Privacy, and Terms copy plus SEO metadata. Contact submissions store inquiry and notification state but no raw IP address. Shield manages its own user tables; package migrations run alongside app migrations.
 
 ## Database Choice
 
@@ -48,7 +48,7 @@ Other domain objects can choose their ID strategy when introduced.
 
 ## Seed Data
 
-No seed data is defined yet.
+The content/contact migration inserts four deployment-neutral managed page records. About and Contact begin published; Privacy and Terms remain drafts until deployment-specific, reviewed legal language is entered.
 
 Expected future persisted concepts:
 
@@ -68,7 +68,7 @@ No retention or deletion policy is defined yet.
 
 Portfolio image files are stored under ignored `public/uploads/portfolio/` and are intentionally public. Replacing a project's selected image does not delete the old reusable media record or file. Backups must include both the database and this upload directory.
 
-Future policies must address customer quote uploads, media library files, contact submissions, quote history, customer records, project files, invoices, and logs. Customer uploads should not automatically be publicly accessible.
+Future policies must address contact-submission retention, customer quote uploads, media library files, quote history, customer records, project files, invoices, and logs. Customer uploads should not automatically be publicly accessible.
 
 ## Open Questions
 

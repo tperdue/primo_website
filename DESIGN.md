@@ -20,6 +20,8 @@ The admin area is an operational workspace, distinct from the public marketing l
 
 Portfolio pages are image-forward only when real deployment-specific project images are uploaded. The public Work index uses large image previews and the detail page shows the full featured image without cropping, followed by challenge and solution. Featured published projects may appear on the homepage. Admin portfolio management follows the same dense workspace patterns as Services.
 
+Managed About and legal pages use a restrained editorial reading layout. Contact uses a two-column introduction and form on desktop and a single-column flow on smaller screens. Contact submissions and page editing live in the operational admin shell as tables and grouped forms, not promotional cards.
+
 ```yaml
 version: alpha
 name: Primo Graphic Designer Business Platform

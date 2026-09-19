@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\BusinessSettingsModel;
+use App\Models\ContactSubmissionModel;
 use App\Models\PortfolioProjectModel;
 use App\Models\ServiceModel;
 
@@ -22,6 +23,8 @@ class Dashboard extends BaseController
             'portfolioTotal' => (new PortfolioProjectModel())->countAllResults(),
             'portfolioPublished' => (new PortfolioProjectModel())->where('status', 'published')->countAllResults(),
             'recentProjects' => (new PortfolioProjectModel())->orderBy('updated_at', 'DESC')->findAll(5),
+            'newContactCount' => (new ContactSubmissionModel())->where('status', 'new')->countAllResults(),
+            'recentContacts' => (new ContactSubmissionModel())->orderBy('created_at', 'DESC')->findAll(5),
         ]);
     }
 }
