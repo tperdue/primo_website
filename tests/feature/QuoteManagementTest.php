@@ -36,9 +36,20 @@ final class QuoteManagementTest extends CIUnitTestCase
         ]);
     }
 
-    public function testQualifiedRequestCreatesOneCustomerLinkedQuoteWithSnapshots(): void
+    public function testQuoteRequestStatusesUseTheSimplifiedWorkflow(): void
     {
-        $requestId = $this->request('qualified');
+        $this->assertSame([
+            'new' => 'New',
+            'needs_information' => 'Needs more information from client',
+            'ready_to_quote' => 'Ready to quote',
+            'closed_quote_created' => 'Closed, Quote Created',
+            'closed_wont_pursue' => "Closed, Won't pursue.",
+        ], QuoteRequestModel::STATUSES);
+    }
+
+    public function testReadyRequestCreatesOneCustomerLinkedQuoteWithSnapshots(): void
+    {
+        $requestId = $this->request('ready_to_quote');
         $admin = $this->createUser('admin');
 
         $result = $this->actingAs($admin)->post('/admin/quote-requests/' . $requestId . '/quote', [csrf_token() => csrf_hash()]);
@@ -52,7 +63,7 @@ final class QuoteManagementTest extends CIUnitTestCase
         $this->assertSame(1, (new CustomerModel())->countAllResults());
         $this->assertSame(1, (new QuoteLineItemModel())->where('quote_id', $quote['id'])->countAllResults());
         $this->assertSame(1, (new QuoteVersionModel())->where('quote_id', $quote['id'])->countAllResults());
-        $this->assertSame('quote_preparing', (new QuoteRequestModel())->find($requestId)['status']);
+        $this->assertSame('closed_quote_created', (new QuoteRequestModel())->find($requestId)['status']);
 
         $this->actingAs($admin)->post('/admin/quote-requests/' . $requestId . '/quote', [csrf_token() => csrf_hash()]);
         $this->assertSame(1, (new QuoteModel())->where('quote_request_id', $requestId)->countAllResults());
@@ -123,9 +134,9 @@ final class QuoteManagementTest extends CIUnitTestCase
         $this->actingAs($this->createUser('user'))->get('/admin/quotes')->assertRedirect();
     }
 
-    public function testRequestMustBeQualifiedBeforeQuoteCreation(): void
+    public function testRequestMustBeInAQuoteableStatusBeforeQuoteCreation(): void
     {
-        $requestId = $this->request('reviewing');
+        $requestId = $this->request('needs_information');
 
         $this->actingAs($this->createUser('admin'))->post('/admin/quote-requests/' . $requestId . '/quote', [csrf_token() => csrf_hash()])
             ->assertRedirectTo('/admin/quote-requests/' . $requestId);
@@ -134,10 +145,20 @@ final class QuoteManagementTest extends CIUnitTestCase
         $this->assertSame(0, (new CustomerModel())->countAllResults());
     }
 
+    public function testClosedQuoteCreatedStatusAllowsMissingQuoteToBeCreated(): void
+    {
+        $requestId = $this->request('closed_quote_created');
+
+        $this->actingAs($this->createUser('admin'))->post('/admin/quote-requests/' . $requestId . '/quote', [csrf_token() => csrf_hash()]);
+
+        $this->assertSame(1, (new QuoteModel())->where('quote_request_id', $requestId)->countAllResults());
+        $this->assertSame('closed_quote_created', (new QuoteRequestModel())->find($requestId)['status']);
+    }
+
     /** @return array<string, mixed> */
     private function createQuote(): array
     {
-        $requestId = $this->request('qualified');
+        $requestId = $this->request('ready_to_quote');
         $admin = $this->createUser('admin');
         $this->actingAs($admin)->post('/admin/quote-requests/' . $requestId . '/quote', [csrf_token() => csrf_hash()]);
 

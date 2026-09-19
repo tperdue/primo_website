@@ -11,7 +11,7 @@ Use this memory to preserve business vocabulary and domain rules for the reusabl
 
 ## Domain Summary
 
-The application is a lightweight business operating layer for independent graphic designers, with a public website attached. It should support the journey from visitor to quote request, qualified lead, quote, client, project, and eventual payment without becoming a full CRM, accounting suite, or advanced project-management platform.
+The application is a lightweight business operating layer for independent graphic designers, with a public website attached. It should support the journey from visitor to quote request, reviewed inquiry, quote, client, project, and eventual payment without becoming a full CRM, accounting suite, or advanced project-management platform.
 
 ## Core Concepts
 
@@ -56,15 +56,11 @@ Document state machines or status fields here:
 | PortfolioProject | Draft | Not public. | Published, Featured, Archived/Removed |
 | PortfolioProject | Published | Publicly visible. | Draft, Featured, Archived/Removed |
 | PortfolioProject | Featured | Publicly visible and eligible for featured placements. | Published, Draft, Archived/Removed |
-| QuoteRequest | New | Newly submitted. | Reviewing, Needs Information, Qualified, Not Qualified, Closed |
-| QuoteRequest | Reviewing | Designer is evaluating fit/details. | Needs Information, Qualified, Not Qualified, Quote Preparing, Closed |
-| QuoteRequest | Needs Information | Designer needs more from customer. | Reviewing, Qualified, Not Qualified, Closed |
-| QuoteRequest | Qualified | Request is worth quoting. | Quote Preparing, Closed |
-| QuoteRequest | Not Qualified | Request is not a fit. | Closed |
-| QuoteRequest | Quote Preparing | Designer is building an actual quote. | Quote Sent, Closed |
-| QuoteRequest | Quote Sent | Actual quote has been delivered. | Accepted, Declined, Closed |
-| QuoteRequest | Accepted | Customer accepted the quote. | Closed, Project Created |
-| QuoteRequest | Declined | Customer declined the quote. | Closed |
+| QuoteRequest | New | Newly submitted and not yet triaged. | Needs more information, Ready to quote, Closed Quote Created, Closed Won't pursue |
+| QuoteRequest | Needs more information from client | Designer needs additional customer input. | Ready to quote, Closed Quote Created, Closed Won't pursue |
+| QuoteRequest | Ready to quote | Designer has enough information to prepare pricing. | Closed Quote Created, Closed Won't pursue |
+| QuoteRequest | Closed, Quote Created | Request intake is complete and may create or link its quote. | Terminal for request workflow; the quote owns later states. |
+| QuoteRequest | Closed, Won't pursue | Studio will not prepare a quote. | Terminal unless manually reopened. |
 | Project | Awaiting Deposit | Accepted work is waiting on initial payment. | Scheduled, Canceled |
 | Project | Scheduled | Work is planned. | In Progress, Canceled |
 | Project | In Progress | Work is active. | Awaiting Client Feedback, Revisions, Awaiting Final Payment, Complete, Canceled |
@@ -87,7 +83,7 @@ Document state machines or status fields here:
 - Quote-cart selections and draft answers are transient session state, not quote requests. A durable QuoteRequest is created only at explicit submission.
 - Submitted requests use an opaque human-readable reference and immutable service/question/answer snapshots. Live catalog foreign keys are nullable so catalog retirement cannot destroy request history.
 - Quote-request receipt confirms delivery only; it is never a final price or project acceptance. Owner and customer notification outcomes are tracked independently.
-- A qualified request converts into at most one actual quote and an associated lightweight customer. The quote snapshots customer contact details so later customer edits cannot rewrite the commercial record.
+- A request in Ready to quote or Closed, Quote Created converts into at most one actual quote and an associated lightweight customer. The request remains Closed, Quote Created afterward, while the quote snapshots customer contact details so later customer edits cannot rewrite the commercial record.
 - Customer identity is matched by normalized email. Matching requests share one customer relationship record, while quote snapshots remain historically immutable; customer records are not deletable until an explicit archive/retention policy exists.
 - Quote line items are independent of originally requested services. Subtotal, fixed discount, percentage tax, total, and percentage deposit are calculated from current line items by the server.
 - Each quote save creates an immutable numbered revision. Status changes also append history; public quote visibility begins at Ready and email delivery promotes Ready to Sent only after successful sending.

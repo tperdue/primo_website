@@ -182,7 +182,7 @@ final class CustomerAdministrationTest extends CIUnitTestCase
             'phone' => '404-555-0100',
             'preferred_contact' => 'email',
             'project_summary' => 'Brand identity work for the next customer launch.',
-            'status' => 'qualified',
+            'status' => 'ready_to_quote',
             'owner_notification_status' => 'not_configured',
             'customer_notification_status' => 'not_configured',
             'submitted_at' => date('Y-m-d H:i:s'),

@@ -8,16 +8,13 @@ class QuoteRequestModel extends Model
 {
     public const STATUSES = [
         'new' => 'New',
-        'reviewing' => 'Reviewing',
-        'needs_information' => 'Needs information',
-        'qualified' => 'Qualified',
-        'not_qualified' => 'Not qualified',
-        'quote_preparing' => 'Quote preparing',
-        'quote_sent' => 'Quote sent',
-        'accepted' => 'Accepted',
-        'declined' => 'Declined',
-        'closed' => 'Closed',
+        'needs_information' => 'Needs more information from client',
+        'ready_to_quote' => 'Ready to quote',
+        'closed_quote_created' => 'Closed, Quote Created',
+        'closed_wont_pursue' => "Closed, Won't pursue.",
     ];
+
+    public const QUOTEABLE_STATUSES = ['ready_to_quote', 'closed_quote_created'];
 
     protected $table = 'quote_requests';
     protected $returnType = 'array';

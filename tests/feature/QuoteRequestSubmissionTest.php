@@ -101,12 +101,12 @@ final class QuoteRequestSubmissionTest extends CIUnitTestCase
 
         $this->actingAs($admin)->post('/admin/quote-requests/' . $requestId, [
             csrf_token() => csrf_hash(),
-            'status' => 'quote_preparing',
+            'status' => 'closed_quote_created',
             'internal_notes' => 'Prepare a two-option scope.',
         ])->assertRedirectTo('/admin/quote-requests/' . $requestId);
 
         $updated = (new QuoteRequestModel())->find($requestId);
-        $this->assertSame('quote_preparing', $updated['status']);
+        $this->assertSame('closed_quote_created', $updated['status']);
         $this->assertSame('Prepare a two-option scope.', $updated['internal_notes']);
     }
 

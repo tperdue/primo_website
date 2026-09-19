@@ -426,11 +426,10 @@ h1, h2, p { overflow-wrap: anywhere; }
 .admin-notification-state dl { display: grid; grid-template-columns: 1fr 1fr; margin: 0; font-size: 12px; }
 .admin-notification-state dt, .admin-notification-state dd { padding: 5px 0; }
 .admin-notification-state dd { margin: 0; text-align: right; }
-.admin-status-reviewing, .admin-status-quote-preparing { background: #e7eef5; color: #2d5370; }
+.admin-status-ready-to-quote { background: #e7eef5; color: #2d5370; }
 .admin-status-needs-information { background: #fff1d8; color: #805415; }
-.admin-status-qualified, .admin-status-accepted { background: #eaf5ee; color: #20623a; }
-.admin-status-not-qualified, .admin-status-declined { background: #f7e7eb; color: #842b45; }
-.admin-status-quote-sent { background: #eee5f6; color: var(--primary); }
+.admin-status-closed-quote-created { background: #eaf5ee; color: #20623a; }
+.admin-status-closed-wont-pursue { background: #eeecef; color: #6c6671; }
 .admin-status-ready { background: #fff1d8; color: #805415; }
 .admin-status-sent { background: #eee5f6; color: var(--primary); }
 .admin-status-expired, .admin-status-void { background: #eeecef; color: #6c6671; }

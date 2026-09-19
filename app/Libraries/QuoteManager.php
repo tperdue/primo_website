@@ -25,8 +25,8 @@ class QuoteManager
         }
 
         $request = (new QuoteRequestModel())->find($requestId);
-        if ($request === null || ! in_array($request['status'], ['qualified', 'quote_preparing'], true)) {
-            throw new RuntimeException('Only qualified requests can be converted into quotes.');
+        if ($request === null || ! in_array($request['status'], QuoteRequestModel::QUOTEABLE_STATUSES, true)) {
+            throw new RuntimeException('Only requests ready to quote can be converted into quotes.');
         }
 
         $services = (new QuoteRequestServiceModel())
@@ -78,7 +78,7 @@ class QuoteManager
             $this->replaceItems($quoteId, $items);
             $quoteModel->update($quoteId, $totals);
             (new QuoteStatusHistoryModel())->insert(['quote_id' => $quoteId, 'from_status' => null, 'to_status' => 'draft', 'note' => 'Quote created from request.']);
-            (new QuoteRequestModel())->update($requestId, ['status' => 'quote_preparing']);
+            (new QuoteRequestModel())->update($requestId, ['status' => 'closed_quote_created']);
             $this->recordVersion($quoteId, 1);
 
             if (! $db->transStatus()) {
@@ -197,7 +197,7 @@ class QuoteManager
                     'to_status' => $data['status'],
                     'note' => 'Status changed while editing quote.',
                 ]);
-                $this->syncRequestStatus($quote['quote_request_id'], $data['status']);
+                $this->markRequestQuoteCreated($quote['quote_request_id']);
             }
             $this->recordVersion($quoteId, $nextVersion);
             if (! $db->transStatus()) {
@@ -233,7 +233,7 @@ class QuoteManager
                 'to_status' => 'sent',
                 'note' => 'Quote delivered by email.',
             ]);
-            $this->syncRequestStatus($quote['quote_request_id'], 'sent');
+            $this->markRequestQuoteCreated($quote['quote_request_id']);
             $this->recordVersion($quoteId, (int) $quote['version'] + 1);
         }
 
@@ -293,19 +293,12 @@ class QuoteManager
         ]);
     }
 
-    private function syncRequestStatus(mixed $requestId, string $quoteStatus): void
+    private function markRequestQuoteCreated(mixed $requestId): void
     {
         if (! is_numeric($requestId)) {
             return;
         }
-        $status = match ($quoteStatus) {
-            'sent' => 'quote_sent',
-            'accepted' => 'accepted',
-            'declined' => 'declined',
-            'void' => 'closed',
-            default => 'quote_preparing',
-        };
-        (new QuoteRequestModel())->update((int) $requestId, ['status' => $status]);
+        (new QuoteRequestModel())->update((int) $requestId, ['status' => 'closed_quote_created']);
     }
 
     private function validDate(string $value): bool
