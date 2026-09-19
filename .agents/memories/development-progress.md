@@ -11,7 +11,7 @@ Use this memory to track the current state of work. Update it at the end of mean
 
 ## Current Phase
 
-Phase 1 marketing foundation is complete; the next work begins Phase 2 quote-request foundations.
+Phase 2: content relationships and quote-request foundations.
 
 ## Active Work
 
@@ -43,6 +43,7 @@ None.
 - About, Contact, Privacy, and Terms are fixed-slug managed pages with draft/published state and SEO fields. Legal pages start as drafts so placeholder language is not published.
 - The public contact form stores validated inquiries, uses CSRF, a honeypot, and an IP-based submission limit, and attempts configurable owner email notification without losing messages when mail is unavailable. Admins can review and close submissions in a protected inbox.
 - Public pages now share canonical and Open Graph metadata; dynamic `sitemap.xml` and `robots.txt` endpoints are available.
+- Media-library administration now supports validated image upload, reusable alt text, file metadata, usage counts, and guarded deletion. Services can select featured images; portfolio projects can select ordered gallery images and related services. Public service and project pages render those relationships responsively.
 
 ## In Progress
 
@@ -54,7 +55,7 @@ None known.
 
 ## Next Actions
 
-- Begin Phase 2 with media-library administration plus service/portfolio image relationships, then build question groups and quote questions.
+- Build reusable question groups and configurable quote questions, including service assignment and supported field types.
 - Build the quote cart/builder, private uploads, submission notifications, and quote-request admin inbox after the reusable question model is stable.
 - Define a contact-submission retention policy before production launch.
 - Decide whether `Zalando Sans` is licensed/available or use the system fallback in production.
@@ -70,6 +71,10 @@ None known.
 - `php spark migrate --all` applied the content/contact migration against the local MySQL connection.
 - `vendor/bin/phpunit --no-coverage` passed: 38 tests, 146 assertions.
 - About and Contact were visually checked at desktop width; Contact was measured at 390px with no horizontal overflow and the mobile menu active. Admin routes were verified through authenticated feature tests because the browser test tab was not signed in.
+- `php spark migrate --all` applied the media-relationship migration against the local MySQL connection.
+- `vendor/bin/phpunit --no-coverage` passed: 42 tests, 172 assertions.
+- Service featured imagery, related-work composition, and project galleries were visually checked with temporary representative previews at desktop and 390px. Both mobile pages had zero horizontal overflow; preview files were removed afterward.
+- The admin media browser/upload layout was visually checked at desktop and 390px. Its grid reduced from four to two columns with stacked upload controls and zero horizontal overflow; the preview file was removed afterward.
 
 ## Handoff Notes
 

@@ -10,7 +10,7 @@ class Home extends BaseController
     public function index(): string
     {
         return view('home', $this->publicSiteData() + [
-            'services' => (new ServiceModel())->published()->findAll(3),
+            'services' => (new ServiceModel())->withImage()->published()->findAll(3),
             'featuredProjects' => (new PortfolioProjectModel())->published()->where('is_featured', 1)->withImage()->findAll(2),
         ]);
     }

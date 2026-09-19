@@ -16,13 +16,15 @@ class Services extends BaseController
 
     public function show(string $slug): string
     {
-        $service = (new ServiceModel())->published()->where('slug', $slug)->first();
+        $model = new ServiceModel();
+        $service = $model->withImage()->published()->where('services.slug', $slug)->first();
         if ($service === null) {
             throw PageNotFoundException::forPageNotFound();
         }
 
         return view('services/show', $this->publicSiteData() + [
             'service' => $service,
+            'relatedProjects' => $model->relatedProjects((int) $service['id']),
         ]);
     }
 }

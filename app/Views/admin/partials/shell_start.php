@@ -17,6 +17,7 @@
             <span class="admin-nav-heading">WEBSITE</span>
             <a href="/admin/services" <?= $activeSection === 'services' ? 'aria-current="page"' : '' ?>>Services</a>
             <a href="/admin/portfolio" <?= $activeSection === 'portfolio' ? 'aria-current="page"' : '' ?>>Portfolio</a>
+            <a href="/admin/media" <?= $activeSection === 'media' ? 'aria-current="page"' : '' ?>>Media</a>
             <a href="/admin/pages" <?= $activeSection === 'pages' ? 'aria-current="page"' : '' ?>>Pages</a>
             <span class="admin-nav-heading">INBOX</span>
             <a href="/admin/contacts" <?= $activeSection === 'contacts' ? 'aria-current="page"' : '' ?>>Contact submissions</a>

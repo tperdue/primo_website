@@ -1,6 +1,6 @@
 <?php
 
-use App\Libraries\PortfolioImageUpload;
+use App\Libraries\MediaImageUpload;
 use App\Models\MediaAssetModel;
 use App\Models\PortfolioProjectModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
@@ -125,7 +125,7 @@ final class PortfolioTest extends CIUnitTestCase
         $file = new UploadedFile(__FILE__, 'project.png', 'image/png', filesize(__FILE__), UPLOAD_ERR_OK);
         $this->expectException(InvalidArgumentException::class);
 
-        (new PortfolioImageUpload())->store($file, 'Project image');
+        (new MediaImageUpload())->store($file, 'Project image');
     }
 
     public function testImageStorageUsesGeneratedPublicFilenameAndMediaRecord(): void
@@ -147,12 +147,12 @@ final class PortfolioTest extends CIUnitTestCase
             }
         };
 
-        $id = (new PortfolioImageUpload())->store($file, 'Printed design concepts');
+        $id = (new MediaImageUpload())->store($file, 'Printed design concepts');
         $media = (new MediaAssetModel())->find($id);
         $storedPath = FCPATH . str_replace('/', DIRECTORY_SEPARATOR, $media['path']);
 
         try {
-            $this->assertMatchesRegularExpression('~^uploads/portfolio/[a-f0-9]{32}\.png$~', $media['path']);
+            $this->assertMatchesRegularExpression('~^uploads/media/[a-f0-9]{32}\.png$~', $media['path']);
             $this->assertSame('Printed design concepts', $media['alt_text']);
             $this->assertFileExists($storedPath);
         } finally {
@@ -170,7 +170,7 @@ final class PortfolioTest extends CIUnitTestCase
         };
         $this->expectException(InvalidArgumentException::class);
 
-        (new PortfolioImageUpload())->store($file, 'Disguised file');
+        (new MediaImageUpload())->store($file, 'Disguised file');
     }
 
     private function media(string $alt): int

@@ -4,7 +4,7 @@
 2. Copy `env` to `.env` if needed and set `app.baseURL` to the local URL, such as `http://localhost:8080/`.
 3. Run `php spark migrate --all`. Without database overrides, the default SQLite database is created in `writable/primo.sqlite`. An existing `.env` database configuration takes precedence; use a database you intend to migrate.
 4. Create an admin account interactively with `php spark shield:user create -n owner -e you@example.com -g admin`. The command prompts for a password; do not put it in a script or commit it.
-5. Ensure the web server can write to `public/uploads/portfolio/` for portfolio images. These are intentionally public; private customer uploads must not be stored there.
+5. Ensure the web server can write to `public/uploads/media/`. Media-library images are intentionally public and must be included in backups. Existing deployments may also contain legacy files under `public/uploads/portfolio/`; private customer uploads must not be stored in either public directory.
 6. To send contact notifications, configure CodeIgniter email settings in `.env`, including at least `email.fromEmail`, `email.fromName`, and the protocol/provider settings required by the deployment. The notification recipient is managed under Business settings and falls back to the public contact email. Without a sender address, inquiries are still stored and marked `not_configured`.
 7. Run `php spark serve --host 127.0.0.1 --port 8080` and open `/login` to manage business settings, services, portfolio projects, pages, and contact submissions.
 

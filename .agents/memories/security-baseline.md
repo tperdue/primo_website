@@ -25,7 +25,7 @@ Security defaults for generated CodeIgniter projects:
 - Treat business settings, notification recipients, quote terms, and pricing visibility as administrative data.
 - Shield session login protects the admin settings routes with `session` and `group:admin`; login is rate-limited.
 - Browser forms use session-backed CSRF tokens; session cookies are Secure in production, HTTP-only, and SameSite Lax.
-- Admin portfolio uploads accept only JPEG, PNG, and WebP up to 5 MB, verify real MIME and image dimensions, require alt text, and store generated filenames under intentionally public `public/uploads/portfolio/`. Quote/customer uploads remain private and must not reuse this path.
+- Admin media uploads accept only JPEG, PNG, and WebP up to 5 MB, verify real MIME and image dimensions, require alt text, and store generated filenames under intentionally public `public/uploads/media/`. Deletion checks every known reference and verifies the resolved file remains under `public/uploads/`. Quote/customer uploads remain private and must not reuse this path.
 - Public contact forms use CSRF, CodeIgniter's injected honeypot, strict length/email validation, and a five-request-per-IP limit over 15 minutes. Inquiries are escaped in admin views, raw IP addresses are not stored, and notification failures do not discard submissions.
 
 When a security decision changes, update this memory and `ARCHITECTURE.md`.

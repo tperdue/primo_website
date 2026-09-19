@@ -4,6 +4,8 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\BusinessSettingsModel;
+use App\Models\MediaAssetModel;
+use App\Models\ServiceMediaModel;
 use App\Models\ServiceModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
@@ -20,12 +22,12 @@ class Services extends BaseController
 
     public function create(): string
     {
-        return view('admin/services/form', ['service' => null, 'businessName' => $this->businessName()]);
+        return $this->form(null);
     }
 
     public function edit(int $id): string
     {
-        return view('admin/services/form', ['service' => $this->findService($id), 'businessName' => $this->businessName()]);
+        return $this->form($this->findService($id));
     }
 
     public function store(): RedirectResponse
@@ -34,6 +36,10 @@ class Services extends BaseController
         if ($data === null) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
+        $mediaId = $this->selectedMediaId();
+        if ($mediaId === false) {
+            return redirect()->back()->withInput()->with('errors', ['featured_media_id' => 'Choose an image from the media library.']);
+        }
 
         helper('url');
         $slug = url_title($data['name'], '-', true);
@@ -41,8 +47,12 @@ class Services extends BaseController
             return redirect()->back()->withInput()->with('errors', ['name' => 'Choose a distinct service name.']);
         }
 
+        $db = db_connect();
+        $db->transStart();
         $model = new ServiceModel();
-        $model->insert(['slug' => $slug] + $data);
+        $id = (int) $model->insert(['slug' => $slug] + $data);
+        $this->syncMedia($id, $mediaId);
+        $db->transComplete();
 
         return redirect()->to('/admin/services')->with('message', 'Service created.');
     }
@@ -54,8 +64,16 @@ class Services extends BaseController
         if ($data === null) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
+        $mediaId = $this->selectedMediaId();
+        if ($mediaId === false) {
+            return redirect()->back()->withInput()->with('errors', ['featured_media_id' => 'Choose an image from the media library.']);
+        }
 
+        $db = db_connect();
+        $db->transStart();
         (new ServiceModel())->update($id, $data);
+        $this->syncMedia($id, $mediaId);
+        $db->transComplete();
 
         return redirect()->to('/admin/services')->with('message', 'Service saved.');
     }
@@ -68,6 +86,45 @@ class Services extends BaseController
         }
 
         return $service;
+    }
+
+    private function form(?array $service): string
+    {
+        $currentMediaId = null;
+        if ($service !== null) {
+            $relation = (new ServiceMediaModel())->find($service['id']);
+            $currentMediaId = $relation['media_id'] ?? null;
+        }
+
+        return view('admin/services/form', [
+            'service' => $service,
+            'businessName' => $this->businessName(),
+            'media' => (new MediaAssetModel())->orderBy('created_at', 'DESC')->findAll(),
+            'currentMediaId' => $currentMediaId,
+            'currentImage' => $currentMediaId === null ? null : (new MediaAssetModel())->find($currentMediaId),
+        ]);
+    }
+
+    private function selectedMediaId(): int|false|null
+    {
+        $selected = $this->request->getPost('featured_media_id');
+        if ($selected === null || $selected === '') {
+            return null;
+        }
+        if (! is_string($selected) || ! ctype_digit($selected) || (int) $selected < 1 || (new MediaAssetModel())->find((int) $selected) === null) {
+            return false;
+        }
+
+        return (int) $selected;
+    }
+
+    private function syncMedia(int $serviceId, ?int $mediaId): void
+    {
+        $model = new ServiceMediaModel();
+        $model->where('service_id', $serviceId)->delete();
+        if ($mediaId !== null) {
+            $model->insert(['service_id' => $serviceId, 'media_id' => $mediaId]);
+        }
     }
 
     private function businessName(): string

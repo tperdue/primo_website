@@ -11,7 +11,7 @@ Use this memory to track database and persistence decisions. Update it when the 
 
 ## Current Status
 
-SQLite is the default database. Business settings are stored as one row with ID 1. Services and portfolio projects use auto-increment IDs internally and stable unique slugs publicly. Portfolio projects reference reusable media asset records; deleting a referenced asset is restricted by the database. Fixed-slug content pages store About, Contact, Privacy, and Terms copy plus SEO metadata. Contact submissions store inquiry and notification state but no raw IP address. Shield manages its own user tables; package migrations run alongside app migrations.
+SQLite is the default database. Business settings are stored as one row with ID 1. Services and portfolio projects use auto-increment IDs internally and stable unique slugs publicly. Reusable media records relate to service featured images, portfolio featured images, ordered project galleries, and project-service associations; deleting an in-use asset is restricted by both the application and database. Fixed-slug content pages store About, Contact, Privacy, and Terms copy plus SEO metadata. Contact submissions store inquiry and notification state but no raw IP address. Shield manages its own user tables; package migrations run alongside app migrations.
 
 ## Database Choice
 
@@ -66,7 +66,7 @@ Expected future persisted concepts:
 
 No retention or deletion policy is defined yet.
 
-Portfolio image files are stored under ignored `public/uploads/portfolio/` and are intentionally public. Replacing a project's selected image does not delete the old reusable media record or file. Backups must include both the database and this upload directory.
+New media files are stored under ignored `public/uploads/media/` and are intentionally public; legacy `public/uploads/portfolio/` paths remain valid. Replacing a selected image does not delete its reusable media record or file. An asset can be deleted only after all service, featured-project, and gallery references are removed. Backups must include the database and both public upload directories when present.
 
 Future policies must address contact-submission retention, customer quote uploads, media library files, quote history, customer records, project files, invoices, and logs. Customer uploads should not automatically be publicly accessible.
 

@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use RuntimeException;
 use Throwable;
 
-class PortfolioImageUpload
+class MediaImageUpload
 {
     private const MIME_EXTENSIONS = [
         'image/jpeg' => ['jpg', 'jpeg'],
@@ -40,12 +40,15 @@ class PortfolioImageUpload
 
         $canonicalExtension = $mime === 'image/jpeg' ? 'jpg' : $extension;
         $name = bin2hex(random_bytes(16)) . '.' . $canonicalExtension;
-        $directory = FCPATH . 'uploads' . DIRECTORY_SEPARATOR . 'portfolio' . DIRECTORY_SEPARATOR;
+        $directory = FCPATH . 'uploads' . DIRECTORY_SEPARATOR . 'media' . DIRECTORY_SEPARATOR;
+        if (! is_dir($directory) && ! mkdir($directory, 0775, true) && ! is_dir($directory)) {
+            throw new RuntimeException('The media directory is not writable.');
+        }
         if ($file->move($directory, $name) !== true) {
             throw new RuntimeException('The image could not be uploaded.');
         }
 
-        $path = 'uploads/portfolio/' . $name;
+        $path = 'uploads/media/' . $name;
         try {
             $id = (new MediaAssetModel())->insert([
                 'path' => $path,
@@ -56,9 +59,9 @@ class PortfolioImageUpload
             if ($id === false) {
                 throw new RuntimeException('The image could not be saved.');
             }
-        } catch (Throwable $e) {
+        } catch (Throwable $exception) {
             @unlink($directory . $name);
-            throw $e;
+            throw $exception;
         }
 
         return (int) $id;

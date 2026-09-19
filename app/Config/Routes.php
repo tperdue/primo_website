@@ -32,6 +32,11 @@ $routes->group('admin', ['filter' => ['session', 'group:admin']], static functio
     $routes->post('portfolio', 'Admin\Portfolio::store');
     $routes->get('portfolio/(:num)/edit', 'Admin\Portfolio::edit/$1');
     $routes->post('portfolio/(:num)', 'Admin\Portfolio::update/$1');
+    $routes->get('media', 'Admin\Media::index');
+    $routes->post('media', 'Admin\Media::store');
+    $routes->get('media/(:num)/edit', 'Admin\Media::edit/$1');
+    $routes->post('media/(:num)', 'Admin\Media::update/$1');
+    $routes->post('media/(:num)/delete', 'Admin\Media::delete/$1');
     $routes->get('pages', 'Admin\ContentPages::index');
     $routes->get('pages/(:num)/edit', 'Admin\ContentPages::edit/$1');
     $routes->post('pages/(:num)', 'Admin\ContentPages::update/$1');

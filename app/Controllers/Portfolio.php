@@ -21,8 +21,17 @@ class Portfolio extends BaseController
             throw PageNotFoundException::forPageNotFound();
         }
 
+        $model = new PortfolioProjectModel();
+
+        $gallery = array_values(array_filter(
+            $model->gallery((int) $project['id']),
+            static fn (array $image): bool => (int) $image['id'] !== (int) $project['featured_media_id'],
+        ));
+
         return view('portfolio/show', $this->publicSiteData() + [
             'project' => $project,
+            'gallery' => $gallery,
+            'relatedServices' => $model->relatedServices((int) $project['id']),
         ]);
     }
 }
