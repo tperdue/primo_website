@@ -6,7 +6,7 @@ This project uses a Penji-inspired visual direction adapted for Primo's purple-l
 
 Name: Primo Graphic Designer Business Platform
 
-Description: A reusable public website, quote-request flow, admin portal, and future customer portal for solo graphic designers and very small design businesses.
+Description: A reusable public website, quote-request flow, admin portal, and lightweight customer portal for solo graphic designers and very small design businesses.
 
 The public site should feel contemporary, creative, image-forward, and sales-capable. The admin portal should feel quieter and more operational: dense enough for repeated work, but still polished enough for a solo creative business owner.
 
@@ -17,6 +17,8 @@ The public header uses the black accent as a sticky navigation surface. At phone
 The service catalog uses a compact editorial list and a text-led detail layout until deployment-specific service imagery is available. Do not imply that the illustrative homepage concept studies are real service or client work.
 
 The admin area is an operational workspace, distinct from the public marketing layout: persistent section navigation, a compact toolbar, a data-led overview, scannable service table, and grouped settings forms. On narrow screens, navigation becomes a horizontal section bar and data rows stack with visible labels.
+
+The customer portal is a quieter private workspace built from full-width record bands, compact status labels, and scannable request, quote, and project lists. It shares Primo typography and color without copying the denser admin shell. Customer data is read-only, internal notes stay absent, and mobile layouts collapse metrics, records, quote rows, and navigation without obscuring status or totals.
 
 Portfolio pages are image-forward only when real deployment-specific project images are uploaded. The public Work index uses large image previews and the detail page shows the full featured image without cropping, followed by challenge and solution. Featured published projects may appear on the homepage. Admin portfolio management follows the same dense workspace patterns as Services.
 

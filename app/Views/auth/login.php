@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sign in | Primo Admin</title>
+    <title>Sign in | Primo</title>
     <link rel="stylesheet" href="<?= base_url('assets/css/app.css') ?>">
 </head>
 <body class="admin-page">
-    <header class="admin-header"><a class="wordmark" href="/">Primo <span class="admin-label">Admin</span></a></header>
+    <header class="admin-header"><a class="wordmark" href="/">Primo <span class="admin-label">Workspace</span></a></header>
     <main class="login-main">
-        <div class="admin-heading"><p class="eyebrow">Workspace</p><h1>Sign in</h1><p>Manage your studio details.</p></div>
+        <div class="admin-heading"><p class="eyebrow">Private workspace</p><h1>Sign in</h1><p>Open your studio or client workspace.</p></div>
         <?php if (session('error')): ?><div class="notice notice-error" role="alert"><?= esc(session('error')) ?></div><?php endif ?>
         <?php if (session('errors')): ?><div class="notice notice-error" role="alert">Please enter a valid email and password.</div><?php endif ?>
         <?php if (session('message')): ?><div class="notice" role="status"><?= esc(session('message')) ?></div><?php endif ?>

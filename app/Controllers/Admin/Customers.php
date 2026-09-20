@@ -4,8 +4,10 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Libraries\CustomerRelationships;
+use App\Libraries\CustomerPortalInvitationNotifier;
 use App\Models\BusinessSettingsModel;
 use App\Models\CustomerModel;
+use App\Models\CustomerPortalInvitationModel;
 use App\Models\ProjectModel;
 use App\Models\QuoteModel;
 use App\Models\QuoteRequestModel;
@@ -104,7 +106,44 @@ class Customers extends BaseController
             'projects' => $projects,
             'timeline' => $timeline,
             'acceptedCount' => count(array_filter($quotes, static fn (array $quote): bool => $quote['status'] === 'accepted')),
+            'portalInvitation' => (new CustomerPortalInvitationModel())->where('customer_id', $id)->first(),
         ]);
+    }
+
+    public function invite(int $id): RedirectResponse
+    {
+        $customer = $this->findCustomer($id);
+        if ($customer['user_id'] !== null) {
+            return redirect()->to('/admin/customers/' . $id)->with('message', 'This customer already has portal access.');
+        }
+
+        $token = bin2hex(random_bytes(32));
+        $invitations = new CustomerPortalInvitationModel();
+        $existing = $invitations->where('customer_id', $id)->first();
+        $data = [
+            'customer_id' => $id,
+            'token_hash' => hash('sha256', $token),
+            'expires_at' => date('Y-m-d H:i:s', time() + 72 * HOUR),
+            'used_at' => null,
+        ];
+        if ($existing === null) {
+            $invitations->insert($data);
+        } else {
+            $invitations->update($existing['id'], $data);
+        }
+
+        $activationUrl = site_url('portal/activate/' . $token);
+        $business = (new BusinessSettingsModel())->find(1) ?? [];
+        $delivery = (new CustomerPortalInvitationNotifier())->send($customer, $business, $activationUrl);
+        $message = match ($delivery) {
+            'sent' => 'Portal invitation sent to ' . $customer['email'] . '.',
+            'failed' => 'The invitation was created, but email delivery failed. Share the link below securely.',
+            default => 'The invitation was created. Share the link below securely.',
+        };
+
+        return redirect()->to('/admin/customers/' . $id)
+            ->with('message', $message)
+            ->with('portal_invitation_url', $activationUrl);
     }
 
     public function create(): string
@@ -135,7 +174,7 @@ class Customers extends BaseController
 
     public function update(int $id): RedirectResponse
     {
-        $this->findCustomer($id);
+        $customer = $this->findCustomer($id);
         $data = $this->validatedInput();
         if ($data === null) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
@@ -144,8 +183,35 @@ class Customers extends BaseController
             return redirect()->back()->withInput()->with('errors', ['email' => 'A customer already uses this email address.']);
         }
 
+        $db = db_connect();
+        $db->transStart();
+        if ($customer['user_id'] !== null && $data['normalized_email'] !== $customer['normalized_email']) {
+            $provider = auth()->getProvider();
+            $existing = $provider->findByCredentials(['email' => $data['email']]);
+            if ($existing !== null && (int) $existing->id !== (int) $customer['user_id']) {
+                $db->transRollback();
+
+                return redirect()->back()->withInput()->with('errors', ['email' => 'That email address already belongs to another sign-in.']);
+            }
+            $portalUser = $provider->findById($customer['user_id']);
+            if ($portalUser === null) {
+                $db->transRollback();
+
+                return redirect()->back()->withInput()->with('errors', ['email' => 'The linked portal account could not be found.']);
+            }
+            $portalUser->email = $data['email'];
+            if (! $provider->save($portalUser)) {
+                $db->transRollback();
+
+                return redirect()->back()->withInput()->with('errors', ['email' => implode(' ', $provider->errors())]);
+            }
+        }
         (new CustomerModel())->update($id, $data);
         (new CustomerRelationships())->linkMatchingRequests($id, $data['normalized_email']);
+        $db->transComplete();
+        if (! $db->transStatus()) {
+            return redirect()->back()->withInput()->with('errors', ['email' => 'The customer profile could not be saved.']);
+        }
 
         return redirect()->to('/admin/customers/' . $id)->with('message', 'Customer profile saved.');
     }

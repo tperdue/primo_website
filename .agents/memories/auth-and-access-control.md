@@ -11,7 +11,7 @@ Use this memory to track identity, session, role, permission, and route-protecti
 
 ## Current Status
 
-CodeIgniter Shield session authentication is installed for the admin area. Public registration and magic-link login are disabled. Create the first owner through Shield's interactive CLI command; credentials are never committed.
+CodeIgniter Shield session authentication protects both workspaces. Public registration and magic-link login are disabled. Admins create customer access through 72-hour, one-time portal invitations; the shared login redirects admins to `/admin/` and customers to `/portal`.
 
 ## Authentication Provider
 
@@ -20,17 +20,17 @@ CodeIgniter Shield session authentication is installed for the admin area. Publi
 | Provider/package | `codeigniter4/shield` `^1.4` |
 | Session-based auth | Yes |
 | Token/API auth | TBD |
-| Password policy | TBD |
+| Password policy | Shield validators plus a 12-character minimum during customer activation |
 | MFA/2FA | TBD |
 
 ## Roles And Permissions
 
-No roles or permissions are implemented yet. Product planning expects at least an admin/designer owner for the admin portal, and later customer identities for the customer portal.
+Explicit `admin`, `customer`, and fallback `user` groups are configured. Route filters enforce workspace membership.
 
 | Role | Permissions | Notes |
 | --- | --- | --- |
 | Admin/Designer Owner | Manage business settings, services, quote questions, quote requests, quotes, customers, portfolio, content, media, contact submissions, and later projects/invoices. | Required for admin portal. |
-| Customer | View profile, requests, quotes, accepted work, files, messages, invoices, and payments. | Later customer portal phase only. |
+| Customer | Read-only profile, linked requests and private request files, sent/final quotes, and linked project status/update. | Account must be linked to exactly one customer record. |
 
 ## Protected Routes
 
@@ -41,8 +41,9 @@ Document route groups or filters when introduced:
 | Public marketing site | None by default | Visitors may browse public pages and submit contact/quote forms. |
 | Public quote request | None by default | Must remain accountless for initial friction reduction. |
 | Admin portal | `session` and `group:admin` filters | Designer owner only. |
-| Project administration | `session` and `group:admin` filters | Designer owner only; customers have no project portal access yet. |
-| Customer portal | Customer auth filter TBD | Later phase after public/admin workflows are stable. |
+| Project administration | `session` and `group:admin` filters | Designer owner only. |
+| Customer portal | `session` and `group:customer` filters | Customer-owned records only; every detail query also enforces `customer_id`. |
+| Portal activation | Public opaque-token route with CSRF on POST | Valid unused invitation, linked customer, and unclaimed email required. |
 
 ## Authorization Rules
 
@@ -53,7 +54,7 @@ Default until changed:
 - Do not rely on hidden UI alone for access control.
 - Enforce ownership checks for user-owned records.
 - Public quote-request submission does not prove customer identity.
-- Later customer portal access must not expose quote/project records across customers.
+- Portal access must not expose request, quote, project, or file records across customers; mismatches return 404.
 
 ## Session And Cookie Notes
 
@@ -64,7 +65,6 @@ Default until changed:
 
 ## Open Questions
 
-- Will the generated project use CodeIgniter Shield, a custom auth layer, or an external provider?
-- Which routes are public, authenticated, or admin-only?
+- Should password recovery use Shield reset links or an admin-assisted flow?
 - Does the project need API tokens or only browser sessions?
 - Will deployments have only one designer owner or support multiple admin users?

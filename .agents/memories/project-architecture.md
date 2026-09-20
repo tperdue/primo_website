@@ -27,7 +27,7 @@ Architectural defaults:
 - Introduce migrations, seeders, and models when persistence is needed.
 - Keep framework config changes documented in `ARCHITECTURE.md`.
 - Model the application around domain objects rather than hard-coded CMS pages.
-- Product areas are public marketing site, admin portal, and later customer portal.
+- Product areas are the public marketing site, admin portal, and lightweight customer portal.
 - Do not build the customer portal before the public site, quote system, and admin portal are stable.
 - Keep deployment-specific business settings, website content, services, portfolio, quote questions, quote terms, policies, and notifications configurable.
 - Resolve quote intake through active reusable groups: unassigned groups are general, while service assignments make groups conditional on the selected quote services.

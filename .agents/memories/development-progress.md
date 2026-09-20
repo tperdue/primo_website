@@ -11,7 +11,7 @@ Use this memory to track the current state of work. Update it at the end of mean
 
 ## Current Phase
 
-Phase 4 underway: secure quote acceptance/decline and lightweight admin projects complete; customer authentication and portal views remain.
+Phase 4 underway: customer authentication and the read-only portal are complete; writable project files and customer communication remain.
 
 ## Active Work
 
@@ -31,7 +31,7 @@ None.
 - `design-system/tokens.json`, `design-system/tokens.css`, and `.extract-design-system/normalized.json` exist with the Primo palette applied.
 - Shield session login, CSRF, rate limiting, and admin-group route protection are configured.
 - SQLite and the business settings migration/model are in place.
-- Public home, custom login, and admin settings views use Primo colors. No customer portal or quote flow has been started.
+- Public home, shared role-aware login, admin settings, and customer portal views use Primo colors.
 - `docs/local_setup.md` records setup and interactive first-admin creation.
 - The public homepage was restyled after review of the current Penji homepage: white editorial hero, outlined navigation action, original concept-study imagery, and a clearer hierarchy. No Penji assets, claims, or copy were reused.
 - Relume component lookup was attempted but its connector sign-in had expired, so no Relume component was used in the implementation.
@@ -56,6 +56,8 @@ None.
 - The admin overview is now an attention-first dashboard. It aggregates open quote requests, ready-to-send quotes, sent quotes awaiting response, new contact messages, recent accepted quotes, recent inbox activity, and catalog health without introducing new workflow states.
 - Customers can securely accept or decline ready/sent quotes from the existing bearer-token proposal. Responses are CSRF-protected, one-time, expiration-aware, actor-audited, revisioned, optionally noted, and leave the final proposal read-only; owner notification is attempted without risking the persisted response.
 - Accepted quotes can be converted once into admin-only lightweight projects with stable project numbers, customer/quote links, schedule, delivery statuses, private notes, and a future customer-visible update. Projects appear in admin navigation, customer history, recent dashboard activity, active-project counts, and attention when client feedback is needed.
+- Admins can issue or replace 72-hour customer portal invitations from customer profiles. Activation stores only a token hash, enforces Shield password checks plus a 12-character minimum, creates a `customer` identity, and links it one-to-one with the customer record. Shared login redirects by role and linked account emails stay synchronized with admin profile edits.
+- Authenticated customers now have a responsive read-only portal for profile details, submitted request briefs and private attachments, sent/final quote history and proposal handoff, and project schedule/status/customer updates. Every record lookup is scoped to the signed-in customer and internal notes are excluded.
 
 ## In Progress
 
@@ -67,7 +69,7 @@ None known.
 
 ## Next Actions
 
-- Continue Phase 4 with customer authentication, customer-owned request/quote/project views, private project files, and simple project communication.
+- Continue Phase 4 with project-specific private files, simple customer/designer communication, and a password recovery decision.
 - Decide whether downloadable server-generated PDFs or admin-driven revision restoration are required before project conversion.
 - Define a contact-submission retention policy before production launch.
 - Decide whether `Zalando Sans` is licensed/available or use the system fallback in production.
@@ -99,6 +101,7 @@ None known.
 - `php spark migrate` applied the simplified quote-request-status migration against the local MySQL connection. Focused request, quote, and customer tests passed: 18 tests, 99 assertions. The final full no-coverage suite passed: 72 tests, 340 assertions.
 - Admin Attention Dashboard slice verified with `vendor/bin/phpunit --no-coverage tests\feature\AdminDashboardTest.php tests\feature\ServicesTest.php` passing 12 tests and 54 assertions, then `vendor/bin/phpunit --no-coverage` passing 75 tests and 356 assertions.
 - `php spark migrate` applied the quote-response/project migration against the local MySQL connection. Proposal response, project, quote, dashboard, and customer tests passed together: 26 tests, 135 assertions. `vendor/bin/phpunit --no-coverage` passed the full suite: 84 tests, 400 assertions.
+- `php spark migrate` applied the customer portal migration against local SQLite. Portal activation, role redirects, read-only rendering, and cross-customer isolation are covered by focused feature tests. The full suite passes with 91 tests and 447 assertions; `composer test` reports only the configured missing-code-coverage-driver warning. The browser confirmed the shared login and invalid/expired invitation state render correctly.
 
 ## Handoff Notes
 

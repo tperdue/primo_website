@@ -24,8 +24,19 @@ $routes->get('terms', 'Pages::show/terms');
 $routes->get('sitemap.xml', 'SiteFiles::sitemap');
 $routes->get('robots.txt', 'SiteFiles::robots');
 $routes->setAutoRoute(false);
-service('auth')->routes($routes, ['only' => ['login']]);
+$routes->get('login', 'Auth\Login::loginView', ['as' => 'login']);
+$routes->post('login', 'Auth\Login::loginAction');
 $routes->post('logout', '\CodeIgniter\Shield\Controllers\LoginController::logoutAction', ['as' => 'logout']);
+$routes->get('portal/activate/(:segment)', 'PortalActivation::show/$1');
+$routes->post('portal/activate/(:segment)', 'PortalActivation::activate/$1');
+$routes->group('portal', ['filter' => ['session', 'group:customer']], static function ($routes): void {
+    $routes->get('/', 'Portal::index');
+    $routes->get('profile', 'Portal::profile');
+    $routes->get('requests/(:num)', 'Portal::request/$1');
+    $routes->get('requests/(:num)/files/(:num)', 'Portal::download/$1/$2');
+    $routes->get('quotes/(:num)', 'Portal::quote/$1');
+    $routes->get('projects/(:num)', 'Portal::project/$1');
+});
 $routes->group('admin', ['filter' => ['session', 'group:admin']], static function ($routes): void {
     $routes->get('/', 'Admin\Dashboard::index');
     $routes->get('settings', 'Admin\BusinessSettings::edit');
@@ -79,4 +90,5 @@ $routes->group('admin', ['filter' => ['session', 'group:admin']], static functio
     $routes->get('customers/(:num)', 'Admin\Customers::show/$1');
     $routes->get('customers/(:num)/edit', 'Admin\Customers::edit/$1');
     $routes->post('customers/(:num)', 'Admin\Customers::update/$1');
+    $routes->post('customers/(:num)/portal-invitation', 'Admin\Customers::invite/$1');
 });

@@ -44,7 +44,7 @@ The application is a lightweight business operating layer for independent graphi
 | Quote | Actual quote prepared by designer. | Admin/designer | Phase 3. |
 | QuoteLineItem | Flexible line items for actual quote pricing. | Admin/designer | Phase 3. |
 | Customer | Lightweight client/prospect record. | Admin/designer | Phase 3. |
-| Project | Minimal project record after quote acceptance. | Admin/designer and later customer | Later phase. |
+| Project | Minimal project record after quote acceptance. | Admin/designer and read-only customer portal | Phase 4. |
 | Invoice | Billing record for project/payment phase. | Admin/designer | Later phase. |
 
 ## Lifecycle States
@@ -89,9 +89,9 @@ Document state machines or status fields here:
 - Each quote save creates an immutable numbered revision. Status changes also append history; public quote visibility begins at Ready and email delivery promotes Ready to Sent only after successful sending.
 - A ready or sent quote may receive one final customer response through its secure proposal. Acceptance and decline are immutable customer decisions, expired quotes reject responses, and the final proposal remains viewable read-only through its existing bearer token.
 - An accepted quote converts into at most one lightweight project. The project retains its quote and customer relationships while owning schedule, delivery status, private notes, and a future customer-visible update.
+- A customer may link to at most one Shield identity. Portal invitations are replaceable until used, expire after 72 hours, and never persist their raw token. Portal visibility is read-only and customer-owned: requests and private request files, sent/final quotes, and projects expose customer-facing fields while internal notes remain private.
 
 ## Open Questions
 
 - Which database engine and ID strategy will be used?
-- Which authentication provider will protect admin and later customer routes?
 - Which content should be modeled first for Phase 1 versus deferred to later phases?

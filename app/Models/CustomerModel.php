@@ -10,7 +10,7 @@ class CustomerModel extends Model
     protected $returnType = 'array';
     protected $useTimestamps = true;
     protected $allowedFields = [
-        'name', 'business_name', 'email', 'normalized_email', 'phone', 'address_line_1',
+        'user_id', 'name', 'business_name', 'email', 'normalized_email', 'phone', 'address_line_1',
         'address_line_2', 'city', 'region', 'postal_code', 'country', 'notes',
     ];
 }

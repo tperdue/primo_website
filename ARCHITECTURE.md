@@ -146,7 +146,7 @@ Monitoring And Logging: CodeIgniter logs write to `writable/logs/` by default. P
 - Use `.env` for secrets and never commit it.
 - Enable production environment settings before deployment.
 - Use CSRF protection for browser forms.
-- Admin settings routes require Shield session authentication and membership in the `admin` group. Public registration is disabled.
+- Admin routes require Shield session authentication and membership in the `admin` group. Customer portal routes require session authentication plus `customer` membership; successful login redirects by role. Public registration is disabled, and customer accounts are created only from admin-issued, expiring invitations.
 - Use filters for authentication, authorization, CORS, and rate limiting concerns.
 - Escape view output with `esc()` using the correct output context.
 - Validate all request input before use.
@@ -157,6 +157,7 @@ Monitoring And Logging: CodeIgniter logs write to `writable/logs/` by default. P
 - Quote-cart mutations use POST with CSRF. Session data is bounded and treated as untrusted: selected services are revalidated as published, answer keys and choice IDs are restricted to the active catalog, and all rendered draft values are escaped.
 - Public quote submission adds honeypot and per-IP throttling, validates customer and configured-question input, limits private attachments to five approved files with 8 MB individual and 20 MB aggregate caps, and does not persist raw IP addresses. Admin quote-request list, detail, status, notes, and attachment routes require Shield session authentication and `admin` membership.
 - Quote construction and delivery routes are admin-only and CSRF-protected. Submitted totals are never trusted: line quantities, unit prices, discounts, tax, and deposits are range-validated and recalculated before persistence. Secure proposal responses suppress caching, referrers, and search indexing; their tokens must be treated as secrets.
+- Customer portal invitations use 256-bit random tokens, store only SHA-256 hashes, expire after 72 hours, and are claimed once during activation. Portal detail queries scope requests, quotes, projects, and private attachment downloads through the authenticated customer's linked record; private/internal notes are never selected for display.
 
 ## 8. Development And Testing Environment
 
@@ -176,7 +177,7 @@ Code Quality Tools: To be selected per generated project.
 ## 9. Future Considerations
 
 - Decide whether the generated app is primarily server-rendered, API-first, or hybrid.
-- Decide authentication strategy, such as CodeIgniter Shield or a project-specific provider.
+- Decide whether password recovery should use Shield reset links or an admin-assisted account recovery flow.
 - Add migrations and seeders when the first persisted feature is built.
 - Add frontend asset tooling only when the project needs it.
 - Add CI once a target repository is created.

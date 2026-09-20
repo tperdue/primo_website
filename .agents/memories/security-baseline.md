@@ -37,5 +37,7 @@ Security defaults for generated CodeIgniter projects:
 - Project creation and management are admin-only. Conversion requires an accepted quote and a database-unique quote relationship so repeated or concurrent requests cannot intentionally create multiple projects.
 - Email delivery failure or missing configuration never marks a quote sent. Quote/customer contact snapshots preserve the exact recipient and commercial record at creation time.
 - Customer directory, profile, and editing routes require both Shield session authentication and admin-group authorization. Search uses query builder conditions, profile fields are length/email validated, normalized-email duplicate checks prevent routine accidental duplicates, and all customer notes/contact/address/history output is escaped.
+- Customer portal accounts are invitation-only. Invitations use 256-bit random tokens, persist only SHA-256 hashes, expire after 72 hours, and are atomically marked used during activation. Customer passwords pass Shield validators with a 12-character minimum; invitation pages suppress indexing and referrers.
+- Portal routes require Shield session authentication and `customer` group membership. A unique customer-to-user link anchors ownership, and each request, quote, project, and attachment query also scopes by that customer ID. Draft/ready quotes and all internal customer, request, and project notes stay out of portal views.
 
 When a security decision changes, update this memory and `ARCHITECTURE.md`.
