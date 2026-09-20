@@ -15,7 +15,7 @@ Phase 4 underway: customer authentication and the read-only portal are complete;
 
 ## Active Work
 
-Production GitHub Actions deployment setup is being completed and verified.
+None.
 
 ## Completed
 
@@ -59,6 +59,7 @@ Production GitHub Actions deployment setup is being completed and verified.
 - Admins can issue or replace 72-hour customer portal invitations from customer profiles. Activation stores only a token hash, enforces Shield password checks plus a 12-character minimum, creates a `customer` identity, and links it one-to-one with the customer record. Shared login redirects by role and linked account emails stay synchronized with admin profile edits.
 - Authenticated customers now have a responsive read-only portal for profile details, submitted request briefs and private attachments, sent/final quote history and proposal handoff, and project schedule/status/customer updates. Every record lookup is scoped to the signed-in customer and internal notes are excluded.
 - Production deployment automation now includes a pinned GitHub Actions workflow, restricted SSH entrypoint, server-owned release script, database backup/migration gate, atomic symlink switch, and post-deploy health checks.
+- The first automated `main` deployment completed successfully on 2026-09-20 and production was independently verified at the deployed commit.
 
 ## In Progress
 
@@ -76,10 +77,11 @@ None known.
 - Decide whether `Zalando Sans` is licensed/available or use the system fallback in production.
 - Add feature-specific tests with the first real behavior.
 - Update this file after each meaningful development session.
-- Verify the first `main` deployment run after the production SSH secret is installed.
 
 ## Last Verification
 
+- GitHub Actions run `35522034697` passed PHPUnit and deployed commit `f40e55143013e7a08b3117d6d3750decd43757c0` to production.
+- Production migration status showed the four newer application migrations applied in batch 2; local and external HTTPS checks returned HTTP 200 with valid TLS.
 - Deployment workflow YAML lint passed; both deployment shell scripts passed Bash syntax validation on the production host.
 - A clean server-side checkout passed `vendor/bin/phpunit --no-coverage`: 91 tests and 446 assertions.
 - The deployment-only SSH key was verified to reject arbitrary remote commands.
