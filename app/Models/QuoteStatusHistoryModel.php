@@ -10,5 +10,5 @@ class QuoteStatusHistoryModel extends Model
     protected $returnType = 'array';
     protected $useTimestamps = true;
     protected $updatedField = '';
-    protected $allowedFields = ['quote_id', 'from_status', 'to_status', 'note'];
+    protected $allowedFields = ['quote_id', 'from_status', 'to_status', 'note', 'actor'];
 }

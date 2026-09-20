@@ -13,6 +13,7 @@ $routes->post('quote/save', 'Quote::save');
 $routes->post('quote/submit', 'Quote::submit', ['filter' => 'honeypot']);
 $routes->get('quote/received/(:segment)', 'Quote::received/$1');
 $routes->get('proposal/(:segment)', 'Proposal::show/$1');
+$routes->post('proposal/(:segment)/respond', 'Proposal::respond/$1');
 $routes->get('work', 'Portfolio::index');
 $routes->get('work/(:segment)', 'Portfolio::show/$1');
 $routes->get('about', 'Pages::show/about');
@@ -68,6 +69,10 @@ $routes->group('admin', ['filter' => ['session', 'group:admin']], static functio
     $routes->get('quotes/(:num)/edit', 'Admin\Quotes::edit/$1');
     $routes->post('quotes/(:num)', 'Admin\Quotes::update/$1');
     $routes->post('quotes/(:num)/send', 'Admin\Quotes::send/$1');
+    $routes->post('quotes/(:num)/project', 'Admin\Projects::createFromQuote/$1');
+    $routes->get('projects', 'Admin\Projects::index');
+    $routes->get('projects/(:num)/edit', 'Admin\Projects::edit/$1');
+    $routes->post('projects/(:num)', 'Admin\Projects::update/$1');
     $routes->get('customers', 'Admin\Customers::index');
     $routes->get('customers/new', 'Admin\Customers::create');
     $routes->post('customers', 'Admin\Customers::store');

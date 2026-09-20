@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Libraries\CustomerRelationships;
 use App\Models\BusinessSettingsModel;
 use App\Models\CustomerModel;
+use App\Models\ProjectModel;
 use App\Models\QuoteModel;
 use App\Models\QuoteRequestModel;
 use App\Models\QuoteStatusHistoryModel;
@@ -45,6 +46,7 @@ class Customers extends BaseController
         $customer = $this->findCustomer($id);
         $requests = (new QuoteRequestModel())->where('customer_id', $id)->orderBy('created_at', 'DESC')->findAll();
         $quotes = (new QuoteModel())->where('customer_id', $id)->orderBy('created_at', 'DESC')->findAll();
+        $projects = (new ProjectModel())->where('customer_id', $id)->orderBy('created_at', 'DESC')->findAll();
         $timeline = [];
         foreach ($requests as $request) {
             $timeline[] = [
@@ -81,6 +83,17 @@ class Customers extends BaseController
                 ];
             }
         }
+        foreach ($projects as $project) {
+            $timeline[] = [
+                'type' => 'project',
+                'date' => (string) ($project['created_at'] ?? ''),
+                'title' => $project['project_number'],
+                'status' => $project['status'],
+                'statusLabel' => ProjectModel::STATUSES[$project['status']] ?? ucfirst($project['status']),
+                'summary' => $project['name'],
+                'url' => '/admin/projects/' . $project['id'] . '/edit',
+            ];
+        }
         usort($timeline, static fn (array $left, array $right): int => strcmp($right['date'], $left['date']));
 
         return view('admin/customers/show', [
@@ -88,6 +101,7 @@ class Customers extends BaseController
             'customer' => $customer,
             'requests' => $requests,
             'quotes' => $quotes,
+            'projects' => $projects,
             'timeline' => $timeline,
             'acceptedCount' => count(array_filter($quotes, static fn (array $quote): bool => $quote['status'] === 'accepted')),
         ]);

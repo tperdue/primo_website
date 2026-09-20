@@ -41,6 +41,7 @@ Document route groups or filters when introduced:
 | Public marketing site | None by default | Visitors may browse public pages and submit contact/quote forms. |
 | Public quote request | None by default | Must remain accountless for initial friction reduction. |
 | Admin portal | `session` and `group:admin` filters | Designer owner only. |
+| Project administration | `session` and `group:admin` filters | Designer owner only; customers have no project portal access yet. |
 | Customer portal | Customer auth filter TBD | Later phase after public/admin workflows are stable. |
 
 ## Authorization Rules

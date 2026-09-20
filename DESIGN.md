@@ -164,6 +164,7 @@ Admin screens should favor scanning and repeat use:
 - Quote-request administration uses a scan-friendly inbox with status filtering and a detail workspace that separates customer/project context, immutable intake snapshots, private attachments, and internal workflow controls.
 - Quote-request status language stays intentionally plain for independent designers: New, Needs more information from client, Ready to quote, Closed Quote Created, and Closed Won't pursue. Quote delivery and outcome states belong to the quote editor rather than being duplicated in the request inbox.
 - Quote construction uses a dense operational editor: editable line rows, a sticky live pricing summary, visible revision and status history, and a separate delivery action. The secure customer proposal reads like a restrained document, supports browser print-to-PDF, and collapses pricing rows into labeled mobile blocks.
+- The secure proposal ends with a focused accept/decline decision band. Final responses replace the form with an explicit read-only state. Admin project management uses the same compact tables and grouped forms as quotes, with schedule, status, private notes, and customer-visible update clearly separated.
 - Customer administration uses a searchable directory and an unframed two-column profile workspace. Compact relationship metrics, private contact/address details, and a chronological request/quote timeline support scanning without turning the admin area into a marketing layout.
 
 ## Components

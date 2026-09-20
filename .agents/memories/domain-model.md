@@ -87,6 +87,8 @@ Document state machines or status fields here:
 - Customer identity is matched by normalized email. Matching requests share one customer relationship record, while quote snapshots remain historically immutable; customer records are not deletable until an explicit archive/retention policy exists.
 - Quote line items are independent of originally requested services. Subtotal, fixed discount, percentage tax, total, and percentage deposit are calculated from current line items by the server.
 - Each quote save creates an immutable numbered revision. Status changes also append history; public quote visibility begins at Ready and email delivery promotes Ready to Sent only after successful sending.
+- A ready or sent quote may receive one final customer response through its secure proposal. Acceptance and decline are immutable customer decisions, expired quotes reject responses, and the final proposal remains viewable read-only through its existing bearer token.
+- An accepted quote converts into at most one lightweight project. The project retains its quote and customer relationships while owning schedule, delivery status, private notes, and a future customer-visible update.
 
 ## Open Questions
 

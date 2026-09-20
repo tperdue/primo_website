@@ -15,6 +15,8 @@ SQLite is the default database. Business settings are stored as one row with ID 
 
 Qualified requests convert into one quote and one lightweight customer record. Customer identity matching uses trimmed, lowercased email stored on both customers and quote requests; conversion reuses an existing match and links previously unassigned requests with the same normalized email. Customer profiles hold current contact, optional address, and private notes, while quotes retain immutable customer contact snapshots, a unique human-readable quote number, a 256-bit public access token, line items, calculated totals, terms, delivery state, and version number. Every save replaces current line items transactionally and appends an immutable JSON revision; status changes also append history. Business settings provide default expiration days, terms, and deposit percentage.
 
+Quote responses store a response timestamp and optional bounded customer note. Status-history records identify admin, customer, or system actors. Accepted quotes convert once into projects through a unique quote relationship; projects have stable human-readable numbers, retain customer ownership, and store schedule, status, private notes, and customer-visible update text.
+
 ## Database Choice
 
 | Setting | Value |
@@ -80,4 +82,4 @@ Unsubmitted quote-cart state follows the configured session lifetime and is not 
 - Which records need soft deletes, audit trails, or immutable history?
 - Which file storage strategy will separate private uploads from public media?
 - Which quote/project records require revision history?
-- Define quote/customer retention and bearer-token rotation policies before production launch.
+- Define quote/customer retention before production launch. Proposal bearer tokens currently remain stable after a final response so customers can retain read-only access to the accepted or declined commercial record.

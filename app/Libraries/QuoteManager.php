@@ -156,6 +156,9 @@ class QuoteManager
         if ($quote === null) {
             throw new RuntimeException('Quote not found.');
         }
+        if ($quote['responded_at'] !== null) {
+            throw new RuntimeException('Customer-responded quotes are locked. Manage delivery work through the linked project.');
+        }
 
         $items = [];
         foreach (array_values($submittedItems) as $item) {
@@ -282,7 +285,7 @@ class QuoteManager
         }
     }
 
-    private function recordVersion(int $quoteId, int $version): void
+    public function recordVersion(int $quoteId, int $version): void
     {
         $quote = (new QuoteModel())->find($quoteId);
         $items = (new QuoteLineItemModel())->where('quote_id', $quoteId)->orderBy('sort_order', 'ASC')->findAll();

@@ -4,6 +4,7 @@ namespace App\Libraries;
 
 use App\Models\ContactSubmissionModel;
 use App\Models\PortfolioProjectModel;
+use App\Models\ProjectModel;
 use App\Models\QuoteModel;
 use App\Models\QuoteRequestModel;
 use App\Models\ServiceModel;
@@ -22,6 +23,7 @@ class AdminAttentionDashboard
         $sentQuotes = (new QuoteModel())->where('status', 'sent')->countAllResults();
         $acceptedQuotes = (new QuoteModel())->where('status', 'accepted')->countAllResults();
         $newContacts = (new ContactSubmissionModel())->where('status', 'new')->countAllResults();
+        $activeProjects = (new ProjectModel())->whereIn('status', ProjectModel::ACTIVE_STATUSES)->countAllResults();
 
         return [
             'attentionCounts' => [
@@ -29,6 +31,7 @@ class AdminAttentionDashboard
                 'quotesToSend' => $readyQuotes,
                 'awaitingResponse' => $sentQuotes,
                 'newContacts' => $newContacts,
+                'activeProjects' => $activeProjects,
             ],
             'attentionItems' => $this->attentionItems(),
             'recentWins' => (new QuoteModel())
@@ -46,6 +49,7 @@ class AdminAttentionDashboard
             'recentActivity' => [
                 'requests' => (new QuoteRequestModel())->orderBy('created_at', 'DESC')->findAll(4),
                 'contacts' => (new ContactSubmissionModel())->orderBy('created_at', 'DESC')->findAll(4),
+                'projects' => (new ProjectModel())->orderBy('updated_at', 'DESC')->findAll(4),
             ],
         ];
     }
@@ -126,6 +130,18 @@ class AdminAttentionDashboard
                 'meta' => $this->dateMeta('Sent', $quote['sent_at'] ?? $quote['updated_at'] ?? null),
                 'href' => '/admin/quotes/' . $quote['id'] . '/edit',
                 'action' => 'Check',
+            ];
+        }
+
+        foreach ((new ProjectModel())->where('status', 'awaiting_client_feedback')->orderBy('updated_at', 'ASC')->findAll(4) as $project) {
+            $items[] = [
+                'priority' => 'medium',
+                'label' => 'Client feedback',
+                'title' => (string) $project['name'],
+                'detail' => 'This project is waiting on a customer response.',
+                'meta' => $this->dateMeta('Updated', $project['updated_at'] ?? null),
+                'href' => '/admin/projects/' . $project['id'] . '/edit',
+                'action' => 'Open',
             ];
         }
 

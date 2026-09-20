@@ -26,6 +26,6 @@ class QuoteModel extends Model
         'customer_business_name', 'customer_email', 'customer_phone', 'quote_date', 'expires_on',
         'currency_code', 'status', 'subtotal', 'discount_amount', 'tax_rate', 'tax_amount',
         'total', 'deposit_percentage', 'deposit_amount', 'terms', 'notes', 'version',
-        'delivery_status', 'sent_at',
+        'delivery_status', 'sent_at', 'responded_at', 'customer_response_note',
     ];
 }

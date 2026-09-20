@@ -7,6 +7,7 @@
         <div><span>Quotes to send</span><strong><?= (int) $attentionCounts['quotesToSend'] ?></strong></div>
         <div><span>Awaiting response</span><strong><?= (int) $attentionCounts['awaitingResponse'] ?></strong></div>
         <div><span>New contacts</span><strong><?= (int) $attentionCounts['newContacts'] ?></strong></div>
+        <div><span>Active projects</span><strong><?= (int) $attentionCounts['activeProjects'] ?></strong></div>
     </section>
 
     <section class="admin-section admin-attention-board" aria-labelledby="attention-board-title">
@@ -38,9 +39,10 @@
 
     <section class="admin-section admin-dashboard-band" aria-labelledby="recent-activity-title">
         <div class="admin-section-heading"><h2 id="recent-activity-title">Recent activity</h2><a href="/admin/contacts">Open contact inbox &nearr;</a></div>
-        <div class="admin-dashboard-columns">
+        <div class="admin-dashboard-columns admin-dashboard-columns-three">
             <div class="admin-dashboard-column"><h3>Quote requests</h3><?php if ($recentActivity['requests'] === []): ?><p>No requests yet.</p><?php else: ?><ul><?php foreach ($recentActivity['requests'] as $request): ?><li><a href="/admin/quote-requests/<?= (int) $request['id'] ?>"><strong><?= esc($request['reference_number']) ?></strong><span><?= esc($request['company'] ?: $request['name']) ?></span></a></li><?php endforeach ?></ul><?php endif ?></div>
             <div class="admin-dashboard-column"><h3>Contact messages</h3><?php if ($recentActivity['contacts'] === []): ?><p>No contact messages yet.</p><?php else: ?><ul><?php foreach ($recentActivity['contacts'] as $contact): ?><li><a href="/admin/contacts/<?= (int) $contact['id'] ?>"><strong><?= esc($contact['subject']) ?></strong><span><?= esc($contact['name']) ?></span></a></li><?php endforeach ?></ul><?php endif ?></div>
+            <div class="admin-dashboard-column"><h3>Projects</h3><?php if ($recentActivity['projects'] === []): ?><p>No projects yet.</p><?php else: ?><ul><?php foreach ($recentActivity['projects'] as $project): ?><li><a href="/admin/projects/<?= (int) $project['id'] ?>/edit"><strong><?= esc($project['name']) ?></strong><span><?= esc(\App\Models\ProjectModel::STATUSES[$project['status']] ?? ucfirst($project['status'])) ?></span></a></li><?php endforeach ?></ul><?php endif ?></div>
         </div>
     </section>
 
