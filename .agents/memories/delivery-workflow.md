@@ -16,6 +16,14 @@ Default delivery workflow for this product:
 7. Run `composer test` or `vendor/bin/phpunit` when feasible.
 8. Summarize changed files, verification, and any skipped checks.
 
+Production delivery:
+
+- Pushes to `main` run Composer validation and the no-coverage PHPUnit suite before deployment.
+- GitHub Actions invokes a forced-command SSH key; server-side release logic remains in `deploy/deploy-production.sh`.
+- Production releases must retain the shared environment, writable data, and public media uploads.
+- Back up MySQL immediately before migrations and never reverse migrations automatically during code rollback.
+- Confirm `/` and `/login` over HTTPS after switching the live symlink.
+
 Phase discipline:
 
 - Phase 1: application foundation, admin authentication, business settings, public site, responsive layout, SEO foundations.

@@ -11,7 +11,7 @@ Use this memory to track required verification before handing off work. Update i
 
 ## Current Status
 
-The project has PHPUnit configured and a Composer `test` script. The first application slice has feature tests for public rendering, admin access, validation, and settings persistence.
+The project has PHPUnit configured, a Composer `test` script, and a GitHub Actions production workflow. Pushes to `main` must pass Composer validation and `vendor/bin/phpunit --no-coverage` before deployment.
 
 ## Required Checks
 
@@ -28,6 +28,8 @@ Default for scaffold work:
 ## Known Verification Caveat
 
 `composer test` currently runs the existing tests successfully but exits non-zero because no code coverage driver is installed.
+
+The deployment workflow intentionally uses `vendor/bin/phpunit --no-coverage`; its clean-checkout verification currently passes 91 tests and 446 assertions.
 
 Resolution options for generated projects:
 

@@ -11,7 +11,7 @@ Use this memory to track hosting, runtime, environment, jobs, logging, backup, a
 
 ## Current Status
 
-No deployment target is selected yet. Each deployment should support configurable business identity, public website content, admin access, email notifications, file uploads, and eventually customer portal/invoice/payment workflows.
+The initial production deployment runs on Ubuntu 24.04 with Nginx, PHP 8.3 FPM, and MySQL at `primodemo.eastpointsoftware.net`. Pushes to `main` are tested by GitHub Actions and deploy the exact tested commit through a restricted SSH command.
 
 ## Runtime Requirements
 
@@ -30,11 +30,11 @@ Baseline:
 
 | Setting | Value |
 | --- | --- |
-| Provider | TBD |
-| Service type | TBD |
-| Region | TBD |
-| PHP version | TBD |
-| Web server | TBD |
+| Provider | Amazon EC2 |
+| Service type | Ubuntu virtual machine |
+| Region | Not recorded |
+| PHP version | 8.3 |
+| Web server | Nginx with PHP-FPM |
 
 ## Environment Variables
 
@@ -56,11 +56,23 @@ No queue workers, cron jobs, or scheduled tasks are defined yet. Future notifica
 Default:
 
 - CodeIgniter logs write under `writable/logs/`.
+- Deployment logs write to `/var/log/primo-deploy.log` and GitHub Actions.
 - Production projects should centralize logs and define alert-worthy failures.
 
 ## Backups And Restore
 
-No backup strategy is defined yet.
+- Every automated release creates and validates a compressed MySQL dump under `/var/backups/primo/mysql` before migrations.
+- Releases are stored under `/var/www/primo/releases`, with `/var/www/primo/current` switched atomically.
+- Failed post-switch health checks restore the previous code symlink, but migrations are never reversed automatically.
+- Scheduled and off-host backups are not configured yet.
+
+## Delivery Contract
+
+- Workflow: `.github/workflows/deploy-production.yml` on pushes to `main` or manual dispatch.
+- Required GitHub secret: `PRODUCTION_SSH_KEY` only; never record its value.
+- The SSH host key is pinned in `deploy/known_hosts`.
+- The deployment key is restricted to `/usr/local/sbin/primo-deploy-entrypoint` and cannot open a shell or forward connections.
+- Server-owned configuration and persistent paths remain outside releases under `/var/www/primo/shared`.
 
 ## Open Questions
 

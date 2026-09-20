@@ -15,7 +15,7 @@ Phase 4 underway: customer authentication and the read-only portal are complete;
 
 ## Active Work
 
-None.
+Production GitHub Actions deployment setup is being completed and verified.
 
 ## Completed
 
@@ -58,6 +58,7 @@ None.
 - Accepted quotes can be converted once into admin-only lightweight projects with stable project numbers, customer/quote links, schedule, delivery statuses, private notes, and a future customer-visible update. Projects appear in admin navigation, customer history, recent dashboard activity, active-project counts, and attention when client feedback is needed.
 - Admins can issue or replace 72-hour customer portal invitations from customer profiles. Activation stores only a token hash, enforces Shield password checks plus a 12-character minimum, creates a `customer` identity, and links it one-to-one with the customer record. Shared login redirects by role and linked account emails stay synchronized with admin profile edits.
 - Authenticated customers now have a responsive read-only portal for profile details, submitted request briefs and private attachments, sent/final quote history and proposal handoff, and project schedule/status/customer updates. Every record lookup is scoped to the signed-in customer and internal notes are excluded.
+- Production deployment automation now includes a pinned GitHub Actions workflow, restricted SSH entrypoint, server-owned release script, database backup/migration gate, atomic symlink switch, and post-deploy health checks.
 
 ## In Progress
 
@@ -75,9 +76,13 @@ None known.
 - Decide whether `Zalando Sans` is licensed/available or use the system fallback in production.
 - Add feature-specific tests with the first real behavior.
 - Update this file after each meaningful development session.
+- Verify the first `main` deployment run after the production SSH secret is installed.
 
 ## Last Verification
 
+- Deployment workflow YAML lint passed; both deployment shell scripts passed Bash syntax validation on the production host.
+- A clean server-side checkout passed `vendor/bin/phpunit --no-coverage`: 91 tests and 446 assertions.
+- The deployment-only SSH key was verified to reject arbitrary remote commands.
 - `php spark migrate --all` applied the services migration against the local `.env` MySQL connection; the framework default is SQLite.
 - `php spark migrate --all` applied the portfolio/media migration against the local MySQL connection; tests use in-memory SQLite.
 - Portfolio list/detail and admin list/form were rendered with temporary mock-data previews at desktop and 390px phone width. Images loaded and no page overflow was observed.
