@@ -1,17 +1,52 @@
 <?= view('admin/partials/shell_start', ['pageTitle' => 'Overview', 'activeSection' => 'overview', 'businessName' => $businessName]) ?>
 <main class="admin-main admin-main-wide">
-    <div class="admin-page-heading"><div><p class="admin-kicker">OVERVIEW</p><h1>Workspace overview</h1><p>Keep your public catalog current as the rest of the workflow takes shape.</p></div><a class="admin-primary-action" href="/admin/services/new">Add service</a></div>
-    <section class="admin-metrics" aria-label="Service summary"><div><span>Total services</span><strong><?= (int) $totalServices ?></strong></div><div><span>Published</span><strong><?= (int) $publishedServices ?></strong></div><div><span>Drafts</span><strong><?= (int) $draftServices ?></strong></div></section>
-    <section class="admin-section" aria-labelledby="contact-overview-title"><div class="admin-section-heading"><h2 id="contact-overview-title">Contact inbox</h2><a href="/admin/contacts">Open inbox &nearr;</a></div><div class="admin-portfolio-summary"><span><?= (int) $newContactCount ?> new <?= (int) $newContactCount === 1 ? 'message' : 'messages' ?></span></div>
-        <?php if ($recentContacts !== []): ?><div class="admin-service-table-wrap"><table class="admin-service-table"><thead><tr><th scope="col">From</th><th scope="col">Subject</th><th scope="col">Status</th><th scope="col">Action</th></tr></thead><tbody><?php foreach ($recentContacts as $contact): ?><tr><td><strong><?= esc($contact['name']) ?></strong><small><?= esc($contact['email']) ?></small></td><td data-label="Subject"><?= esc($contact['subject']) ?></td><td data-label="Status"><span class="admin-status admin-status-<?= esc($contact['status'], 'attr') ?>"><?= esc(ucfirst($contact['status'])) ?></span></td><td data-label="Action"><a href="/admin/contacts/<?= (int) $contact['id'] ?>">Open</a></td></tr><?php endforeach ?></tbody></table></div><?php endif ?>
+    <div class="admin-page-heading"><div><p class="admin-kicker">ATTENTION</p><h1>Workspace overview</h1><p>Start with quote, proposal, and inbox work that needs a human decision.</p></div><a class="admin-primary-action" href="/admin/quote-requests">Open quote inbox</a></div>
+
+    <section class="admin-metrics admin-attention-metrics" aria-label="Attention summary">
+        <div><span>Open quote requests</span><strong><?= (int) $attentionCounts['openRequests'] ?></strong></div>
+        <div><span>Quotes to send</span><strong><?= (int) $attentionCounts['quotesToSend'] ?></strong></div>
+        <div><span>Awaiting response</span><strong><?= (int) $attentionCounts['awaitingResponse'] ?></strong></div>
+        <div><span>New contacts</span><strong><?= (int) $attentionCounts['newContacts'] ?></strong></div>
     </section>
-    <section class="admin-section" aria-labelledby="recent-services-title"><div class="admin-section-heading"><h2 id="recent-services-title">Recent services</h2><a href="/admin/services">Manage services &nearr;</a></div>
-        <?php if ($recentServices === []): ?><div class="admin-empty"><h3>No services yet</h3><p>Start with the services you want visitors to browse.</p><a href="/admin/services/new">Add your first service &nearr;</a></div><?php else: ?>
-            <div class="admin-service-table-wrap"><table class="admin-service-table"><thead><tr><th scope="col">Service</th><th scope="col">Status</th><th scope="col">Updated</th><th scope="col">Action</th></tr></thead><tbody><?php foreach ($recentServices as $service): ?><tr><td><strong><?= esc($service['name']) ?></strong></td><td data-label="Status"><span class="admin-status admin-status-<?= esc($service['status'], 'attr') ?>"><?= esc(ucfirst($service['status'])) ?></span></td><td data-label="Updated"><?= esc(substr($service['updated_at'] ?? '', 0, 10)) ?></td><td data-label="Action"><a href="/admin/services/<?= (int) $service['id'] ?>/edit">Edit</a></td></tr><?php endforeach ?></tbody></table></div>
+
+    <section class="admin-section admin-attention-board" aria-labelledby="attention-board-title">
+        <div class="admin-section-heading"><div><h2 id="attention-board-title">Attention queue</h2><p>Prioritized from active requests, deliverable quotes, and unread inquiries.</p></div><a href="/admin/quotes">Manage quotes &nearr;</a></div>
+        <?php if ($attentionItems === []): ?>
+            <div class="admin-empty"><h2>All clear</h2><p>No quote requests, proposals, or contact messages need attention right now.</p></div>
+        <?php else: ?>
+            <div class="admin-attention-list">
+                <?php foreach ($attentionItems as $item): ?>
+                    <a class="admin-attention-item admin-attention-<?= esc($item['priority'], 'attr') ?>" href="<?= esc($item['href'], 'attr') ?>">
+                        <span class="admin-attention-priority"><?= esc($item['label']) ?></span>
+                        <span><strong><?= esc($item['title']) ?></strong><small><?= esc($item['detail']) ?></small></span>
+                        <span class="admin-attention-meta"><?= esc($item['meta']) ?></span>
+                        <span class="admin-attention-action"><?= esc($item['action']) ?></span>
+                    </a>
+                <?php endforeach ?>
+            </div>
         <?php endif ?>
     </section>
-    <section class="admin-section admin-portfolio-overview" aria-labelledby="portfolio-overview-title"><div class="admin-section-heading"><h2 id="portfolio-overview-title">Portfolio</h2><a href="/admin/portfolio">Manage portfolio &nearr;</a></div><div class="admin-portfolio-summary"><span><?= (int) $portfolioTotal ?> total projects</span><span><?= (int) $portfolioPublished ?> published</span><a href="/admin/portfolio/new">Add project &nearr;</a></div>
-        <?php if ($recentProjects !== []): ?><div class="admin-service-table-wrap"><table class="admin-service-table"><thead><tr><th scope="col">Project</th><th scope="col">Status</th><th scope="col">Updated</th><th scope="col">Action</th></tr></thead><tbody><?php foreach ($recentProjects as $project): ?><tr><td><strong><?= esc($project['title']) ?></strong></td><td data-label="Status"><span class="admin-status admin-status-<?= esc($project['status'], 'attr') ?>"><?= esc(ucfirst($project['status'])) ?></span></td><td data-label="Updated"><?= esc(substr($project['updated_at'] ?? '', 0, 10)) ?></td><td data-label="Action"><a href="/admin/portfolio/<?= (int) $project['id'] ?>/edit">Edit</a></td></tr><?php endforeach ?></tbody></table></div><?php endif ?>
+
+    <?php if ($recentWins !== []): ?>
+        <section class="admin-section admin-dashboard-band" aria-labelledby="recent-wins-title">
+            <div class="admin-section-heading"><h2 id="recent-wins-title">Recent wins</h2><a href="/admin/quotes">View quotes &nearr;</a></div>
+            <div class="admin-service-table-wrap"><table class="admin-service-table"><thead><tr><th scope="col">Quote</th><th scope="col">Customer</th><th scope="col">Total</th><th scope="col">Updated</th><th scope="col">Action</th></tr></thead><tbody>
+                <?php foreach ($recentWins as $quote): ?><tr><td><strong><?= esc($quote['quote_number']) ?></strong><small>Accepted</small></td><td data-label="Customer"><?= esc($quote['customer_business_name'] ?: $quote['customer_name']) ?></td><td data-label="Total"><strong><?= esc($quote['currency_code']) ?> <?= esc(number_format((float) $quote['total'], 2)) ?></strong></td><td data-label="Updated"><?= esc(substr($quote['updated_at'] ?? '', 0, 10)) ?></td><td data-label="Action"><a href="/admin/quotes/<?= (int) $quote['id'] ?>/edit">Open</a></td></tr><?php endforeach ?>
+            </tbody></table></div>
+        </section>
+    <?php endif ?>
+
+    <section class="admin-section admin-dashboard-band" aria-labelledby="recent-activity-title">
+        <div class="admin-section-heading"><h2 id="recent-activity-title">Recent activity</h2><a href="/admin/contacts">Open contact inbox &nearr;</a></div>
+        <div class="admin-dashboard-columns">
+            <div class="admin-dashboard-column"><h3>Quote requests</h3><?php if ($recentActivity['requests'] === []): ?><p>No requests yet.</p><?php else: ?><ul><?php foreach ($recentActivity['requests'] as $request): ?><li><a href="/admin/quote-requests/<?= (int) $request['id'] ?>"><strong><?= esc($request['reference_number']) ?></strong><span><?= esc($request['company'] ?: $request['name']) ?></span></a></li><?php endforeach ?></ul><?php endif ?></div>
+            <div class="admin-dashboard-column"><h3>Contact messages</h3><?php if ($recentActivity['contacts'] === []): ?><p>No contact messages yet.</p><?php else: ?><ul><?php foreach ($recentActivity['contacts'] as $contact): ?><li><a href="/admin/contacts/<?= (int) $contact['id'] ?>"><strong><?= esc($contact['subject']) ?></strong><span><?= esc($contact['name']) ?></span></a></li><?php endforeach ?></ul><?php endif ?></div>
+        </div>
+    </section>
+
+    <section class="admin-section admin-dashboard-band" aria-labelledby="catalog-health-title">
+        <div class="admin-section-heading"><h2 id="catalog-health-title">Catalog health</h2><a href="/admin/services">Manage services &nearr;</a></div>
+        <div class="admin-portfolio-summary"><span><?= (int) $catalogHealth['publishedServices'] ?> published <?= (int) $catalogHealth['publishedServices'] === 1 ? 'service' : 'services' ?></span><span><?= (int) $catalogHealth['draftServices'] ?> service <?= (int) $catalogHealth['draftServices'] === 1 ? 'draft' : 'drafts' ?></span><span><?= (int) $catalogHealth['portfolioPublished'] ?> published work <?= (int) $catalogHealth['portfolioPublished'] === 1 ? 'item' : 'items' ?></span><span><?= (int) $catalogHealth['acceptedQuotes'] ?> accepted <?= (int) $catalogHealth['acceptedQuotes'] === 1 ? 'quote' : 'quotes' ?></span><a href="/admin/portfolio">Manage portfolio &nearr;</a></div>
     </section>
 </main>
 <?= view('admin/partials/shell_end') ?>

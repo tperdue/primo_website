@@ -75,9 +75,9 @@ final class ServicesTest extends CIUnitTestCase
 
         $result->assertOK();
         $result->assertSee('Workspace overview');
-        $result->assertSee('Total services');
-        $result->assertSee('Recent services');
-        $result->assertSee('Visible');
+        $result->assertSee('Catalog health');
+        $result->assertSee('1 published service');
+        $result->assertSee('1 service draft');
         $result->assertSee('href="/admin/services"');
         $result->assertSee('href="/admin/settings"');
         $result->assertSee('aria-current="page"');

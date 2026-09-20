@@ -53,6 +53,7 @@ None.
 - Qualified requests can now become a single customer-linked commercial quote. Admins can edit flexible line items, dates, status, discount, tax, deposit, terms, and customer notes while the server recalculates totals and records immutable revisions plus status history.
 - Quotes have configurable expiration, terms, and deposit defaults; a protected admin quote list/editor; email delivery state; and a tokenized, non-indexable, non-cacheable customer proposal that supports browser print-to-PDF.
 - Admins now have a searchable customer directory plus create/edit profiles for contact, address, and private notes. Normalized email links matching requests to one relationship, quote conversion reuses that customer, and profiles show a chronological request, quote, and quote-status history without rewriting commercial snapshots.
+- The admin overview is now an attention-first dashboard. It aggregates open quote requests, ready-to-send quotes, sent quotes awaiting response, new contact messages, recent accepted quotes, recent inbox activity, and catalog health without introducing new workflow states.
 
 ## In Progress
 
@@ -64,7 +65,7 @@ None known.
 
 ## Next Actions
 
-- Choose the next increment between an operations-focused dashboard/attention queue and Phase 4 customer quote acceptance. Before public acceptance, decide token rotation and audit requirements.
+- Choose the next increment around Phase 4 customer quote acceptance. Before public acceptance, decide token rotation and audit requirements.
 - Decide whether downloadable server-generated PDFs or admin-driven revision restoration are required before project conversion.
 - Define a contact-submission retention policy before production launch.
 - Decide whether `Zalando Sans` is licensed/available or use the system fallback in production.
@@ -94,6 +95,7 @@ None known.
 - `php spark migrate --all` applied the customer/quote migration against the local MySQL connection. `vendor/bin/phpunit --no-coverage` passed: 64 tests, 306 assertions. Admin and proposal rendering are covered by authenticated/public feature tests because the browser test tab has no admin session or persisted sample quote.
 - `php spark migrate` applied the customer-relationship migration against the local MySQL connection. Customer, submission, and quote workflow tests passed together: 17 tests, 97 assertions. `vendor/bin/phpunit --no-coverage` passed the full suite: 70 tests, 337 assertions. The browser confirmed protected customer routes redirect to sign-in; authenticated admin rendering is covered by feature tests because the browser tab has no admin session.
 - `php spark migrate` applied the simplified quote-request-status migration against the local MySQL connection. Focused request, quote, and customer tests passed: 18 tests, 99 assertions. The final full no-coverage suite passed: 72 tests, 340 assertions.
+- Admin Attention Dashboard slice verified with `vendor/bin/phpunit --no-coverage tests\feature\AdminDashboardTest.php tests\feature\ServicesTest.php` passing 12 tests and 54 assertions, then `vendor/bin/phpunit --no-coverage` passing 75 tests and 356 assertions.
 
 ## Handoff Notes
 
